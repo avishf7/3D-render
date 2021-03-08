@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.Objects;
+
 public class Vector {
 
 	public Vector(Coordinate x, Coordinate y, Coordinate z) {
@@ -65,5 +67,24 @@ public class Vector {
 	
 	public Vector normalized() {
 		return new Vector(head).normalize();
+		
+		
 	}
+
+	@Override
+	public String toString() {
+		return "Vector [head=" + head + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Vector))
+			return false;
+		Vector other = (Vector) obj;
+		return Objects.equals(head, other.head);
+	}
+	
+	
 }
