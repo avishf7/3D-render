@@ -1,8 +1,10 @@
 package primitives;
 
+import java.util.Objects;
+
 public class Point3D {
 
-	static Point3D ZERO = new Point3D(0, 0, 0);
+	static final Point3D ZERO = new Point3D(0, 0, 0);
 
 	public Point3D(double x, double y, double z) {
 		this.x = new Coordinate(x);
@@ -20,8 +22,12 @@ public class Point3D {
 	Coordinate y;
 	Coordinate z;
 
-	public Vector subtract (Point3D point) {//**********
+	public Vector subtract(Point3D point) {// **********
 		return new Vector();
+	}
+	
+	public Point3D add(Vector vec) {// **********
+		return new Point3D();
 	}
 	
 	public double distanceSquared(Point3D point) {
@@ -36,39 +42,14 @@ public class Point3D {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((x == null) ? 0 : x.hashCode());
-		result = prime * result + ((y == null) ? 0 : y.hashCode());
-		result = prime * result + ((z == null) ? 0 : z.hashCode());
-		return result;
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Point3D))
 			return false;
 		Point3D other = (Point3D) obj;
-		if (x == null) {
-			if (other.x != null)
-				return false;
-		} else if (!x.equals(other.x))
-			return false;
-		if (y == null) {
-			if (other.y != null)
-				return false;
-		} else if (!y.equals(other.y))
-			return false;
-		if (z == null) {
-			if (other.z != null)
-				return false;
-		} else if (!z.equals(other.z))
-			return false;
-		return true;
+		return Objects.equals(x, other.x) && Objects.equals(y, other.y) && Objects.equals(z, other.z);
 	}
+
+	
 }
