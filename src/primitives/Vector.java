@@ -85,6 +85,10 @@ public class Vector {
 		Vector other = (Vector) obj;
 		return Objects.equals(head, other.head);
 	}
+
+	public Point3D getHead() {
+		return head;
+	}
 	
 	
 }
