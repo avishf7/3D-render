@@ -22,12 +22,12 @@ public class Point3D {
 	Coordinate y;
 	Coordinate z;
 
-	public Vector subtract(Point3D point) {// **********
-		return new Vector();
+	public Vector subtract(Point3D point) {
+		return new Vector(x.coord - point.x.coord,y.coord - point.y.coord,z.coord - point.z.coord);
 	}
 	
-	public Point3D add(Vector vec) {// **********
-		return new Point3D();
+	public Point3D add(Vector vec) {
+		return new Point3D(x.coord + vec.head.x.coord,y.coord + vec.head.y.coord,z.coord + vec.head.z.coord);
 	}
 	
 	public double distanceSquared(Point3D point) {
@@ -49,6 +49,11 @@ public class Point3D {
 			return false;
 		Point3D other = (Point3D) obj;
 		return Objects.equals(x, other.x) && Objects.equals(y, other.y) && Objects.equals(z, other.z);
+	}
+
+	@Override
+	public String toString() {
+		return "Point3D [x=" + x + ", y=" + y + ", z=" + z + "]";
 	}
 
 	
