@@ -27,7 +27,7 @@ public class Vector {
 	public Vector(Point3D other) {
 		if (other.equals(Point3D.ZERO))
 			throw new IllegalArgumentException("Invalid vector - (0,0,0)");
-		this.head = other;
+		this.head =new Point3D(other.x,other.y,other.z);
 	}
 
 	Point3D head;

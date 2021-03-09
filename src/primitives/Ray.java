@@ -5,12 +5,13 @@ import java.util.Objects;
 public class Ray {
 
 	public Ray(Point3D p0, Vector dir) {
-		this.p0 = p0;
+		this.p0 = new Point3D(p0.x, p0.y, p0.z);
 		this.dir = dir.normalized();
 	}
+
 	Point3D p0;
 	Vector dir;
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -28,5 +29,5 @@ public class Ray {
 	public Vector getDir() {
 		return dir;
 	}
-	
+
 }
