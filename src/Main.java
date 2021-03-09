@@ -18,7 +18,7 @@ public final class Main {
      */
     public static void main(String[] args) {
 
-       /* try { // test zero vector
+        try { // test zero vector
             new Vector(0, 0, 0);
             out.println("ERROR: zero vector does not throw an exception");
         } catch (Exception e) {}
@@ -69,6 +69,6 @@ public final class Main {
         if (!new Vector(1, 1, 1).equals(new Point3D(2, 3, 4).subtract(p1)))
              out.println("ERROR: Point - Point does not work correctly");
 
-        out.println("If there were no any other outputs - all tests succeeded!");*/
+        out.println("If there were no any other outputs - all tests succeeded!");
     }
 }
