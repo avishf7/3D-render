@@ -30,7 +30,7 @@ public class Vector {
 		this.head =new Point3D(other.x,other.y,other.z);
 	}
 
-	Point3D head;
+	private Point3D head;
 
 	public Vector add(Vector vec) {
 		return new Vector(head.add(vec));

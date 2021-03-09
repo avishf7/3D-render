@@ -9,8 +9,8 @@ public class Ray {
 		this.dir = dir.normalized();
 	}
 
-	Point3D p0;
-	Vector dir;
+	private Point3D p0;
+	private Vector dir;
 
 	@Override
 	public boolean equals(Object obj) {
