@@ -61,7 +61,7 @@ public class Vector {
 	}
 	
 	public Vector normalize() {
-		head = scale(length()).head;
+		head = scale(1/length()).head;
 		return this;
 	}
 	
