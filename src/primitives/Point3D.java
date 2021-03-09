@@ -27,7 +27,7 @@ public class Point3D {
 	}
 	
 	public Point3D add(Vector vec) {
-		return new Point3D(x.coord + vec.head.x.coord,y.coord + vec.head.y.coord,z.coord + vec.head.z.coord);
+		return new Point3D(x.coord + vec.getHead().x.coord,y.coord + vec.getHead().y.coord,z.coord + vec.getHead().z.coord);
 	}
 	
 	public double distanceSquared(Point3D point) {
