@@ -13,9 +13,9 @@ public class Point3D {
 	}
 
 	public Point3D(Coordinate x, Coordinate y, Coordinate z) {
-		this.x = new Coordinate(x.coord);
-		this.y =new Coordinate (y.coord);
-		this.z =new Coordinate( z.coord);
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 
 	Coordinate x;
@@ -23,13 +23,14 @@ public class Point3D {
 	Coordinate z;
 
 	public Vector subtract(Point3D point) {
-		return new Vector(x.coord - point.x.coord,y.coord - point.y.coord,z.coord - point.z.coord);
+		return new Vector(x.coord - point.x.coord, y.coord - point.y.coord, z.coord - point.z.coord);
 	}
-	
+
 	public Point3D add(Vector vec) {
-		return new Point3D(x.coord + vec.getHead().x.coord,y.coord + vec.getHead().y.coord,z.coord + vec.getHead().z.coord);
+		return new Point3D(x.coord + vec.getHead().x.coord, y.coord + vec.getHead().y.coord,
+				z.coord + vec.getHead().z.coord);
 	}
-	
+
 	public double distanceSquared(Point3D point) {
 
 		return (x.coord - point.x.coord) * (x.coord - point.x.coord)
@@ -56,5 +57,4 @@ public class Point3D {
 		return "Point3D [x=" + x + ", y=" + y + ", z=" + z + "]";
 	}
 
-	
 }

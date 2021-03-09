@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Ray {
 
 	public Ray(Point3D p0, Vector dir) {
-		this.p0 = new Point3D(p0.x, p0.y, p0.z);
+		this.p0 = p0;
 		this.dir = dir.normalized();
 	}
 
