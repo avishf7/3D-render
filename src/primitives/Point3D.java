@@ -52,18 +52,19 @@ public class Point3D {
 	final Coordinate z;
 
 	/**
-	 * 
-	 * @param point
-	 * @return
+	 * The function performs a vector subtract
+	 * @param point A point with which subtract
+	 * @return new vector that represent the result 
+	 * of vector1(represent by "this point") - vector2(represent by Point received)
 	 */
 	public Vector subtract(Point3D point) {
 		return new Vector(x.coord - point.x.coord, y.coord - point.y.coord, z.coord - point.z.coord);
 	}
 
 	/**
-	 * 
-	 * @param vec
-	 * @return
+	 * The function performs a points sum
+	 * @param vec A vector representing a point for subtraction
+	 * @return New point that represent the result of the subtraction
 	 */
 	public Point3D add(Vector vec) {
 		return new Point3D(x.coord + vec.getHead().x.coord, y.coord + vec.getHead().y.coord,
@@ -71,9 +72,9 @@ public class Point3D {
 	}
 
 	/**
-	 * 
-	 * @param point
-	 * @return
+	 * Calculates the distance between two points squared
+	 * @param point The other point
+	 * @return The distance between two points squared
 	 */
 	public double distanceSquared(Point3D point) {
 
@@ -83,14 +84,16 @@ public class Point3D {
 	}
 
 	/**
-	 * 
-	 * @param point
-	 * @return
+	 * Calculates the distance between two points
+	 * @param point The other point
+	 * @return The distance between two points squared
 	 */
 	public double distance(Point3D point) {
 		return Math.sqrt(distanceSquared(point));
 	}
 
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
