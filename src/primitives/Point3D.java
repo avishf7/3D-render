@@ -18,9 +18,9 @@ public class Point3D {
 		this.z = z;
 	}
 
-	Coordinate x;
-	Coordinate y;
-	Coordinate z;
+	final Coordinate x;
+	final Coordinate y;
+	final Coordinate z;
 
 	public Vector subtract(Point3D point) {
 		return new Vector(x.coord - point.x.coord, y.coord - point.y.coord, z.coord - point.z.coord);
