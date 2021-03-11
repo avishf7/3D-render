@@ -5,7 +5,8 @@ import primitives.Vector;
 
 /**
  * Class Sphere is the basic class representing a sphere in the
- * Three-dimensional space. 
+ * Three-dimensional space.
+ * 
  * @author Shai&Avishay
  */
 public class Sphere implements Geometry {
@@ -30,7 +31,7 @@ public class Sphere implements Geometry {
 	private double radius;
 
 	/**
-	 * getter
+	 * Getter
 	 * 
 	 * @return center
 	 */
@@ -39,7 +40,7 @@ public class Sphere implements Geometry {
 	}
 
 	/**
-	 * getter
+	 * Getter
 	 * 
 	 * @return radius
 	 */

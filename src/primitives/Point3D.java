@@ -2,6 +2,7 @@ package primitives;
 
 import java.util.Objects;
 
+
 /**
  * Class Point3D is the basic class representing a point in the
  * Three-dimensional space.

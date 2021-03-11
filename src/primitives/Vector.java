@@ -2,6 +2,7 @@ package primitives;
 
 import java.util.Objects;
 
+
 /**
  * Class Vector is the basic class representing a vector in the
  * Three-dimensional space.
@@ -137,7 +138,7 @@ public class Vector {
 	}
 
 	/**
-	 * getter
+	 * Getter
 	 * @return head
 	 */
 	public Point3D getHead() {

@@ -8,7 +8,6 @@ import java.util.Objects;
  * Three-dimensional space.
  * 
  * @author Shai&Avishay
- *
  */
 public class Ray {
 

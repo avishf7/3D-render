@@ -7,13 +7,12 @@ import primitives.*;
  * space.
  * 
  * @author Shai&Avishay
- *
  */
 public class Tube implements Geometry {
 	/**
 	 * Tube constructor receiving the ray and the radius of the tube.
 	 * 
-	 * @param axisRay the Ray of the tube.
+	 * @param axisRay A {@link Ray} that representing the The cylinder axis.
 	 * @param radius  the radius of the tube.
 	 */
 	public Tube(Ray axisRay, double radius) {
@@ -31,7 +30,7 @@ public class Tube implements Geometry {
 	protected double radius;
 
 	/**
-	 * getter
+	 * Getter
 	 * 
 	 * @return axisRay
 	 */
@@ -40,7 +39,7 @@ public class Tube implements Geometry {
 	}
 
 	/**
-	 * getter
+	 * Getter
 	 * 
 	 * @return radius
 	 */
