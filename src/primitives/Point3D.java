@@ -68,8 +68,9 @@ public class Point3D {
 	 * @return New point that represent the result of the subtraction
 	 */
 	public Point3D add(Vector vec) {
-		return new Point3D(x.coord + vec.getHead().x.coord, y.coord + vec.getHead().y.coord,
-				z.coord + vec.getHead().z.coord);
+		Point3D other = vec.getHead();
+		return new Point3D(x.coord + other.x.coord, y.coord + other.y.coord,
+				z.coord + other.z.coord);
 	}
 
 	/**
