@@ -25,6 +25,10 @@ public class TubeTests {
 	public void testGetNormal() {
 		Tube t1 = new Tube(new Ray(Point3D.ZERO,new Vector(0, 0, 3)),2);				
 		assertEquals("Bad normal to Tube", new Vector(1,0,0), t1.getNormal(new Point3D(2, 0, 3)));
+		try {
+		t1.getNormal(new Point3D(1, 0, 0));
+		fail("Normal calculation when the point perpendicular to the head of the fund does not throw an Exception(vector zero)");
+		} catch (IllegalArgumentException e) {
 	}
-
+	}
 }
