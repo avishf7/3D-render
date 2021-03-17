@@ -1,7 +1,7 @@
 /**
  * 
  */
-package unittests;
+package unittests.PrimitivesTests;
 
 import static org.junit.Assert.*;
 import static primitives.Util.isZero;
@@ -14,7 +14,7 @@ import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * @author Assist
+ * @author Shai&Avishay
  *
  */
 public class VectorTests {

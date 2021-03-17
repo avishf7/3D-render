@@ -1,19 +1,19 @@
 /**
  * 
  */
-package unittests;
+package unittests.GeometriesTests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import geometries.Sphere;
-import geometries.Triangle;
+
 import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * @author User
+ * @author Shai&Avishay
  *
  */
 public class SphereTests {

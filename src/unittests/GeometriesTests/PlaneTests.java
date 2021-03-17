@@ -1,19 +1,18 @@
 /**
  * 
  */
-package unittests;
+package unittests.GeometriesTests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import geometries.Plane;
-import primitives.Coordinate;
 import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * @author Assist
+ * @author Shai&Avishay
  *
  */
 public class PlaneTests {
