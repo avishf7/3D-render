@@ -18,8 +18,10 @@ public class Plane implements Geometry {
 	 * @param p3 A point in the plane
 	 */
 	public Plane(Point3D p1, Point3D p2, Point3D p3) {
-		Vector v1 = p2.subtract(p1).normalize(), v2 = p3.subtract(p1).normalize();
 
+		if (p1.equals(p2)||p2.equals(p3))
+			throw new IllegalArgumentException("A plane must consist of 3 different points");		
+		Vector v1 = p2.subtract(p1).normalize(), v2 = p3.subtract(p1).normalize();
 		if (v1.equals(v2) || v1.equals(v2.scale(-1)))
 			throw new IllegalArgumentException("The dots are on the same line");
 		

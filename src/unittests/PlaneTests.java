@@ -26,7 +26,7 @@ public class PlaneTests {
 		assertThrows("Constructed plane with a single vector", IllegalArgumentException.class,
 				() -> new Plane(new Point3D(1,1,1),new Point3D(2,2,2),new Point3D(-1,-1,-1)));
 		
-		assertThrows("Constructed plane with the zero vector", IllegalArgumentException.class,
+		assertThrows("Constructed plane When the first two points are identical", IllegalArgumentException.class,
 				() -> new Plane(new Point3D(1,1,1),new Point3D(1,1,1),new Point3D(2,3,4)));
 	}
 
