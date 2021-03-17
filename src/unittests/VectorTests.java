@@ -3,7 +3,6 @@
  */
 package unittests;
 
-import static java.lang.System.out;
 import static org.junit.Assert.*;
 import static primitives.Util.isZero;
 
@@ -11,7 +10,7 @@ import org.junit.Test;
 
 import primitives.Coordinate;
 import primitives.Point3D;
-import primitives.Ray;
+
 import primitives.Vector;
 
 /**
@@ -30,11 +29,9 @@ public class VectorTests {
 	 */
 	@Test
 	public void testVectorCoordinateCoordinateCoordinate() {
-		try { // test zero vector
-			new Vector(new Coordinate(0), new Coordinate(0), new Coordinate(0));
-			fail("Constructed a zero vector");
-		} catch (IllegalArgumentException e) {
-		}
+
+		assertThrows("Constructed a zero vector", IllegalArgumentException.class,
+				() -> new Vector(new Coordinate(0), new Coordinate(0), new Coordinate(0)));
 	}
 
 	/**
@@ -42,11 +39,8 @@ public class VectorTests {
 	 */
 	@Test
 	public void testVectorDoubleDoubleDouble() {
-		try { // test zero vector
-			new Vector(0, 0, 0);
-			fail("Constructed a zero vector");
-		} catch (IllegalArgumentException e) {
-		}
+
+		assertThrows("Constructed a zero vector", IllegalArgumentException.class, () -> new Vector(0, 0, 0));
 	}
 
 	/**
@@ -54,11 +48,9 @@ public class VectorTests {
 	 */
 	@Test
 	public void testVectorPoint3D() {
-		try { // test zero vector
-			new Vector(new Point3D(0, 0, 0));
-			fail("Constructed a zero vector");
-		} catch (IllegalArgumentException e) {
-		}
+
+		assertThrows("Constructed a zero vector", IllegalArgumentException.class,
+				() -> new Vector(new Point3D(0, 0, 0)));
 	}
 
 	/**
@@ -104,11 +96,9 @@ public class VectorTests {
 	@Test
 	public void testCrossProduct() {
 		// test Cross-Product
-		try { // test zero vector
-			v1.crossProduct(v2);
-			fail("crossProduct() for parallel vectors does not throw an exception");
-		} catch (IllegalArgumentException e) {
-		}
+
+		assertThrows("crossProduct() for parallel vectors does not throw an exception", IllegalArgumentException.class,
+				() -> v1.crossProduct(v2));
 
 		Vector vr = v1.crossProduct(v3);
 		assertTrue("crossProduct() wrong result length", isZero(vr.length() - v1.length() * v3.length()));

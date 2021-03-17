@@ -24,7 +24,9 @@ public class SphereTests {
 	@Test
 	public void testGetNormal() {
 		Sphere s1 = new Sphere(new Point3D(0, 0, 0),3);				
-		assertEquals("Bad normal to Sphere", new Vector(0,0,1), s1.getNormal(new Point3D(0, 0, 3)));
+		
+		Vector normal = s1.getNormal(new Point3D(0, 0, 3));
+		assertTrue("Bad normal to Tube", new Vector(0, 0, 1).equals(normal) || new Vector(0, 0, -1).equals(normal));
 	}
 
 }
