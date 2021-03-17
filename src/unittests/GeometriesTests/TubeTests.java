@@ -1,7 +1,7 @@
 /**
  * 
  */
-package unittests;
+package unittests.GeometriesTests;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 /**
- * @author User
+ * @author Shai&Avishay
  *
  */
 public class TubeTests {
