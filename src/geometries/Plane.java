@@ -12,18 +12,25 @@ import primitives.Vector;
 public class Plane implements Geometry {
 	/**
 	 * Cylinder constructor receiving three {@link Point3D}.
+	 * 
 	 * @param p1 A point in the plane
 	 * @param p2 A point in the plane
 	 * @param p3 A point in the plane
 	 */
 	public Plane(Point3D p1, Point3D p2, Point3D p3) {
+		Vector v1 = p2.subtract(p1).normalize(), v2 = p3.subtract(p1).normalize();
+
+		if (v1.equals(v2) || v1.equals(v2.scale(-1)))
+			throw new IllegalArgumentException("The dots are on the same line");
+		
 		this.q0 = p1;
-		this.normal = p2.subtract(p1).crossProduct(p3.subtract(p1)).normalize();
+		this.normal = v1.crossProduct(v2).normalize();
 	}
 
 	/**
 	 * Cylinder constructor receiving a {@link Point3D} and {@link Vector}
-	 * @param q0 A point in the plane
+	 * 
+	 * @param q0     A point in the plane
 	 * @param normal The normal to the plane
 	 */
 	public Plane(Point3D q0, Vector normal) {
@@ -42,6 +49,7 @@ public class Plane implements Geometry {
 
 	/**
 	 * Getter
+	 * 
 	 * @return q0(a point in the plane)
 	 */
 	public Point3D getQ0() {
@@ -50,6 +58,7 @@ public class Plane implements Geometry {
 
 	/**
 	 * Getter
+	 * 
 	 * @return Normal plane
 	 */
 	public Vector getNormal() {
@@ -60,7 +69,7 @@ public class Plane implements Geometry {
 	public Vector getNormal(Point3D point) {
 		return normal;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Plane [q0=" + q0 + ", normal=" + normal + "]";
