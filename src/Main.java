@@ -14,7 +14,7 @@ public final class Main {
     /**
      * Main program to tests initial functionality of the 1st stage
      * 
-     * @param args  irrelevant here
+     * @param args irrelevant here
      */
     public static void main(String[] args) {
 
@@ -51,7 +51,7 @@ public final class Main {
         if (!isZero(vr.dotProduct(v1)) || !isZero(vr.dotProduct(v3)))
             out.println("ERROR: crossProduct() result is not orthogonal to its operands");
 
-        // test vector normalization vs vector length and cross-product
+        //test vector normalization vs vector length and cross-product
         Vector v = new Vector(1, 2, 3);
         Vector vCopy = new Vector(v.getHead());
         Vector vCopyNormalize = vCopy.normalize();
