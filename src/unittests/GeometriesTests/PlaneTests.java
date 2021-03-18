@@ -8,12 +8,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import geometries.Plane;
+import geometries.Polygon;
 import primitives.Coordinate;
 import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * @author Assist
+ * Testing Plane
+ * @author Shai&Avishay
  *
  */
 public class PlaneTests {
@@ -23,11 +25,21 @@ public class PlaneTests {
 	 */
 	@Test
 	public void testPlanePoint3DPoint3DPoint3D() {
+		//Test Construction of a proper plain
+		try {
+			new Plane(new Point3D(0, 0, 1), new Point3D(1, 0, 0), new Point3D(0, 1, 0));
+		} catch (IllegalArgumentException e) {
+			fail("Failed constructing a correct Plane");
+		}
+		//Test the case that all points on the same line 
 		assertThrows("Constructed  plane with a single vector", IllegalArgumentException.class,
 				() -> new Plane(new Point3D(1,1,1),new Point3D(2,2,2),new Point3D(-1,-1,-1)));
 		
+		//Test the case that identical points has been received
 		assertThrows("Constructed plane When the first two points are identical", IllegalArgumentException.class, 
 				() -> new Plane(new Point3D(1,1,1),new Point3D(1,1,1),new Point3D(2,3,4)));
+		
+		
 	}
 
 	/**
@@ -35,6 +47,7 @@ public class PlaneTests {
 	 */
 	@Test
 	public void testGetNormalPoint3D() {
+		// TC01: Test that the returned vector is indeed normal to the plane
 		Plane pl = new Plane(new Point3D(0, 0, 1), new Point3D(1, 0, 0), new Point3D(0, 1, 0));				
 		double sqrt3 = Math.sqrt(1d / 3);
 		Vector normal = pl.getNormal(new Point3D(0, 0, 1));
