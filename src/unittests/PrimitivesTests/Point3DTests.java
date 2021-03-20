@@ -21,6 +21,7 @@ public class Point3DTests {
 	 */
 	@Test
 	public void testSubtract() {
+		// TC01: Test Point - Point
 		assertTrue("Point - Point does not work correctly", new Vector(1, 1, 1).equals(new Point3D(2, 3, 4).subtract(new Point3D(1, 2, 3))));
 	}
 
@@ -29,6 +30,7 @@ public class Point3DTests {
 	 */
 	@Test
 	public void testAdd() {
+		// TC01: Test Point + Vector
 		assertTrue("Point + Vector does not work correctly", Point3D.ZERO.equals(new Point3D(1, 2, 3).add(new Vector(-1, -2, -3))));
 	}
 
