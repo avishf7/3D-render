@@ -9,7 +9,7 @@ import primitives.Vector;
  * 
  * @author Shai&Avishay
  */
-public interface Geometry {
+public interface Geometry extends Intersectable {
 	/**
 	 * The function receives a {@link Point3D} 
 	 * and calculates The normal (vertical) vector to the geometric shape at the received point.

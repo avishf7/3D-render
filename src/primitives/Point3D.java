@@ -2,7 +2,6 @@ package primitives;
 
 import java.util.Objects;
 
-
 /**
  * Class Point3D is the basic class representing a point in the
  * Three-dimensional space.
@@ -17,6 +16,7 @@ public class Point3D {
 
 	/**
 	 * Point3D constructor receiving coordinate values.
+	 * 
 	 * @param x value of the Coordinate that relative to the x-axis
 	 * @param y value of the Coordinate that relative to the y-axis
 	 * @param z value of the Coordinate that relative to the z-axis
@@ -29,6 +29,7 @@ public class Point3D {
 
 	/**
 	 * Point3D constructor receiving coordinates.
+	 * 
 	 * @param x Coordinate relative to the x-axis
 	 * @param y Coordinate relative to the y-axis
 	 * @param z Coordinate relative to the z-axis
@@ -54,9 +55,10 @@ public class Point3D {
 
 	/**
 	 * The function performs a vector subtract
+	 * 
 	 * @param point A point with which subtract
-	 * @return new vector that represent the result 
-	 * of vector1(represent by "this point") - vector2(represent by Point received)
+	 * @return new vector that represent the result of vector1(represent by "this
+	 *         point") - vector2(represent by Point received)
 	 */
 	public Vector subtract(Point3D point) {
 		return new Vector(x.coord - point.x.coord, y.coord - point.y.coord, z.coord - point.z.coord);
@@ -64,17 +66,18 @@ public class Point3D {
 
 	/**
 	 * The function performs a points sum
+	 * 
 	 * @param vec A vector representing a point for subtraction
 	 * @return New point that represent the result of the subtraction
 	 */
 	public Point3D add(Vector vec) {
 		Point3D other = vec.getHead();
-		return new Point3D(x.coord + other.x.coord, y.coord + other.y.coord,
-				z.coord + other.z.coord);
+		return new Point3D(x.coord + other.x.coord, y.coord + other.y.coord, z.coord + other.z.coord);
 	}
 
 	/**
 	 * Calculates the distance between two points squared
+	 * 
 	 * @param point The other point
 	 * @return The distance between two points squared
 	 */
@@ -87,6 +90,7 @@ public class Point3D {
 
 	/**
 	 * Calculates the distance between two points
+	 * 
 	 * @param point The other point
 	 * @return The distance between two points squared
 	 */
@@ -94,8 +98,6 @@ public class Point3D {
 		return Math.sqrt(distanceSquared(point));
 	}
 
-	
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -109,6 +111,33 @@ public class Point3D {
 	@Override
 	public String toString() {
 		return "Point3D [x=" + x + ", y=" + y + ", z=" + z + "]";
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return x coordinate value
+	 */
+	public double getX() {
+		return x.coord;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return y coordinate value
+	 */
+	public double getY() {
+		return y.coord;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return z coordinate value
+	 */
+	public double getZ() {
+		return z.coord;
 	}
 
 }

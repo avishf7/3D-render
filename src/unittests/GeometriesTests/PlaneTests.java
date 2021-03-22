@@ -56,5 +56,8 @@ public class PlaneTests {
 		assertTrue("Bad normal to plane",
 				new Vector(sqrt3, sqrt3, sqrt3).equals(normal) || new Vector(-sqrt3, -sqrt3, -sqrt3).equals(normal));
 	}
+	public void testFindIntersections() {
+	
+	}
 
 }
