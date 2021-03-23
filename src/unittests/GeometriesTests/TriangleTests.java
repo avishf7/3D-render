@@ -5,10 +5,14 @@ package unittests.GeometriesTests;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
+import geometries.Sphere;
 import geometries.Triangle;
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
 
 /**
@@ -36,6 +40,36 @@ public class TriangleTests {
 	}
 
 	public void testFindIntersections() {
+		Triangle triangle = new Triangle(new Point3D(0, 0, 0), new Point3D(1, 0, 0), new Point3D(1, 1, 0));
 
+		// ============ Equivalence Partitions Tests ==============
+
+		// TC01:Inside triangle
+		Point3D p1 = new Point3D(0.5, 0.25, 0);
+		List<Point3D> result = triangle.findIntsersections(new Ray(new Point3D(0.5, 0.25, 1), new Vector(0, 0, -1)));
+		assertEquals("Wrong number of points", 1, result.size());
+		assertEquals("Bad intsersection point", p1, result.get(0));
+
+		// TC02:Outside against edge
+		assertNull("Ray's line out of polygon",
+				triangle.findIntsersections(new Ray(new Point3D(2, 0.25, 1), new Vector(0, 0, -1))));
+
+		// TC03:Outside against edge
+		assertNull("Ray's line out of polygon",
+				triangle.findIntsersections(new Ray(new Point3D(-1, -0.5, 1), new Vector(0, 0, -1))));
+
+		// =============== Boundary Values Tests ==================
+
+		// TC01:On edge
+		assertNull("Ray's line out of polygon",
+				triangle.findIntsersections(new Ray(new Point3D(0.5, 0.5, 1), new Vector(0, 0, -1))));
+
+		// TC02:In vertex
+		assertNull("Ray's line out of polygon",
+				triangle.findIntsersections(new Ray(new Point3D(1, 1, 1), new Vector(0, 0, -1))));
+
+		// TC03:On edge's continuation
+		assertNull("Ray's line out of polygon",
+				triangle.findIntsersections(new Ray(new Point3D(2, 2, 1), new Vector(0, 0, -1))));
 	}
 }
