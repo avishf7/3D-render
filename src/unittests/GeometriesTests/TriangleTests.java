@@ -60,15 +60,15 @@ public class TriangleTests {
 
 		// =============== Boundary Values Tests ==================
 
-		// TC01:On edge
+		// TC11:On edge
 		assertNull("Ray's line out of polygon",
 				triangle.findIntsersections(new Ray(new Point3D(0.5, 0.5, 1), new Vector(0, 0, -1))));
 
-		// TC02:In vertex
+		// TC12:In vertex
 		assertNull("Ray's line out of polygon",
 				triangle.findIntsersections(new Ray(new Point3D(1, 1, 1), new Vector(0, 0, -1))));
 
-		// TC03:On edge's continuation
+		// TC13:On edge's continuation
 		assertNull("Ray's line out of polygon",
 				triangle.findIntsersections(new Ray(new Point3D(2, 2, 1), new Vector(0, 0, -1))));
 	}
