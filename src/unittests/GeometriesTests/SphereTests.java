@@ -38,6 +38,10 @@ public class SphereTests {
 		assertTrue("Bad normal to sphere", new Vector(0, 0, 1).equals(normal) || new Vector(0, 0, -1).equals(normal));
 	}
 
+	/**
+	 * Test method for {@link geometries.Sphere#findIntsersections(primitives.Ray)}.
+	 */
+	@Test
 	public void testFindIntersections() {
 		Sphere sphere = new Sphere(new Point3D(1, 0, 0), 1d);
 

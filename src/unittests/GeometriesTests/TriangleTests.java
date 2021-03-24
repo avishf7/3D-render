@@ -39,6 +39,10 @@ public class TriangleTests {
 				new Vector(sqrt3, sqrt3, sqrt3).equals(normal) || new Vector(-sqrt3, -sqrt3, -sqrt3).equals(normal));
 	}
 
+	/**
+	 * Test method for {@link geometries.Polygon#findIntsersections(primitives.Ray)}.
+	 */
+	@Test
 	public void testFindIntersections() {
 		Triangle triangle = new Triangle(new Point3D(0, 0, 0), new Point3D(1, 0, 0), new Point3D(1, 1, 0));
 

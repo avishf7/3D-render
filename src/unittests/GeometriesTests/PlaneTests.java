@@ -62,8 +62,9 @@ public class PlaneTests {
 	/**
 	 * Test method for {@link geometries.Plane#findIntsersections(primitives.Ray)}.
 	 */
+	@Test
 	public void testFindIntersections() {
-		Plane pl = new Plane(new Point3D(0, 1, 0), new Point3D(1, 1, 0), new Point3D(2, 1, 0));
+		Plane pl = new Plane(new Point3D(0, 1, 0), new Point3D(1, 1, 0), new Point3D(0, 1, 1));
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Ray intersects the plane(1 point)
@@ -87,6 +88,30 @@ public class PlaneTests {
 		assertNull("The Ray should not Intersect with plane",
 				pl.findIntsersections(new Ray(new Point3D(1, 2, 0), new Vector(1, 0, 0))));
 		
+		//****Ray orthogonal to the plane
+		//TC13: Ray starts before the plane
+		p1 = new Point3D(1, 1, 0);
+		result = pl.findIntsersections(new Ray(new Point3D(1, 0, 0), new Vector(0, 1, 0)));
+		assertEquals("Wrong number of points", 1, result.size());
+		assertEquals("Wrong Intersections points", p1, result.get(0));
+		
+		//TC14: Ray starts in the plane
+		assertNull("The Ray should not Intersect with plane",
+				pl.findIntsersections(new Ray(new Point3D(1, 1, 0), new Vector(0, 1, 0))));
+		
+		//TC15: Ray starts after the plane
+		assertNull("The Ray should not Intersect with plane",
+				pl.findIntsersections(new Ray(new Point3D(1, 2, 0), new Vector(0, 1, 0))));
+		
+		//****Ray is neither orthogonal nor parallel to the plane
+		//TC16:Begins at the plane
+		assertNull("The Ray should not Intersect with plane",
+				pl.findIntsersections(new Ray(new Point3D(1, 1, 0), new Vector(1, 1, 0))));
+		
+		//TC17:Begins in the same point which appears as reference point in the plane (Q)
+		assertNull("The Ray should not Intersect with plane",
+				pl.findIntsersections(new Ray(pl.getQ0(), new Vector(1, 1, 0))));
+
 		
 
 	}

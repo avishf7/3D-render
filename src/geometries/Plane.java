@@ -1,7 +1,9 @@
 package geometries;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import static primitives.Util.*;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -21,14 +23,14 @@ public class Plane implements Geometry {
 	 * @param p3 A point in the plane
 	 */
 	public Plane(Point3D p1, Point3D p2, Point3D p3) {
-		if (p1.equals(p2)||p2.equals(p3))
-			throw new IllegalArgumentException("A plane must consist of 3 different points");		
-		
+		if (p1.equals(p2) || p2.equals(p3))
+			throw new IllegalArgumentException("A plane must consist of 3 different points");
+
 		Vector v1 = p2.subtract(p1).normalize(), v2 = p3.subtract(p1).normalize();
-		
+
 		if (v1.equals(v2) || v1.equals(v2.scale(-1)))
 			throw new IllegalArgumentException("The dots are on the same line");
-		
+
 		this.q0 = p1;
 		this.normal = v1.crossProduct(v2).normalize();
 	}
@@ -83,8 +85,22 @@ public class Plane implements Geometry {
 
 	@Override
 	public List<Point3D> findIntsersections(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			double nQ0MinusP0 = normal.dotProduct(q0.subtract(ray.getP0()));
+			double nv = normal.dotProduct(ray.getDir());
+			
+			if (isZero(nv))
+				return null;
+			
+			double t = alignZero(nQ0MinusP0/nv);
+			if(t <= 0)
+				return null;
+			
+			return new LinkedList<Point3D>(List.of(ray.getP0().add(ray.getDir().scale(t))));
+
+		} catch (IllegalArgumentException e) {
+			return null;
+		}
 	}
 
 }
