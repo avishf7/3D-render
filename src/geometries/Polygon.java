@@ -93,6 +93,7 @@ public class Polygon implements Geometry {
 
 	@Override
 	public List<Point3D> findIntsersections(Ray ray) {
+		
 		List<Point3D> intsPoints = plane.findIntsersections(ray);
 
 		if (intsPoints == null)
