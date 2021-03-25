@@ -1,5 +1,6 @@
 package geometries;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import primitives.Point3D;
@@ -7,7 +8,6 @@ import primitives.Ray;
 import primitives.Vector;
 
 import static primitives.Util.*;
-
 
 /**
  * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
@@ -93,9 +93,34 @@ public class Polygon implements Geometry {
 
 	@Override
 	public List<Point3D> findIntsersections(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Point3D> intsPoints = plane.findIntsersections(ray);
+
+		if (intsPoints == null)
+			return null;
+
+		LinkedList<Vector> perEdges = new LinkedList<Vector>();
+		for (Point3D v : vertices) {
+			perEdges.add(v.subtract(ray.getP0()));
+		}
+		
+		double result = ray.getDir().dotProduct(perEdges.get(perEdges.size() - 1).crossProduct(perEdges.get(0)).normalize());
+
+		if (isZero(result))
+			return null;
+
+		boolean isPos = result > 0;
+		for (int i = 0; i < perEdges.size() - 1; i++) {
+			result = ray.getDir().dotProduct(perEdges.get(i).crossProduct(perEdges.get(i + 1)).normalize());
+
+			if (isZero(result))
+				return null;
+
+			if ((result > 0) != isPos)
+				return null;
+		}
+		
+
+		return intsPoints;
 	}
 
-	
 }

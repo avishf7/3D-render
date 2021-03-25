@@ -58,7 +58,7 @@ public class TriangleTests {
 		assertNull("Ray's line out of polygon",
 				triangle.findIntsersections(new Ray(new Point3D(2, 0.25, 1), new Vector(0, 0, -1))));
 
-		// TC03:Outside against edge
+		// TC03:Outside against vertex
 		assertNull("Ray's line out of polygon",
 				triangle.findIntsersections(new Ray(new Point3D(-1, -0.5, 1), new Vector(0, 0, -1))));
 
