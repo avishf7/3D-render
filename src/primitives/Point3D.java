@@ -67,8 +67,8 @@ public class Point3D {
 	/**
 	 * The function performs a points sum
 	 * 
-	 * @param vec A vector representing a point for subtraction
-	 * @return New point that represent the result of the subtraction
+	 * @param vec A vector representing a point for sum
+	 * @return New point that represent the result of the sum
 	 */
 	public Point3D add(Vector vec) {
 		Point3D other = vec.getHead();
