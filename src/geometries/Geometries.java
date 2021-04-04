@@ -28,10 +28,11 @@ public class Geometries implements Intersectable {
 		shapes=new LinkedList<Intersectable>(); 
 	}
 	public Geometries(Intersectable... geometries) {
+		shapes=List.of(geometries);
 	}
 	
 	public void add(Intersectable... geometries) {
-	
+		shapes.addAll(List.of(geometries));
 	}
 	
 	
