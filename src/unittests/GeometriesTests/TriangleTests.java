@@ -55,25 +55,25 @@ public class TriangleTests {
 		assertEquals("Bad intsersection point", p1, result.get(0));
 
 		// TC02:Outside against edge
-		assertNull("Ray's line out of polygon",
+		assertNull("Ray's line out of Triangle",
 				triangle.findIntsersections(new Ray(new Point3D(2, 0.25, 1), new Vector(0, 0, -1))));
 
 		// TC03:Outside against vertex
-		assertNull("Ray's line out of polygon",
+		assertNull("Ray's line out of Triangle",
 				triangle.findIntsersections(new Ray(new Point3D(-1, -0.5, 1), new Vector(0, 0, -1))));
 
 		// =============== Boundary Values Tests ==================
 
 		// TC11:On edge
-		assertNull("Ray's line out of polygon",
+		assertNull("Ray's line out of Triangle",
 				triangle.findIntsersections(new Ray(new Point3D(0.5, 0.5, 1), new Vector(0, 0, -1))));
 
 		// TC12:In vertex
-		assertNull("Ray's line out of polygon",
+		assertNull("Ray's line out of Triangle",
 				triangle.findIntsersections(new Ray(new Point3D(1, 1, 1), new Vector(0, 0, -1))));
 
 		// TC13:On edge's continuation
-		assertNull("Ray's line out of polygon",
+		assertNull("Ray's line out of Triangle",
 				triangle.findIntsersections(new Ray(new Point3D(2, 2, 1), new Vector(0, 0, -1))));
 	}
 }
