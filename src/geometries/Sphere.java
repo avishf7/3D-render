@@ -66,7 +66,8 @@ public class Sphere implements Geometry {
 	public List<Point3D> findIntsersections(Ray ray) {
 		try {
 			Vector u = center.subtract(ray.getP0());
-			double tM = u.dotProduct(ray.getDir()), d = Math.sqrt(u.lengthSquared() - (tM * tM));
+			double tM = u.dotProduct(ray.getDir()), 
+					d = Math.sqrt(u.lengthSquared() - (tM * tM));
 
 			if (d >= radius)
 				return null;
@@ -83,9 +84,9 @@ public class Sphere implements Geometry {
 			}
 
 			return null;
-			
+
 		} catch (IllegalArgumentException e) {
-			
+
 			return new LinkedList<Point3D>(List.of(ray.getP0().add(ray.getDir().scale(radius))));
 		}
 
