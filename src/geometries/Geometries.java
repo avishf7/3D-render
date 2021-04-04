@@ -9,9 +9,12 @@ import primitives.Point3D;
 import primitives.Ray;
 
 /**
+ *
+ * 
  * @author User
  *
  */
+
 public class Geometries implements Intersectable {
 
 	List<Intersectable> shapes;
