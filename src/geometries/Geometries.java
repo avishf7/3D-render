@@ -9,9 +9,9 @@ import primitives.Point3D;
 import primitives.Ray;
 
 /**
- *
+ * Class Geometries is class for works with several geometric shapes.
  * 
- * @author User
+ * @author Shai&Avishay
  *
  */
 
