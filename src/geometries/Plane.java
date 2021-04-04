@@ -96,7 +96,7 @@ public class Plane implements Geometry {
 			if(t <= 0)
 				return null;
 			
-			return new LinkedList<Point3D>(List.of(ray.getP0().add(ray.getDir().scale(t))));
+			return new LinkedList<Point3D>(List.of(ray.getPoint(t)));
 
 		} catch (IllegalArgumentException e) {
 			return null;

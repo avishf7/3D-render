@@ -77,9 +77,9 @@ public class Sphere implements Geometry {
 			if (t1 > 0 || t2 > 0) {
 				LinkedList<Point3D> intsPoints = new LinkedList<Point3D>();
 				if (t1 > 0)
-					intsPoints.add(ray.getP0().add(ray.getDir().scale(t1)));
+					intsPoints.add(ray.getPoint(t1));
 				if (t2 > 0)
-					intsPoints.add(ray.getP0().add(ray.getDir().scale(t2)));
+					intsPoints.add(ray.getPoint(t2));
 				return intsPoints;
 			}
 

@@ -30,6 +30,18 @@ public class Ray {
 	 */
 	private Vector dir;
 
+	
+	/**
+	 * The function moves the starting point of the ray in the direction
+	 * of the ray vector at a distance of the given scalar
+	 * 
+	 * @param t scalar
+	 * @return the point after movement
+	 */
+	public Point3D getPoint(double t) {
+		return p0.add(dir.scale(t));
+	} 
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

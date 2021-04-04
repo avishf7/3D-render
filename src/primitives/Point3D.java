@@ -97,6 +97,7 @@ public class Point3D {
 	public double distance(Point3D point) {
 		return Math.sqrt(distanceSquared(point));
 	}
+	
 
 	@Override
 	public boolean equals(Object obj) {

@@ -3,6 +3,7 @@
  */
 package geometries;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,30 +19,37 @@ import primitives.Ray;
 
 public class Geometries implements Intersectable {
 
-	
 	List<Intersectable> shapes;
-	
+
 	/**
 	 * 
 	 */
 	public Geometries() {
-		shapes=new LinkedList<Intersectable>(); 
+		shapes = new LinkedList<Intersectable>();
 	}
+
 	public Geometries(Intersectable... geometries) {
-		shapes=List.of(geometries);
+		shapes = List.of(geometries);
 	}
-	
+
 	public void add(Intersectable... geometries) {
 		shapes.addAll(List.of(geometries));
 	}
-	
-	
-	
+
 	@Override
 	public List<Point3D> findIntsersections(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Point3D> intsPoints = null, result;
+
+		for (Intersectable sh : shapes) {
+			result = sh.findIntsersections(ray);
+			if (result != null)
+				if (intsPoints == null)
+					intsPoints = result;
+				else
+					intsPoints.addAll(result);
+		}
+
+		return intsPoints;
 	}
-	
 
 }
