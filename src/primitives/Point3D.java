@@ -83,7 +83,7 @@ public class Point3D {
 	 */
 	public double distanceSquared(Point3D point) {
 
-		return (x.coord - point.x.coord) * (x.coord - point.x.coord)
+		return  (x.coord - point.x.coord) * (x.coord - point.x.coord)
 				+ (y.coord - point.y.coord) * (y.coord - point.y.coord)
 				+ (z.coord - point.z.coord) * (z.coord - point.z.coord);
 	}
@@ -98,6 +98,13 @@ public class Point3D {
 		return Math.sqrt(distanceSquared(point));
 	}
 	
+
+	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(x, y, z);
+	}
 
 	@Override
 	public boolean equals(Object obj) {

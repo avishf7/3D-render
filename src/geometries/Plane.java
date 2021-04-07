@@ -84,7 +84,7 @@ public class Plane implements Geometry {
 	}
 
 	@Override
-	public List<Point3D> findIntsersections(Ray ray) {
+	public List<Point3D> findIntersections(Ray ray) {
 		try {
 			double nQ0MinusP0 = normal.dotProduct(q0.subtract(ray.getP0()));
 			double nv = normal.dotProduct(ray.getDir());

@@ -92,9 +92,9 @@ public class Polygon implements Geometry {
 	}
 
 	@Override
-	public List<Point3D> findIntsersections(Ray ray) {
+	public List<Point3D> findIntersections(Ray ray) {
 		
-		List<Point3D> intsPoints = plane.findIntsersections(ray);
+		List<Point3D> intsPoints = plane.findIntersections(ray);
 
 		if (intsPoints == null)
 			return null;
@@ -104,16 +104,16 @@ public class Polygon implements Geometry {
 			perEdges.add(v.subtract(ray.getP0()));
 		}
 		
-		double result = ray.getDir().dotProduct(perEdges.get(perEdges.size() - 1).crossProduct(perEdges.get(0)).normalize());
+		double result = alignZero(ray.getDir().dotProduct(perEdges.get(perEdges.size() - 1).crossProduct(perEdges.get(0)).normalize()));
 
-		if (isZero(result))
+		if (result == 0)
 			return null;
 
 		boolean isPos = result > 0;
 		for (int i = 0; i < perEdges.size() - 1; i++) {
 			result = ray.getDir().dotProduct(perEdges.get(i).crossProduct(perEdges.get(i + 1)).normalize());
 
-			if (isZero(result))
+			if (result == 0)
 				return null;
 
 			if ((result > 0) != isPos)

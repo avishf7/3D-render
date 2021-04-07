@@ -1,5 +1,7 @@
 package geometries;
 
+import static primitives.Util.alignZero;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,31 +65,32 @@ public class Sphere implements Geometry {
 	}
 
 	@Override
-	public List<Point3D> findIntsersections(Ray ray) {
+	public List<Point3D> findIntersections(Ray ray) {
 		try {
 			Vector u = center.subtract(ray.getP0());
 			double tM = u.dotProduct(ray.getDir()), 
-					d = Math.sqrt(u.lengthSquared() - (tM * tM));
+					d = Math.sqrt(alignZero(u.lengthSquared() - (tM * tM)));
 
 			if (d >= radius)
 				return null;
 
-			double tH = Math.sqrt(radius * radius - d * d), t1 = tM + tH, t2 = tM - tH;
+			double tH = Math.sqrt(alignZero(radius * radius - d * d)), t1 = tM + tH, t2 = tM - tH;
 
 			if (t1 > 0 || t2 > 0) {
 				LinkedList<Point3D> intsPoints = new LinkedList<Point3D>();
-				if (t1 > 0)
+				if (alignZero(t1) > 0)
 					intsPoints.add(ray.getPoint(t1));
-				if (t2 > 0)
+				if (alignZero(t2) > 0)
 					intsPoints.add(ray.getPoint(t2));
 				return intsPoints;
 			}
 
 			return null;
 
+		//In case the starting point of the ray is in the center of the sphere
 		} catch (IllegalArgumentException e) {
 
-			return new LinkedList<Point3D>(List.of(ray.getP0().add(ray.getDir().scale(radius))));
+			return new LinkedList<Point3D>(List.of(ray.getPoint(radius)));
 		}
 
 	}
