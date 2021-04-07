@@ -3,9 +3,11 @@
  */
 package geometries;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import primitives.Point3D;
 import primitives.Ray;
@@ -46,9 +48,9 @@ public class Geometries implements Intersectable {
 				if (intsPoints == null)
 					intsPoints = result;
 				else
-					intsPoints.addAll(result);
+					(intsPoints).addAll(result);
 		}
-
+		
 		return intsPoints;
 	}
 
