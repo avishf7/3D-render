@@ -5,6 +5,8 @@ package unittests.GeometriesTests;
 
 import static org.junit.Assert.*;
 
+import java.awt.Polygon;
+
 import org.junit.Test;
 
 import geometries.*;
@@ -32,7 +34,8 @@ public class GeometriesClassTests {
 
 		geo = new Geometries(new Plane(new Point3D(3, 3, 0), new Point3D(1, -1, 0), new Point3D(2, 4, 0)),
 				new Sphere(new Point3D(1, 0, 0), 1d),
-				new Triangle(new Point3D(1, 1, 0), new Point3D(2, 0, 0), new Point3D(1, 0, 0)));
+				new Triangle(new Point3D(1, 1, 0), new Point3D(2, 0, 0), new Point3D(1, 0, 0)),
+				new geometries.Polygon(new Point3D(1, 1, 0), new Point3D(1, 0, 0), new Point3D(1.5, -0.2, 0),new Point3D(2, 0, 0)));
 
 		// TC02: No shape intersects
 		assertNull("The Ray should not Intersect with the shapes",
@@ -44,14 +47,12 @@ public class GeometriesClassTests {
 
 		// TC04: all shapes intersects
 		assertEquals("The Ray should Intersect with all shapes",
-				geo.findIntsersections(new Ray(new Point3D(1.5, 0.3, 2), new Vector(0, 0, -1))).size(),4);
+				geo.findIntsersections(new Ray(new Point3D(1.5, 0.3, 2), new Vector(0, 0, -1))).size(),5);
 
 		// ============ Equivalence Partitions Tests ==============
 		
 		// TC11: Some (but not all) shapes intersect
-		
-		// TC04: all shapes intersects
-		assertEquals("The Ray should Intersect with all shapes",
+		assertEquals("The Ray should Intersect with some (not all) shapes",
 				geo.findIntsersections(new Ray(new Point3D(0.5, 0, 2), new Vector(0, 0, -1))).size(),3);
 		
 	}
