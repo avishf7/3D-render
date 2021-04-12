@@ -1,6 +1,7 @@
 package elements;
 
 import primitives.*;
+
 /**
  * Class Camera is a class that represents the point of view of an image viewer
  * 
@@ -14,7 +15,7 @@ public class Camera {
 	 * @param vTo
 	 */
 	public Camera(Point3D p0, Vector vUp, Vector vTo) {
-		if (Util.isZero(vUp.dotProduct(vTo)))
+		if (!Util.isZero(vUp.dotProduct(vTo)))
 			throw new IllegalArgumentException("\"up and to\" vectors are not orthogonal");
 		vRight = vTo.crossProduct(vUp).normalize();
 		this.p0 = p0;
@@ -81,10 +82,10 @@ public class Camera {
 	}
 
 	/**
-	 * @param distance the distance to set
+	 * @param distance the distance (from ViewPlane) to set
 	 * @return this camera
 	 */
-	public Camera setDistance(double distance) {
+	public Camera setViewPlaneDistance(double distance) {
 		this.distance = distance;
 		return this;
 	}
@@ -108,7 +109,17 @@ public class Camera {
 	 * @return
 	 */
 	public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
-		return null;
+		Point3D pCenter = p0.add(vTo.scale(distance)), pIJ = pCenter;
+		double Ry = height / nY, Rx = width / nX;
+
+		double yI = -(i - (nY - 1) / 2) * Ry;
+		double xJ = (j - (nX - 1) / 2) * Rx;
+
+		if (xJ != 0)
+			pIJ = pIJ.add(vRight.scale(xJ));
+		if (yI != 0)
+			pIJ = pIJ.add(vUp.scale(-yI));
+		return new Ray(p0, pIJ.subtract(p0));
 	}
 
 }
