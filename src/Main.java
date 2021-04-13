@@ -83,14 +83,7 @@ public final class Main {
 		if (!new Vector(1, 1, 1).equals(new Point3D(2, 3, 4).subtract(p1)))
 			out.println("ERROR: Point - Point does not work correctly");
 
-		out.println("If there were no any other outputs - all tests succeeded!");
-
-		Geometries geo = new Geometries(new Plane(new Point3D(3, 3, 0), new Point3D(1, -1, 0), new Point3D(2, 4, 0)),
-				new Triangle(new Point3D(1, 1, 0), new Point3D(2, 0, 0), new Point3D(1, 0, 0)),
-				new Polygon(new Point3D(1, 1, 0), new Point3D(1, 0, 0), new Point3D(1.5, -0.2, 0),
-						new Point3D(2, 0, 0)),
-				new Sphere(new Point3D(1, 0, 0), 1d));
-
-		geo.findIntersections(new Ray(new Point3D(1.5, 0.3, 2), new Vector(0, 0, -1))).forEach(System.out::println);
+		out.println("If there were no any other outputs - all tests succeeded!");	
+		
 	}
 }
