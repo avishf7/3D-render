@@ -131,7 +131,7 @@ public class Camera {
 	 * @param nY number of rows
 	 * @param j  Pixel column index
 	 * @param i  Pixel row index
-	 * @return
+	 * @return the ray from the camera towards a desired pixel
 	 */
 	public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
 		//-------Calculation of the center of the view plane------
