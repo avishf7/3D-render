@@ -10,27 +10,50 @@ import primitives.*;
  */
 public class Camera {
 	/**
+	 * Camera constructor receiving three {@link Vector}.
 	 * 
-	 * @param p0
-	 * @param vUp
-	 * @param vTo
+	 * @param p0  the position of the camera
+	 * @param vUp "Rotate" the camera
+	 * @param vTo The direction in which the camera is facing
 	 */
 	public Camera(Point3D p0, Vector vTo, Vector vUp) {
 		if (!Util.isZero(vUp.dotProduct(vTo)))
 			throw new IllegalArgumentException("\"up and to\" vectors are not orthogonal");
-		vRight = vTo.crossProduct(vUp).normalize();
 		this.p0 = p0;
+		vRight = vTo.crossProduct(vUp).normalize();
 		this.vUp = vUp.normalized();
 		this.vTo = vTo.normalized();
 		;
 	}
 
+	/**
+	 * the position of the camera
+	 */
 	private Point3D p0;
+
+	/**
+	 * "Rotate" the camera
+	 */
 	private Vector vUp;
+	/**
+	 * the direction in which the camera is facing
+	 */
 	private Vector vTo;
+	/**
+	 * the direction of the right side of the camera
+	 */
 	private Vector vRight;
+	/**
+	 * the width of the view plane
+	 */
 	private double width;
+	/**
+	 * the height of the view plane
+	 */
 	private double height;
+	/**
+	 * The distance of the view plane from the camera
+	 */
 	private double distance;
 
 	/**
@@ -92,7 +115,7 @@ public class Camera {
 	}
 
 	/**
-	 * @param distance the distance to set
+	 * @param distance the width and height to set
 	 * @return this camera
 	 */
 	public Camera setViewPlaneSize(double width, double height) {
@@ -102,28 +125,43 @@ public class Camera {
 	}
 
 	/**
+	 * The function construct a ray from the camera towards a desired pixel
 	 * 
-	 * @param nX number of coloumns
-	 * @param nY
-	 * @param j
-	 * @param i
+	 * @param nX number of columns
+	 * @param nY number of rows
+	 * @param j  Pixel column index
+	 * @param i  Pixel row index
 	 * @return
 	 */
 	public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
-		Point3D pCenter = p0.add(vTo.scale(distance));
+		//-------Calculation of the center of the view plane------
 		
+		Point3D pCenter = p0.add(vTo.scale(distance));
 		double Ry = height / nY, Rx = width / nX;
+		
+		//****If the center is on the grid — move it to the nearest upper left pixel********
 		if (nX % 2 == 0)
-			pCenter = pCenter.add(vRight.scale(-Rx/2));
+			pCenter = pCenter.add(vRight.scale(-Rx / 2));
 		if (nY % 2 == 0)
-			pCenter = pCenter.add(vUp.scale(Ry/2));
+			pCenter = pCenter.add(vUp.scale(Ry / 2));
+		//******************************************************
+		
+		//------------------------------------------------------
+		
+		//------Find the center point of the desired pixel--------
 		double yI = -(i - (nY - 1) / 2) * Ry;
 		double xJ = (j - (nX - 1) / 2) * Rx;
 		Point3D pIJ = pCenter;
+		
+		//           Measures Prevent a situation that creates a zero vector
+		//******(When the desired pixel center is on one of the axes of the plane)*********
 		if (xJ != 0)
 			pIJ = pIJ.add(vRight.scale(xJ));
 		if (yI != 0)
 			pIJ = pIJ.add(vUp.scale(yI));
+		//**********************************************************************************
+		
+		//--------------------------------------------------------
 		return new Ray(p0, pIJ.subtract(p0));
 	}
 
