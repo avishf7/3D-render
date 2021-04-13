@@ -149,7 +149,7 @@ public class Camera {
 		//-----------------------------------------------------------------------------------
 		
 		
-		//--------------------Find the center point of the desired pixel---------------------
+		//---------------------Find the center point of the desired pixel--------------------
 		
 		double yI = -(i - (nY - 1) / 2) * Ry;
 		double xJ = (j - (nX - 1) / 2) * Rx;
