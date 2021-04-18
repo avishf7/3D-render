@@ -1,12 +1,12 @@
 /**
  * 
  */
-package sence;
+package scene;
 
 /**
  * @author Assist
  *
  */
-public class sence {
+public class Scene {
 
 }
