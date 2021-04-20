@@ -11,7 +11,7 @@ import primitives.Ray;
 import scene.Scene;
 
 /**
- * @author User
+ * @author Shai&Avishay
  *
  */
 public class RayTracerBasic extends RayTracerBase {
