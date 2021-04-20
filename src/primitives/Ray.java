@@ -1,11 +1,11 @@
 package primitives;
 
+import java.util.List;
 import java.util.Objects;
 
-
 /**
- * Class Ray is the basic class representing a Ray in the
- * Three-dimensional space.
+ * Class Ray is the basic class representing a Ray in the Three-dimensional
+ * space.
  * 
  * @author Shai&Avishay
  */
@@ -13,7 +13,8 @@ public class Ray {
 
 	/**
 	 * Ray constructor receiving {@link Point3D} and {@link Vector}.
-	 * @param p0 starting point
+	 * 
+	 * @param p0  starting point
 	 * @param dir Direction vector
 	 */
 	public Ray(Point3D p0, Vector dir) {
@@ -30,18 +31,38 @@ public class Ray {
 	 */
 	private Vector dir;
 
-	
 	/**
-	 * The function moves the starting point of the ray in the direction
-	 * of the ray vector at a distance of the given scalar
+	 * The function moves the starting point of the ray in the direction of the ray
+	 * vector at a distance of the given scalar
 	 * 
 	 * @param t scalar
 	 * @return the point after movement
 	 */
 	public Point3D getPoint(double t) {
 		return p0.add(dir.scale(t));
-	} 
-	
+	}
+
+	/**
+	 * 
+	 * @param points collection of points
+	 * @return Point3D The closest point to the head of the ray
+	 */
+	public Point3D findClosestPoint(List<Point3D> points) {
+
+		if (points.size() == 0)
+			return null;
+		Point3D closest = points.get(0);
+		double distance = p0.distance(closest);
+		for (Point3D point : points) {
+			double newDist = point.distance(p0);
+			if (newDist < distance) {
+				distance = newDist;
+				closest = point;
+			}
+		}
+		return closest;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -54,6 +75,7 @@ public class Ray {
 
 	/**
 	 * Getter
+	 * 
 	 * @return starting point
 	 */
 	public Point3D getP0() {
@@ -62,6 +84,7 @@ public class Ray {
 
 	/**
 	 * Getter
+	 * 
 	 * @return Direction vector
 	 */
 	public Vector getDir() {
