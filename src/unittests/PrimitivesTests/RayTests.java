@@ -30,9 +30,9 @@ public class RayTests {
 	public void testFindClosestPoint() {
 		Ray ray = new Ray(new Point3D(0,1,0),new Vector(1,0,0));
 		List <Point3D> points = new LinkedList<Point3D>();
-		points.add(new Point3D(1,0,0));
+		points.add(new Point3D(3,4,0));
 		points.add(new Point3D(1,1,0));
-		points.add(new Point3D(1,2,0));
+		points.add(new Point3D(2,3,0));
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: The closest point to the head of the ray is not at the edges of the list
@@ -50,6 +50,9 @@ public class RayTests {
 
 		// TC13: empty list
 		points.clear();
+		assertNull("empty list",ray.findClosestPoint(points));
+		// TC14: empty list(2)the list is null
+		points=null;
 		assertNull("empty list",ray.findClosestPoint(points));
 	}
 

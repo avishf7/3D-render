@@ -17,9 +17,9 @@ public class Scene {
 	 */
 	public Scene(String name) {
 		this.name = name;
-		geometries=new Geometries();
+		geometries = new Geometries();
 	}
-	
+
 	/**
 	 * @param background the background to set
 	 */
@@ -27,6 +27,7 @@ public class Scene {
 		this.background = background;
 		return this;
 	}
+
 	/**
 	 * @param ambientLight the ambientLight to set
 	 */
@@ -34,6 +35,7 @@ public class Scene {
 		this.ambientLight = ambientLight;
 		return this;
 	}
+
 	/**
 	 * @param geometries the geometries to set
 	 */
@@ -43,8 +45,8 @@ public class Scene {
 	}
 
 	public String name;
-	public Color background;
-	public AmbientLight ambientLight;
+	public Color background = Color.BLACK;
+	public AmbientLight ambientLight = new AmbientLight(Color.BLACK, 0);
 	public Geometries geometries;
 
 }

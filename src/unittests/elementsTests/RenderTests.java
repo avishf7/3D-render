@@ -29,7 +29,7 @@ public class RenderTests {
 				.setAmbientLight(new AmbientLight(new Color(255, 191, 191), 1)) //
 				.setBackground(new Color(75, 127, 90));
 
-		scene.geometries.add(new Sphere(50, new Point3D(0, 0, -100)),
+		scene.geometries.add(new Sphere(new Point3D(0, 0, -100),50),
 				new Triangle(new Point3D(-100, 0, -100), new Point3D(0, 100, -100), new Point3D(-100, 100, -100)), // up left
 				new Triangle(new Point3D(100, 0, -100), new Point3D(0, 100, -100), new Point3D(100, 100, -100)), // up right
 				new Triangle(new Point3D(-100, 0, -100), new Point3D(0, -100, -100), new Point3D(-100, -100, -100)), // down left
@@ -39,17 +39,19 @@ public class RenderTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setScene(scene) //
-				.setCamera(camera) //
-				.setRayTracer(new BasicRayTracer(scene));
+				.setCam(camera) //
+				.setRayTracer(new RayTracerBasic(scene));
 
 		render.renderImage();
 		render.printGrid(100, new Color(java.awt.Color.YELLOW));
 		render.writeToImage();
 	}
 	
+	
 	/**
 	 * Test for XML based scene - for bonus
 	 */
+	/*
 	@Test
 	public void basicRenderXml() {
 		Scene scene = new Scene("XML Test scene");
@@ -60,13 +62,13 @@ public class RenderTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setScene(scene) //
-				.setCamera(camera) //
-				.setRayTracer(new BasicRayTracer(scene));
+				.setCam(camera) //
+				.setRayTracer(new RayTracerBasic(scene));
 
 		render.renderImage();
 		render.printGrid(100, new Color(java.awt.Color.YELLOW));
 		render.writeToImage();
-	}
+	}*/
 
 	
 }

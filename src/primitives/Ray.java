@@ -49,7 +49,7 @@ public class Ray {
 	 */
 	public Point3D findClosestPoint(List<Point3D> points) {
 
-		if (points.size() == 0)
+		if (points == null || points.size() == 0)
 			return null;
 		Point3D closest = points.get(0);
 		double distance = p0.distance(closest);

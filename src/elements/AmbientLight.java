@@ -13,11 +13,11 @@ public class AmbientLight {
 
 	Color intensity;
 
-	AmbientLight(Color IA,double KA){
+	public AmbientLight(Color IA,double KA){
 		intensity=IA.scale(KA);
 	 }
 	
-	Color getIntensity() {
+	public Color getIntensity() {
 		return intensity;
 	}
 }
