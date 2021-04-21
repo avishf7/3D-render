@@ -43,7 +43,7 @@ public class Ray {
 	}
 
 	/**
-	 * 
+	 * The function finds the point closest to the ray head from a collection of points
 	 * @param points collection of points
 	 * @return Point3D The closest point to the head of the ray
 	 */

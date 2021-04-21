@@ -18,7 +18,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 /**
- * @author User
+ * @author Shai&Avishay
  *
  */
 public class RayTests {
