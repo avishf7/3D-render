@@ -3,8 +3,6 @@
  */
 package renderer;
 
-import static org.junit.Assert.assertThrows;
-
 import java.util.MissingResourceException;
 
 import elements.Camera;
