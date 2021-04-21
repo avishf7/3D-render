@@ -8,7 +8,7 @@ import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * ClassAmbientLight is a class that represents the Ambient light of a scene
+ * Class AmbientLight is a class that represents the Ambient light of a scene
  * 
  * @author Shai&Avishay
  *
@@ -30,7 +30,7 @@ public class AmbientLight {
 	 }
 	
 	/**
-	 * getter 
+	 * Getter 
 	 * @return intensity field
 	 */
 	public Color getIntensity() {

@@ -8,12 +8,17 @@ import geometries.Geometries;
 import primitives.Color;
 
 /**
+ * The class scene is a representative class for a scene
+ * that includes shapes, colors, and lighting
+ * 
  * @author Shai&Avishay
  *
  */
 public class Scene {
+	
 	/**
-	 * @param name
+	 * CTOR
+	 * @param name The name of the scene
 	 */
 	public Scene(String name) {
 		this.name = name;
@@ -21,6 +26,7 @@ public class Scene {
 	}
 
 	/**
+	 * Builder pattern Setter
 	 * @param background the background to set
 	 */
 	public Scene setBackground(Color background) {
@@ -29,6 +35,7 @@ public class Scene {
 	}
 
 	/**
+	 * Builder pattern Setter
 	 * @param ambientLight the ambientLight to set
 	 */
 	public Scene setAmbientLight(AmbientLight ambientLight) {
@@ -37,6 +44,7 @@ public class Scene {
 	}
 
 	/**
+	 * Builder pattern Setter
 	 * @param geometries the geometries to set
 	 */
 	public Scene setGeometries(Geometries geometries) {
