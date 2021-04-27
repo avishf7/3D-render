@@ -14,7 +14,7 @@ import primitives.Vector;
  * 
  * @author Shai&Avishay
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 	/**
 	 * Cylinder constructor receiving three {@link Point3D}.
 	 * 
@@ -84,7 +84,7 @@ public class Plane implements Geometry {
 	}
 
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		try {
 			double nQ0MinusP0 = normal.dotProduct(q0.subtract(ray.getP0()));
 			double nv = normal.dotProduct(ray.getDir());
@@ -96,11 +96,12 @@ public class Plane implements Geometry {
 			if(t <= 0)
 				return null;
 			
-			return new LinkedList<Point3D>(List.of(ray.getPoint(t)));
+			return new LinkedList<GeoPoint>(List.of(new GeoPoint(this,ray.getPoint(t))));
 
 		} catch (IllegalArgumentException e) {
 			return null;
 		}
+			
 	}
 
 }

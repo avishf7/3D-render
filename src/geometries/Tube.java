@@ -1,7 +1,9 @@
 package geometries;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 
 /**
@@ -10,7 +12,7 @@ import primitives.*;
  * 
  * @author Shai&Avishay
  */
-public class Tube implements Geometry {
+public class Tube extends Geometry {
 	/**
 	 * Tube constructor receiving the ray and the radius of the tube.
 	 * 
@@ -62,7 +64,7 @@ public class Tube implements Geometry {
 	}
 
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		// TODO Auto-generated method stub
 		return null;
 	}

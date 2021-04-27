@@ -3,6 +3,7 @@ package geometries;
 import java.util.LinkedList;
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -15,7 +16,7 @@ import static primitives.Util.*;
  * 
  * @author Dan
  */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
 	/**
 	 * List of polygon's vertices
 	 */
@@ -91,10 +92,11 @@ public class Polygon implements Geometry {
 		return plane.getNormal();
 	}
 
+	
+
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
-		
-		List<Point3D> intsPoints = plane.findIntersections(ray);
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
+		List<GeoPoint> intsPoints = plane.findGeoIntersections(ray);
 
 		if (intsPoints == null)
 			return null;
@@ -119,9 +121,9 @@ public class Polygon implements Geometry {
 			if ((result > 0) != isPos)
 				return null;
 		}
-		
-
+		intsPoints.get(0).geometry=this;
 		return intsPoints;
+		
 	}
 
 }

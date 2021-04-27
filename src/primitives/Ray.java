@@ -3,6 +3,8 @@ package primitives;
 import java.util.List;
 import java.util.Objects;
 
+import geometries.Intersectable.GeoPoint;
+
 /**
  * Class Ray is the basic class representing a Ray in the Three-dimensional
  * space.
@@ -62,6 +64,23 @@ public class Ray {
 		}
 		return closest;
 	}
+	
+	public GeoPoint getClosestGeoPoint(List<GeoPoint> points) {
+		if (points == null || points.size() == 0)
+			return null;
+		GeoPoint closest = points.get(0);
+		double distance = p0.distance(closest.point);
+		for (GeoPoint gpoint : points) {
+			double newDist = gpoint.point.distance(p0);
+			if (newDist < distance) {
+				distance = newDist;
+				closest = gpoint;
+			}
+		}
+		return closest;
+	
+	}
+	
 
 	@Override
 	public boolean equals(Object obj) {
