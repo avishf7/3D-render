@@ -14,7 +14,7 @@ public interface Intersectable {
 	
 	/**
 	 * 
-	 * @author User
+	 * @author Shai&Avishay
 	 *
 	 */
 	public static class GeoPoint {
