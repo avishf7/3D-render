@@ -13,12 +13,7 @@ import primitives.Vector;
  * @author Shai&Avishay
  *
  */
-public class AmbientLight {
-
-	/**
-	 * The color of the ambient lighting
-	 */
-	Color intensity;
+public class AmbientLight extends Light {
 
 	/**
 	 * AmbientLight constructor receiving {@link Color} and {@link double}.
@@ -26,14 +21,6 @@ public class AmbientLight {
 	 * @param KA Coefficient of intensity of lighting
 	 */
 	public AmbientLight(Color IA,double KA){
-		intensity=IA.scale(KA);
+		super(IA.scale(KA));
 	 }
-	
-	/**
-	 * Getter 
-	 * @return intensity field
-	 */
-	public Color getIntensity() {
-		return intensity;
-	}
 }
