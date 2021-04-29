@@ -1,11 +1,12 @@
 package geometries;
 
 import primitives.Color;
+import primitives.Material;
 import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * interface Geometry is interface for geometric shape in the Three-dimensional
+ * class Geometry is interface for geometric shape in the Three-dimensional
  * space.
  * 
  * @author Shai&Avishay
@@ -13,6 +14,22 @@ import primitives.Vector;
 public abstract class Geometry implements Intersectable {
 
 	protected Color emmission = Color.BLACK;
+	private Material material = new Material();
+
+	/**
+	 * @return the material
+	 */
+	public Material getMaterial() {
+		return material;
+	}
+
+	/**
+	 * @param material the material to set
+	 */
+	public Geometry setMaterial(Material material) {
+		this.material = material;
+		return this;
+	}
 
 	/**
 	 * @return the emmission

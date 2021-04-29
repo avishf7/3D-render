@@ -109,7 +109,7 @@ public class Point3D {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;
+			return true;  
 		if (!(obj instanceof Point3D))
 			return false;
 		Point3D other = (Point3D) obj;
