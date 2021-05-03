@@ -3,8 +3,7 @@ package primitives;
 
 /**
  * Class Material is class for hold the shininess factors of a geometry shape
- * 
- * 
+ *  
  * @author Shai&Avishay
  *
  */
@@ -39,7 +38,7 @@ public class Material {
 	}
 
 	/**
-	 * @param nShininess the nShininess to set
+	 * @param nShininess the nShininess to set 
 	 */
 	public Material setnShininess(int nShininess) {
 		this.nShininess = nShininess;
