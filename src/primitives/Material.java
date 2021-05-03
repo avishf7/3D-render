@@ -2,12 +2,24 @@
 package primitives;
 
 /**
- * @author User
+ * Class Material is class for hold the shininess factors of a geometry shape
+ * 
+ * 
+ * @author Shai&Avishay
  *
  */
 public class Material {
-
-	public double kD = 0, kS = 0;
+	/**
+	 * the Diffusive coefficient
+	 */
+	public double kD = 0;
+	/**
+	 * the spectacular effect coefficient
+	 */
+	public double kS = 0;
+	/**
+	 * the Spectacular exponent 
+	 */
 	public int nShininess = 0;
 
 	/**

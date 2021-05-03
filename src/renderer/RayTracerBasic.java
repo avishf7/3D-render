@@ -56,17 +56,21 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * 
-	 * @param intersection
-	 * @param ray
-	 * @return
+	 * A help function that calculates the effect of the light sources on the color of the Point
+	 * @param intersection point to calculate its color
+	 * @param ray  the ray coming out towards the scene
+	 * @return color that represent the effect of the light sources on the color of the Point
 	 */
 	private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
+		
+		//check whether the light and point of view are from different directions of the body
 		Vector v = ray.getDir();
 		Vector n = intersection.geometry.getNormal(intersection.point);
 		double nv = Util.alignZero(n.dotProduct(v));
 		if (nv == 0)
 			return Color.BLACK;
+		
+		//Calculate the effect all light sources have on the point
 		int nShininess = intersection.geometry.getMaterial().nShininess;
 		double kd = intersection.geometry.getMaterial().kD, ks = intersection.geometry.getMaterial().kS;
 		Color color = Color.BLACK;
@@ -83,12 +87,12 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * 
-	 * @param kd
-	 * @param l
-	 * @param n
-	 * @param lightIntensity
-	 * @return
+	 * A help function calculates the effect of the light source with the diffusion
+	 * @param kd the coefficient
+	 * @param l The vector from the light source to the point
+	 * @param n The normal in the point
+	 * @param lightIntensity Original light intensity
+	 * @return The color that reaches the point after the effect of diffusion
 	 */
 	private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
 		double scale = l.dotProduct(n);
@@ -99,14 +103,14 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * 
-	 * @param ks
-	 * @param l
-	 * @param n
-	 * @param v
-	 * @param nShininess
-	 * @param lightIntensity
-	 * @return
+	 * A help function calculates spectacular effect 
+	 * @param ks the coefficient
+	 * @param l The vector from the light source to the point
+	 * @param n The normal in the point
+	 * @param v the direction of the scanned ray
+	 * @param nShininess Spectacular exponent 
+	 * @param lightIntensity Original light intensity
+	 * @return The color that reaches the point after the spectacular effect 
 	 */
 	private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
 		Vector r = l.subtract(n.scale(l.dotProduct(n) * 2)).normalize();
