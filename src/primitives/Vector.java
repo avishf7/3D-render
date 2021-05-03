@@ -86,7 +86,7 @@ public class Vector {
 	/**
 	 * The function performs Scleric product
 	 * @param vec the vector to do with him the production
-	 * @return vector that represent the result of scleric product
+	 * @return the result of scleric product
 	 */
 	public double dotProduct(Vector vec) {
 		return (head.x.coord * vec.head.x.coord + head.y.coord * vec.head.y.coord + head.z.coord * vec.head.z.coord);

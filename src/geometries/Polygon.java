@@ -92,8 +92,6 @@ public class Polygon extends Geometry {
 		return plane.getNormal();
 	}
 
-	
-
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		List<GeoPoint> intsPoints = plane.findGeoIntersections(ray);
@@ -105,8 +103,9 @@ public class Polygon extends Geometry {
 		for (Point3D v : vertices) {
 			perEdges.add(v.subtract(ray.getP0()));
 		}
-		
-		double result = alignZero(ray.getDir().dotProduct(perEdges.get(perEdges.size() - 1).crossProduct(perEdges.get(0)).normalize()));
+
+		double result = alignZero(
+				ray.getDir().dotProduct(perEdges.get(perEdges.size() - 1).crossProduct(perEdges.get(0)).normalize()));
 
 		if (result == 0)
 			return null;
@@ -121,9 +120,9 @@ public class Polygon extends Geometry {
 			if ((result > 0) != isPos)
 				return null;
 		}
-		intsPoints.get(0).geometry=this;
+		intsPoints.get(0).geometry = this;
 		return intsPoints;
-		
+
 	}
 
 }

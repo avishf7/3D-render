@@ -88,7 +88,7 @@ public class RayTracerBasic extends RayTracerBase {
 		Vector r = l.subtract(n.scale(l.dotProduct(n) * 2)).normalize();
 		double scale =Util.alignZero(v.scale(-1).dotProduct(r));
 		if (scale < 0)
-			scale=0;
+			return Color.BLACK;
 		return lightIntensity.scale(ks * Math.pow(scale, nShininess));
 	}
 
