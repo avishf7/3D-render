@@ -170,7 +170,7 @@ public class LightsTests {
 	}
 	
 	/**
-	 * Produce a picture of a two triangles lighted by a point light
+	 * Produce a picture of a two triangles lighted by all lights
 	 */
 	@Test
 	public void trianglesLights() {

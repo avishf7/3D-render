@@ -41,7 +41,7 @@ public class RayTracerBasic extends RayTracerBase {
 		List<GeoPoint> interPoint = scene.geometries.findGeoIntersections(ray);
 		if (interPoint == null)
 			return scene.background;
-		return calcColor(ray.getClosestGeoPoint(interPoint),ray);
+		return calcColor(ray.getClosestGeoPoint(interPoint), ray);
 
 	}
 
@@ -55,6 +55,12 @@ public class RayTracerBasic extends RayTracerBase {
 		return scene.ambientLight.getIntensity().add(p.geometry.getEmmission()).add(calcLocalEffects(p, ray));
 	}
 
+	/**
+	 * 
+	 * @param intersection
+	 * @param ray
+	 * @return
+	 */
 	private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
 		Vector v = ray.getDir();
 		Vector n = intersection.geometry.getNormal(intersection.point);
@@ -69,13 +75,21 @@ public class RayTracerBasic extends RayTracerBase {
 			double nl = Util.alignZero(n.dotProduct(l));
 			if (nl * nv > 0) { // sign(nl) == sing(nv)
 				Color lightIntensity = lightSource.getIntensity(intersection.point);
-				color = color.add(calcDiffusive(kd, l, n, lightIntensity).add
-						(calcSpecular(ks, l, n, v, nShininess, lightIntensity)));
+				color = color.add(calcDiffusive(kd, l, n, lightIntensity)
+						.add(calcSpecular(ks, l, n, v, nShininess, lightIntensity)));
 			}
 		}
 		return color;
 	}
 
+	/**
+	 * 
+	 * @param kd
+	 * @param l
+	 * @param n
+	 * @param lightIntensity
+	 * @return
+	 */
 	private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
 		double scale = l.dotProduct(n);
 		if (scale < 0)
@@ -84,9 +98,19 @@ public class RayTracerBasic extends RayTracerBase {
 
 	}
 
+	/**
+	 * 
+	 * @param ks
+	 * @param l
+	 * @param n
+	 * @param v
+	 * @param nShininess
+	 * @param lightIntensity
+	 * @return
+	 */
 	private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
 		Vector r = l.subtract(n.scale(l.dotProduct(n) * 2)).normalize();
-		double scale =Util.alignZero(v.scale(-1).dotProduct(r));
+		double scale = Util.alignZero(v.scale(-1).dotProduct(r));
 		if (scale < 0)
 			return Color.BLACK;
 		return lightIntensity.scale(ks * Math.pow(scale, nShininess));
