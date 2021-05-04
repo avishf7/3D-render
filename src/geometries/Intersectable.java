@@ -13,14 +13,16 @@ import primitives.*;
 public interface Intersectable {
 	
 	/**
+	 * Class GeoPoint is the basic class that represents a point of shape with her shape 
 	 * 
 	 * @author Shai&Avishay
 	 *
 	 */
 	public static class GeoPoint {
-	    /**
-		 * @param geometry
-		 * @param point
+	    /**CTOR
+	     * 
+		 * @param geometry the shape that the point belong
+		 * @param point the point
 		 */
 		public GeoPoint(Geometry geometry, Point3D point) {
 			this.geometry = geometry;

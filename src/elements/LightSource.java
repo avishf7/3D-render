@@ -15,15 +15,16 @@ import primitives.Vector;
  */
 public interface LightSource {
 	/**
-	 * 
-	 * @param p
-	 * @return
+	 * The function receives a point and calculates the effect of light at that point
+	 * @param p the point 
+	 * @return the color of the light on the point that received
 	 */
 	public Color getIntensity(Point3D p);
 	/**
+	 * the function receives a point and calculates the vector from the light source to the point
 	 * 
-	 * @param p
-	 * @return
+	 * @param p the point
+	 * @return the vector from the light source to the point
 	 */
 	public Vector getL(Point3D p);
 

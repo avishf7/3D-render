@@ -6,13 +6,23 @@ import primitives.Point3D;
 import primitives.Vector;
 
 /**
+ * Class DirectionalLight is a class that represents the DirectionalLight on a scene
+ * 
  * @author Shai&Avishay
  *
  */
 public class DirectionalLight extends Light implements LightSource {
 
+	/**
+	 * direction of the light
+	 */
 	private Vector direction;
 	
+	/**
+	 * CTOR
+	 * @param intensity color of the light
+	 * @param dir direction of the light
+	 */
 	public DirectionalLight(Color intensity,Vector dir) {
 		super(intensity);
 		direction = dir.normalize();

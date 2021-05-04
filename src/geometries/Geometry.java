@@ -6,7 +6,7 @@ import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * class Geometry is interface for geometric shape in the Three-dimensional
+ * class Geometry is class for geometric shape in the Three-dimensional
  * space.
  * 
  * @author Shai&Avishay
