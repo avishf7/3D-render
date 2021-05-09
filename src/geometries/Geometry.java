@@ -16,7 +16,9 @@ public abstract class Geometry implements Intersectable {
 	protected Color emmission = Color.BLACK;
 	private Material material = new Material();
 
+
 	/**
+	 * Getter
 	 * @return the material
 	 */
 	public Material getMaterial() {
@@ -24,6 +26,7 @@ public abstract class Geometry implements Intersectable {
 	}
 
 	/**
+	 * Builder pattern Setter
 	 * @param material the material to set
 	 */
 	public Geometry setMaterial(Material material) {
@@ -32,6 +35,7 @@ public abstract class Geometry implements Intersectable {
 	}
 
 	/**
+	 * Getter
 	 * @return the emmission
 	 */
 	public Color getEmmission() {
@@ -39,6 +43,7 @@ public abstract class Geometry implements Intersectable {
 	}
 
 	/**
+	 * Builder pattern Setter
 	 * @param emmission the emmission to set
 	 */
 	public Geometry setEmmission(Color emmission) {

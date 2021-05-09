@@ -9,6 +9,7 @@ import primitives.Color;
  *
  */
 abstract class Light {
+
 	/**
 	 * CTOR
 	 * @param intensity

@@ -33,12 +33,39 @@ public class PointLight extends Light implements LightSource {
 	 * @param kL Discount factor
 	 * @param kQ Discount factor
 	 */
-	public PointLight(Color intensity, Point3D position, double kC, double kL, double kQ) {
+	public PointLight(Color intensity, Point3D position) {
 		super(intensity);
 		this.position = position;
+		this.kC = 1;
+		this.kL = 0;
+		this.kQ = 0;
+	}
+
+	/**
+	 * Builder pattern Setter
+	 * @param kC the kC to set
+	 */
+	public PointLight setKc(double kC) {
 		this.kC = kC;
+		return this;
+	}
+
+	/**
+	 * Builder pattern Setter
+	 * @param kL the kL to set
+	 */
+	public PointLight setKl(double kL) {
 		this.kL = kL;
+		return this;
+	}
+
+	/**
+	 * Builder pattern Setter
+	 * @param kQ the kQ to set
+	 */
+	public PointLight setKq(double kQ) {
 		this.kQ = kQ;
+		return this;
 	}
 
 	@Override

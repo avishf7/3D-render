@@ -19,7 +19,6 @@ import scene.Scene;
 public class Render {
 
 	ImageWriter imageWriter;
-	Scene scene;
 	RayTracerBase rayTracer;
 	Camera cam;
 
@@ -46,16 +45,6 @@ public class Render {
 	/**
 	 * Builder pattern Setter
 	 * 
-	 * @param scene the scene to set
-	 */
-	public Render setScene(Scene scene) {
-		this.scene = scene;
-		return this;
-	}
-
-	/**
-	 * Builder pattern Setter
-	 * 
 	 * @param rayTracer the rayTracer to set
 	 */
 	public Render setRayTracer(RayTracerBase rayTracer) {
@@ -69,8 +58,6 @@ public class Render {
 	public void renderImage() {
 		if (imageWriter == null)
 			throw new MissingResourceException("imageWriter field is empty", "ImageWriter", "imageWriter");
-		if (scene == null)
-			throw new MissingResourceException("scene field is empty", "Scene", "scene");
 		if (rayTracer == null)
 			throw new MissingResourceException("rayTracer field is empty", "RayTracerBase", "rayTracer");
 		if (cam == null)

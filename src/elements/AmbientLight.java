@@ -16,6 +16,13 @@ import primitives.Vector;
 public class AmbientLight extends Light {
 
 	/**
+	 * CTOR
+	 */
+	public AmbientLight() {
+		super(Color.BLACK);
+	}
+	
+	/**
 	 * AmbientLight constructor receiving {@link Color} and {@link double}.
 	 * @param IA The color of the ambient lighting
 	 * @param KA Coefficient of intensity of lighting

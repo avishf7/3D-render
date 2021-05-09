@@ -31,7 +31,8 @@ public class SpotLight extends PointLight {
 	 * @param direction direction of the light
 	 */
 	public SpotLight(Color intensity, Point3D position, Vector direction, double kC, double kL, double kQ) {
-		super(intensity, position, kC, kL, kQ);
+		super(intensity, position);
+		this.setKc(kC).setKl(kL).setKq(kQ);
 		this.direction = direction.normalize();
 	}
 
