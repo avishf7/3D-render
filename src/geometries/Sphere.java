@@ -65,32 +65,32 @@ public class Sphere extends Geometry {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
 		try {
 			Vector u = center.subtract(ray.getP0());
-			double tM = u.dotProduct(ray.getDir()), 
-					d = Math.sqrt(alignZero(u.lengthSquared() - (tM * tM)));
+			double tM = u.dotProduct(ray.getDir()), d = Math.sqrt(alignZero(u.lengthSquared() - (tM * tM)));
 
 			if (d >= radius)
 				return null;
 
 			double tH = Math.sqrt(alignZero(radius * radius - d * d)), t1 = tM + tH, t2 = tM - tH;
 
-			if (t1 > 0 || t2 > 0) {
+			if ((alignZero(t1) > 0 && alignZero(t1 - maxDistance) <= 0)
+					|| (alignZero(t2) > 0 && alignZero(t2 - maxDistance) <= 0)) {
 				LinkedList<GeoPoint> intsPoints = new LinkedList<GeoPoint>();
-				if (alignZero(t1) > 0)
-					intsPoints.add(new GeoPoint(this,ray.getPoint(t1)));
-				if (alignZero(t2) > 0)
-					intsPoints.add(new GeoPoint(this,ray.getPoint(t2)));
+				if (alignZero(t1) > 0 && alignZero(t1 - maxDistance) <= 0)
+					intsPoints.add(new GeoPoint(this, ray.getPoint(t1)));
+				if (alignZero(t2) > 0 && alignZero(t2 - maxDistance) <= 0)
+					intsPoints.add(new GeoPoint(this, ray.getPoint(t2)));
 				return intsPoints;
 			}
 
 			return null;
 
-		//In case the starting point of the ray is in the center of the sphere
+			// In case the starting point of the ray is in the center of the sphere
 		} catch (IllegalArgumentException e) {
 
-			return new LinkedList<GeoPoint>(List.of(new GeoPoint(this,ray.getPoint(radius))));
+			return new LinkedList<GeoPoint>(List.of(new GeoPoint(this, ray.getPoint(radius))));
 		}
 
 	}

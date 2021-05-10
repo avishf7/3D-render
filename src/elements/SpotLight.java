@@ -23,19 +23,20 @@ public class SpotLight extends PointLight {
 
 	/**
 	 * CTOR
+	 * 
 	 * @param intensity color of the light
-	 * @param position position of the light
-	 * @param kC Discount factor
-	 * @param kL Discount factor
-	 * @param kQ Discount factor
+	 * @param position  position of the light
+	 * @param kC        Discount factor
+	 * @param kL        Discount factor
+	 * @param kQ        Discount factor
 	 * @param direction direction of the light
 	 */
-	public SpotLight(Color intensity, Point3D position, Vector direction, double kC, double kL, double kQ) {
+	public SpotLight(Color intensity, Point3D position, Vector direction) {
 		super(intensity, position);
-		this.setKc(kC).setKl(kL).setKq(kQ);
 		this.direction = direction.normalize();
 	}
 
+	
 	@Override
 	public Color getIntensity(Point3D p) {
 		double cosA = Util.alignZero(direction.dotProduct(this.getL(p)));

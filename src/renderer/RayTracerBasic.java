@@ -22,6 +22,11 @@ import scene.Scene;
  */
 public class RayTracerBasic extends RayTracerBase {
 	/**
+	 * 
+	 */
+	private static final double DELTA = 0.1;
+
+	/**
 	 * RayTracerBasic constructor receiving {@link scene}.
 	 * 
 	 * @param scene the photographed scene
@@ -56,21 +61,25 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * A help function that calculates the effect of the light sources on the color of the Point
+	 * A help function that calculates the effect of the light sources on the color
+	 * of the Point
+	 * 
 	 * @param intersection point to calculate its color
-	 * @param ray  the ray coming out towards the scene
-	 * @return color that represent the effect of the light sources on the color of the Point
+	 * @param ray          the ray coming out towards the scene
+	 * @return color that represent the effect of the light sources on the color of
+	 *         the Point
 	 */
 	private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
-		
-		//check whether the light and point of view are from different directions of the body
+
+		// check whether the light and point of view are from different directions of
+		// the body
 		Vector v = ray.getDir();
 		Vector n = intersection.geometry.getNormal(intersection.point);
 		double nv = Util.alignZero(n.dotProduct(v));
 		if (nv == 0)
 			return Color.BLACK;
-		
-		//Calculate the effect all light sources have on the point
+
+		// Calculate the effect all light sources have on the point
 		int nShininess = intersection.geometry.getMaterial().nShininess;
 		double kd = intersection.geometry.getMaterial().kD, ks = intersection.geometry.getMaterial().kS;
 		Color color = Color.BLACK;
@@ -78,9 +87,11 @@ public class RayTracerBasic extends RayTracerBase {
 			Vector l = lightSource.getL(intersection.point);
 			double nl = Util.alignZero(n.dotProduct(l));
 			if (nl * nv > 0) { // sign(nl) == sing(nv)
-				Color lightIntensity = lightSource.getIntensity(intersection.point);
-				color = color.add(calcDiffusive(kd, l, n, lightIntensity)
-						.add(calcSpecular(ks, l, n, v, nShininess, lightIntensity)));
+				if (unShaded(l, n, intersection, lightSource)) {
+					Color lightIntensity = lightSource.getIntensity(intersection.point);
+					color = color.add(calcDiffusive(kd, l, n, lightIntensity)
+							.add(calcSpecular(ks, l, n, v, nShininess, lightIntensity)));
+				}
 			}
 		}
 		return color;
@@ -88,9 +99,10 @@ public class RayTracerBasic extends RayTracerBase {
 
 	/**
 	 * A help function calculates the effect of the light source with the diffusion
-	 * @param kd the coefficient
-	 * @param l The vector from the light source to the point
-	 * @param n The normal in the point
+	 * 
+	 * @param kd             the coefficient
+	 * @param l              The vector from the light source to the point
+	 * @param n              The normal in the point
 	 * @param lightIntensity Original light intensity
 	 * @return The color that reaches the point after the effect of diffusion
 	 */
@@ -103,14 +115,15 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * A help function calculates spectacular effect 
-	 * @param ks the coefficient
-	 * @param l The vector from the light source to the point
-	 * @param n The normal in the point
-	 * @param v the direction of the scanned ray
-	 * @param nShininess Spectacular exponent 
+	 * A help function calculates spectacular effect
+	 * 
+	 * @param ks             the coefficient
+	 * @param l              The vector from the light source to the point
+	 * @param n              The normal in the point
+	 * @param v              the direction of the scanned ray
+	 * @param nShininess     Spectacular exponent
 	 * @param lightIntensity Original light intensity
-	 * @return The color that reaches the point after the spectacular effect 
+	 * @return The color that reaches the point after the spectacular effect
 	 */
 	private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
 		Vector r = l.subtract(n.scale(l.dotProduct(n) * 2)).normalize();
@@ -118,6 +131,16 @@ public class RayTracerBasic extends RayTracerBase {
 		if (scale < 0)
 			return Color.BLACK;
 		return lightIntensity.scale(ks * Math.pow(scale, nShininess));
+	}
+
+	private boolean unShaded(Vector l, Vector n, GeoPoint gp, LightSource light) {
+
+		Vector lightDirection = l.scale(-1); // from point to light source
+		Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : -DELTA);
+		Point3D point = gp.point.add(delta);
+		Ray lightRay = new Ray(point, lightDirection);
+		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, light.getDistance(gp.point));
+		return intersections == null;
 	}
 
 }

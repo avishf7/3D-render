@@ -39,11 +39,11 @@ public class Geometries implements Intersectable {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
 		List<GeoPoint> intsPoints = null, result;
 
 		for (Intersectable sh : shapes) {
-			result = sh.findGeoIntersections(ray);
+			result = sh.findGeoIntersections(ray, maxDistance);
 			if (result != null)
 				if (intsPoints == null)
 					intsPoints = result;
