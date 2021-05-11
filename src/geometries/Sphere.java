@@ -89,8 +89,10 @@ public class Sphere extends Geometry {
 
 			// In case the starting point of the ray is in the center of the sphere
 		} catch (IllegalArgumentException e) {
-
-			return new LinkedList<GeoPoint>(List.of(new GeoPoint(this, ray.getPoint(radius))));
+			if (alignZero(radius - maxDistance) <= 0)
+				return new LinkedList<GeoPoint>(List.of(new GeoPoint(this, ray.getPoint(radius))));
+			else
+				return null;
 		}
 
 	}

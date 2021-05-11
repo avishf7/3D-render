@@ -133,6 +133,14 @@ public class RayTracerBasic extends RayTracerBase {
 		return lightIntensity.scale(ks * Math.pow(scale, nShininess));
 	}
 
+	/**
+	 * 
+	 * @param l
+	 * @param n
+	 * @param gp
+	 * @param light
+	 * @return
+	 */
 	private boolean unShaded(Vector l, Vector n, GeoPoint gp, LightSource light) {
 
 		Vector lightDirection = l.scale(-1); // from point to light source

@@ -9,8 +9,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import geometries.Polygon;
 import geometries.Sphere;
 import geometries.Triangle;
+import geometries.Intersectable.GeoPoint;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -75,5 +77,28 @@ public class TriangleTests {
 		// TC13:On edge's continuation
 		assertNull("Ray's line out of Triangle",
 				triangle.findIntersections(new Ray(new Point3D(2, 2, 1), new Vector(0, 0, -1))));
+	}
+	
+	/**
+	 * Test method for
+	 * {@link geometries.Triangle#findGeoIntersections(primitives.Ray, double)}.
+	 */
+	@Test
+	public void testFindGeoIntersections() {
+		Triangle pl = new Triangle(new Point3D(0, 1, 0), new Point3D(1, 1, 0), new Point3D(0.5, 1, 1));
+		// ============ Equivalence Partitions Tests ==============
+
+		// TC01: Ray intersects the triangle in the range
+		List<GeoPoint> result = pl.findGeoIntersections(new Ray(new Point3D(0.5, 0, 0), new Vector(0, 1, 0.5)), 2);
+		assertEquals("The Ray should Intersect with triangle in the range", 1, result.size());
+
+		// TC02: Ray intersects the triangle in out of the range
+		result = pl.findGeoIntersections(new Ray(new Point3D(0.5, 0, 0), new Vector(0, 1, 0.5)), 1);
+		assertNull("The Ray should not Intersect with triangle", result);
+
+		// =============== Boundary Values Tests ==================
+		// TC01: Ray intersects the triangle exactly at the edge of the range
+		result = pl.findGeoIntersections(new Ray(new Point3D(0.5, 0, 0.5), new Vector(0, 1, 0)), 1);
+		assertEquals("The Ray should Intersect with plane in the triangle", 1, result.size());
 	}
 }

@@ -9,8 +9,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+import geometries.Polygon;
 import geometries.Sphere;
-
+import geometries.Intersectable.GeoPoint;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -142,6 +143,39 @@ public class SphereTests {
 		assertNull("Ray's line out of sphere",
 				sphere.findIntersections(new Ray(new Point3D(1, 2, 0), new Vector(1, 0, 0))));
 
+	}
+
+	/**
+	 * Test method for
+	 * {@link geometries.Sphere#findGeoIntersections(primitives.Ray, double)}.
+	 */
+	@Test
+	public void testFindGeoIntersections() {
+		Sphere sphere = new Sphere(new Point3D(1, 0, 0), 1d);
+
+		// ============ Equivalence Partitions Tests ==============
+
+		// TC01: Ray intersects the Sphere in range twice
+		List<GeoPoint> result = sphere.findGeoIntersections(new Ray(new Point3D(1, -2, 0), new Vector(0, 1, 0)), 4);
+		assertEquals("The Ray should Intersect with Sphere in range", 2, result.size());
+
+		// TC02: Ray intersects the Sphere in range once
+		result = sphere.findGeoIntersections(new Ray(new Point3D(1, -2, 0), new Vector(0, 1, 0)), 2);
+		assertEquals("The Ray should Intersect with Sphere in range", 1, result.size());
+
+		// TC03: Ray intersects the Sphere in out of range
+		result = sphere.findGeoIntersections(new Ray(new Point3D(1, -2, 0), new Vector(0, 1, 0)), 0.5);
+		assertNull("The Ray should not Intersect with Sphere", result);
+
+		// =============== Boundary Values Tests ==================
+		
+		// TC01: Ray intersects the Sphere exactly at the edge of the range(2 points)
+		result = sphere.findGeoIntersections(new Ray(new Point3D(1, -2, 0), new Vector(0, 1, 0)), 3);
+		assertEquals("The Ray should Intersect with Sphere in the range", 1, result.size());
+		
+		// TC02: Ray intersects the Sphere exactly at the edge of the range(1 point)
+		result = sphere.findGeoIntersections(new Ray(new Point3D(1, -2, 0), new Vector(0, 1, 0)), 1);
+		assertEquals("The Ray should Intersect with Sphere in the range", 1, result.size());
 	}
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.Test;
 
 import geometries.*;
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 
 /**
@@ -95,13 +96,14 @@ public class PolygonTests {
 		assertTrue("Bad normal to polygon",
 				new Vector(sqrt3, sqrt3, sqrt3).equals(normal) || new Vector(-sqrt3, -sqrt3, -sqrt3).equals(normal));
 	}
-	
+
 	/**
 	 * Test method for {@link geometries.Polygon#findIntersections(primitives.Ray)}.
 	 */
 	@Test
 	public void testFindIntersections() {
-		Polygon pl = new Polygon(new Point3D(0, 0, 0), new Point3D(1, 0, 0), new Point3D(1, 1, 0), new Point3D(0, 1, 0));
+		Polygon pl = new Polygon(new Point3D(0, 0, 0), new Point3D(1, 0, 0), new Point3D(1, 1, 0),
+				new Point3D(0, 1, 0));
 
 		// ============ Equivalence Partitions Tests ==============
 
@@ -132,6 +134,30 @@ public class PolygonTests {
 		// TC13:On edge's continuation
 		assertNull("Ray's line out of polygon",
 				pl.findIntersections(new Ray(new Point3D(2, 0, 1), new Vector(0, 0, -1))));
+	}
+
+	/**
+	 * Test method for
+	 * {@link geometries.Polygon#findGeoIntersections(primitives.Ray, double)}.
+	 */
+	@Test
+	public void testFindGeoIntersections() {
+		Polygon pl = new Polygon(new Point3D(0, 1, 0), new Point3D(1, 1, 0), new Point3D(1, 1, 1),
+				new Point3D(0, 1, 1));
+		// ============ Equivalence Partitions Tests ==============
+
+		// TC01: Ray intersects the polygon in the range
+		List<GeoPoint> result = pl.findGeoIntersections(new Ray(new Point3D(0.5, 0, 0), new Vector(0, 1, 0.5)), 2);
+		assertEquals("The Ray should Intersect with polygon in the range", 1, result.size());
+
+		// TC02: Ray intersects the polygon in out of the range
+		result = pl.findGeoIntersections(new Ray(new Point3D(0.5, 0, 0), new Vector(0, 1, 0.5)), 1);
+		assertNull("The Ray should not Intersect with polygon", result);
+
+		// =============== Boundary Values Tests ==================
+		// TC01: Ray intersects the polygon exactly at the edge of the range
+		result = pl.findGeoIntersections(new Ray(new Point3D(0.5, 0, 0.5), new Vector(0, 1, 0)), 1);
+		assertEquals("The Ray should Intersect with polygon in the range", 1, result.size());
 	}
 
 }
