@@ -14,13 +14,25 @@ import geometries.Intersectable.GeoPoint;
 public class Ray {
 
 	/**
+	 * 
+	 */
+	private static final double DELTA = 0.1;
+
+	/**
 	 * Ray constructor receiving {@link Point3D} and {@link Vector}.
 	 * 
 	 * @param p0  starting point
 	 * @param dir Direction vector
+	 * 
 	 */
 	public Ray(Point3D p0, Vector dir) {
 		this.p0 = p0;
+		this.dir = dir.normalized();
+	}
+
+	public Ray(Point3D p0, Vector dir, Vector normal) {
+		Vector delt = normal.scale(Util.alignZero(normal.dotProduct(dir)) > 0 ? DELTA : -DELTA);
+		this.p0 = p0.add(delt);
 		this.dir = dir.normalized();
 	}
 
@@ -45,7 +57,9 @@ public class Ray {
 	}
 
 	/**
-	 * The function finds the point closest to the ray head from a collection of points
+	 * The function finds the point closest to the ray head from a collection of
+	 * points
+	 * 
 	 * @param points collection of points
 	 * @return Point3D The closest point to the head of the ray
 	 */
@@ -64,7 +78,14 @@ public class Ray {
 		}
 		return closest;
 	}
-	
+
+	/**
+	 * The function gets a list of intersection points and calculates the
+	 * intersection point closest to the beginning of the ray
+	 * 
+	 * @param points intersection points
+	 * @return the closest point to the ray's head
+	 */
 	public GeoPoint getClosestGeoPoint(List<GeoPoint> points) {
 		if (points == null || points.size() == 0)
 			return null;
@@ -78,9 +99,8 @@ public class Ray {
 			}
 		}
 		return closest;
-	
+
 	}
-	
 
 	@Override
 	public boolean equals(Object obj) {
