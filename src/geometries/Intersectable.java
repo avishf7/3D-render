@@ -71,10 +71,12 @@ public interface Intersectable {
 	}
 
 	/**
-	 * 
-	 * @param ray
-	 * @param maxDistance
-	 * @return
+	 *  The function receives a {@link Ray} and range(number) and calculates ray's Intersections with the
+	 * shape in the range.
+	 *  
+	 * @param ray A Ray in three-dimensional space
+	 * @param maxDistance Intersection range
+	 * @return List(<GeoPoint>) of The Intersections points in the range with their shapes
 	 */
 	List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
 }
