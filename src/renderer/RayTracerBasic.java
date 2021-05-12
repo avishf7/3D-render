@@ -108,14 +108,14 @@ public class RayTracerBasic extends RayTracerBase {
 	/**
 	 * A help function calculates the effect of the light source with the diffusion
 	 * 
-	 * @param kd             the coefficient
-	 * @param l              The vector from the light source to the point
-	 * @param n              The normal in the point
+	 * @param kd            the coefficient
+	 * @param l             The vector from the light source to the point
+	 * @param n             The normal in the point
 	 * @param lightIntensity Original light intensity
 	 * @return The color that reaches the point after the effect of diffusion
 	 */
 	private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
-		double scale = l.dotProduct(n);
+		double scale = l.dotProduct(n); 
 		if (scale < 0)
 			scale *= -1;
 		return lightIntensity.scale(kd * scale);
