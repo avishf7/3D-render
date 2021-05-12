@@ -67,8 +67,8 @@ public class RayTracerBasic extends RayTracerBase {
 	 */
 	private Color calcColor(GeoPoint p, Ray ray, int level, double k) {
 		Color color = p.geometry.getEmmission().add(calcLocalEffects(p, ray));
-//	return 1 == level ? color : color.add(calcGlobalEffects(p, ray, level, k));
-		return null;//*
+		return 1 == level ? color : color.add(calcGlobalEffects(p, ray, level, k));
+
 	}
 
 	/**
