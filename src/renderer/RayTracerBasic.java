@@ -8,6 +8,7 @@ import java.util.List;
 import elements.LightSource;
 import geometries.Intersectable.GeoPoint;
 import primitives.Color;
+import primitives.Material;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Util;
@@ -51,10 +52,10 @@ public class RayTracerBasic extends RayTracerBase {
 	 */
 	@Override
 	public Color traceRay(Ray ray) {
-		List<GeoPoint> interPoint = scene.geometries.findGeoIntersections(ray);
+		GeoPoint interPoint = findClosestIntersection(ray);
 		if (interPoint == null)
 			return scene.background;
-		return calcColor(ray.getClosestGeoPoint(interPoint), ray);
+		return calcColor(interPoint, ray);
 
 	}
 
@@ -64,8 +65,9 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @param p The required point
 	 * @return Color the color of the scene at the given point
 	 */
-	private Color calcColor(GeoPoint p, Ray ray) {
-		return scene.ambientLight.getIntensity().add(p.geometry.getEmmission()).add(calcLocalEffects(p, ray));
+	private Color calcColor(GeoPoint p, Ray ray, int level, double k) {
+		Color color = p.geometry.getEmmission().add(calcLocalEffects(p, ray));
+		return 1 == level ? color : color.add(calcGlobalEffects(p, ray, level, k));
 	}
 
 	/**
@@ -108,14 +110,14 @@ public class RayTracerBasic extends RayTracerBase {
 	/**
 	 * A help function calculates the effect of the light source with the diffusion
 	 * 
-	 * @param kd            the coefficient
-	 * @param l             The vector from the light source to the point
-	 * @param n             The normal in the point
+	 * @param kd             the coefficient
+	 * @param l              The vector from the light source to the point
+	 * @param n              The normal in the point
 	 * @param lightIntensity Original light intensity
 	 * @return The color that reaches the point after the effect of diffusion
 	 */
 	private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
-		double scale = l.dotProduct(n); 
+		double scale = l.dotProduct(n);
 		if (scale < 0)
 			scale *= -1;
 		return lightIntensity.scale(kd * scale);
@@ -158,5 +160,42 @@ public class RayTracerBasic extends RayTracerBase {
 		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, light.getDistance(gp.point));
 		return intersections == null;
 	}
+
+	/**
+	 * The function receives a Ray and calculates its closest Intersection point
+	 * with the shape(s)
+	 * 
+	 * @param ray Ray in three-dimensional space
+	 * @return the closest Intersection point
+	 */
+	private GeoPoint findClosestIntersection(Ray ray) {
+		List<GeoPoint> interPoint = scene.geometries.findGeoIntersections(ray);
+		if (interPoint == null)
+			return null;
+		return ray.getClosestGeoPoint(interPoint);
+	}
+
+	private Color calcColor(GeoPoint geopoint, Ray ray) {
+		return calcColor(geopoint, ray, MAX_CALC_COLOR_LEVEL, geopoint.geometry.getMaterial().kT)
+				.add(scene.ambientLight.getIntensity());
+	}
+
+	private Color calcGlobalEffects(GeoPoint geopoint, Ray ray, int level, double k) {
+		Color color = Color.BLACK;
+		Material material = geopoint.geometry.getMaterial();
+		double kr = material.kR, kkr = k * kr;
+		if (kkr > MIN_CALC_COLOR_K) {
+		Ray reflectedRay = constructReflectedRay(n, geopoint.point, inRay);
+		GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
+		color = color.add(calcColor(reflectedPoint, reflectedRay, level – 1, kkr).scale(kr));
+		}
+		double kt = material.kT, kkt = k * kt;
+		if (kkt > MIN_CALC_COLOR_K) {
+		Ray refractedRay = constructRefractedRay(n, geopoint.point, inRay);
+		GeoPoint refractedPoint = findClosestIntersection(refractedRay);
+		color = color.add(calcColor(refractedPoint, refractedRay, level – 1, kkt).scale(kt));
+		}
+		return color;
+		}
 
 }
