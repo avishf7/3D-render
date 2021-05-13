@@ -61,10 +61,12 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * A help function that calculates the color of the scene at a particular point
 	 * 
-	 * @param p The required point
-	 * @return Color the color of the scene at the given point
+	 * @param p
+	 * @param ray
+	 * @param level
+	 * @param k
+	 * @return
 	 */
 	private Color calcColor(GeoPoint p, Ray ray, int level, double k) {
 		Color color = p.geometry.getEmmission().add(calcLocalEffects(p, ray, k));
@@ -78,6 +80,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * 
 	 * @param intersection point to calculate its color
 	 * @param ray          the ray coming out towards the scene
+	 * @param k
 	 * @return color that represent the effect of the light sources on the color of
 	 *         the Point
 	 */
@@ -203,8 +206,7 @@ public class RayTracerBasic extends RayTracerBase {
 			GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
 			if (reflectedPoint != null)
 				color = color.add(calcColor(reflectedPoint, reflectedRay, level - 1, kkr).scale(kr));
-			else
-				color = color.add(scene.background);
+			
 		}
 		double kt = material.kT, kkt = k * kt;
 		if (kkt > MIN_CALC_COLOR_K) {
@@ -212,8 +214,7 @@ public class RayTracerBasic extends RayTracerBase {
 			GeoPoint refractedPoint = findClosestIntersection(refractedRay);
 			if (refractedPoint != null)
 				color = color.add(calcColor(refractedPoint, refractedRay, level - 1, kkt).scale(kt));
-			else
-				color = color.add(scene.background);
+			
 		}
 		return color;
 	}
