@@ -67,7 +67,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return Color the color of the scene at the given point
 	 */
 	private Color calcColor(GeoPoint p, Ray ray, int level, double k) {
-		Color color = p.geometry.getEmmission().add(calcLocalEffects(p, ray));
+		Color color = p.geometry.getEmmission().add(calcLocalEffects(p, ray, k));
 		return 1 == level ? color : color.add(calcGlobalEffects(p, ray, level, k));
 
 	}
@@ -81,7 +81,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return color that represent the effect of the light sources on the color of
 	 *         the Point
 	 */
-	private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
+	private Color calcLocalEffects(GeoPoint intersection, Ray ray, double k) {
 
 		// check whether the light and point of view are from different directions of
 		// the body
@@ -99,10 +99,12 @@ public class RayTracerBasic extends RayTracerBase {
 			Vector l = lightSource.getL(intersection.point);
 			double nl = Util.alignZero(n.dotProduct(l));
 			if (nl * nv > 0) { // sign(nl) == sing(nv)
-				if (unShaded(l, n, intersection, lightSource)) {
-					Color lightIntensity = lightSource.getIntensity(intersection.point);
-					color = color.add(calcDiffusive(kd, l, n, lightIntensity)
-							.add(calcSpecular(ks, l, n, v, nShininess, lightIntensity)));
+				double ktr = transparency(lightSource, l, n, intersection);
+				if (ktr * k > MIN_CALC_COLOR_K) {
+					Color lightIntensity = lightSource.getIntensity(intersection.point).scale(ktr);
+					color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+							calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+
 				}
 			}
 		}
@@ -231,5 +233,29 @@ public class RayTracerBasic extends RayTracerBase {
 
 	private Ray constructRefractedRay(Vector normal, GeoPoint point, Ray inRay) {
 		return new Ray(point.point, inRay.getDir(), normal);
+	}
+
+	/**
+	 * 
+	 * @param ls
+	 * @param l
+	 * @param n
+	 * @param geoPoint
+	 * @return
+	 */
+	private double transparency(LightSource ls, Vector l, Vector n, GeoPoint geoPoint) {
+		Vector lightDirection = l.scale(-1); // from point to light source
+		Ray lightRay = new Ray(geoPoint.point, lightDirection, n);
+		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, ls.getDistance(geoPoint.point));
+		if (intersections == null)
+			return 1.0;
+		double ktr = 1.0;
+		for (GeoPoint gp : intersections) {
+			ktr *= gp.geometry.getMaterial().kT;
+			if (ktr < MIN_CALC_COLOR_K)
+				return 0.0;
+		}
+
+		return ktr;
 	}
 }
