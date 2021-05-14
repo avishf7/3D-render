@@ -6,19 +6,23 @@ import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * class Geometry is class for geometric shape in the Three-dimensional
- * space.
+ * class Geometry is class for geometric shape in the Three-dimensional space.
  * 
  * @author Shai&Avishay
  */
 public abstract class Geometry implements Intersectable {
-
+	/**
+	 * the color of the shape
+	 */
 	protected Color emmission = Color.BLACK;
+	/**
+	 * The properties of the material of the shape 
+	 */
 	private Material material = new Material();
-
 
 	/**
 	 * Getter
+	 * 
 	 * @return the material
 	 */
 	public Material getMaterial() {
@@ -27,6 +31,7 @@ public abstract class Geometry implements Intersectable {
 
 	/**
 	 * Builder pattern Setter
+	 * 
 	 * @param material the material to set
 	 */
 	public Geometry setMaterial(Material material) {
@@ -36,6 +41,7 @@ public abstract class Geometry implements Intersectable {
 
 	/**
 	 * Getter
+	 * 
 	 * @return the emmission
 	 */
 	public Color getEmmission() {
@@ -44,6 +50,7 @@ public abstract class Geometry implements Intersectable {
 
 	/**
 	 * Builder pattern Setter
+	 * 
 	 * @param emmission the emmission to set
 	 */
 	public Geometry setEmmission(Color emmission) {

@@ -30,8 +30,18 @@ public class Ray {
 		this.dir = dir.normalized();
 	}
 
-	public Ray(Point3D p0, Vector dir, Vector normal) {
-		Vector delt = normal.scale(Util.alignZero(normal.dotProduct(dir)) > 0 ? DELTA : -DELTA);
+	/**
+	 * Ray constructor receiving {@link Point3D} and {@link Vector} and more
+	 * {@link Vector}-to move a little the ray's head on the normal
+	 * 
+	 * @param p0  starting point
+	 * @param dir Direction vector
+	 * @param n   vector to move on it the ray's head
+	 */
+	public Ray(Point3D p0, Vector dir, Vector n) {
+		Vector delt = n.scale(Util.alignZero(n.dotProduct(dir)) > 0 ? DELTA : -DELTA);// Calculate the
+																						// direction of move the
+																						// head
 		this.p0 = p0.add(delt);
 		this.dir = dir.normalized();
 	}
