@@ -3,6 +3,8 @@
  */
 package elements;
 
+import java.util.List;
+
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
@@ -24,13 +26,13 @@ public interface LightSource {
 	public Color getIntensity(Point3D p);
 
 	/**
-	 * the function receives a point and calculates the vector from the light source
+	 * the function receives a point and calculates the vectors from the light source
 	 * to the point
 	 * 
 	 * @param p the point
-	 * @return the vector from the light source to the point
+	 * @return List of vector from the light source to the point
 	 */
-	public Vector getL(Point3D p);
+	public List<Vector> getLs(Point3D p);
 
 	/**
 	 * 

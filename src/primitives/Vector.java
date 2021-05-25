@@ -57,6 +57,21 @@ public class Vector {
 	private Point3D head;
 
 	/**
+	 * The function calculates an orthogonal vector to "this"
+	 * @return a orthogonal vector to "this" vector
+	 */
+	public Vector getOrthogonal()
+	{
+		try {
+		return new Vector(-head.getZ(), 0 , head.getX()).normalized();
+		}
+		catch(IllegalArgumentException ex)
+		{
+			return new Vector(-head.getY(), head.getX() , 0).normalized();
+		}
+	}
+	
+	/**
 	 * The function performs a vector sum
 	 * @param vec vector to add
 	 * @return new vector that represent the sum of the two vectors

@@ -125,7 +125,7 @@ public class RayTracerBasic extends RayTracerBase {
 		double kd = intersection.geometry.getMaterial().kD, ks = intersection.geometry.getMaterial().kS;
 		Color color = Color.BLACK;
 		for (LightSource lightSource : scene.lights) {
-			Vector l = lightSource.getL(intersection.point);
+			List<Vector> l = lightSource.getLs(intersection.point);
 			double nl = Util.alignZero(n.dotProduct(l));
 			if (nl * nv > 0) { // sign(nl) == sing(nv)
 				double ktr = transparency(lightSource, l, n, intersection);// The effect of the shadow
