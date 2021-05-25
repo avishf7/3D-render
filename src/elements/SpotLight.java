@@ -3,6 +3,10 @@
  */
 package elements;
 
+import java.util.List;
+
+
+
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Util;
@@ -33,13 +37,17 @@ public class SpotLight extends PointLight {
 		this.direction = direction.normalize();
 	}
 
-	
 	@Override
 	public Color getIntensity(Point3D p) {
-		double cosA = Util.alignZero(direction.dotProduct(this.getLs(p)));
+		double cosA = Util.alignZero(direction.dotProduct(this.getL(p)));
 		if (0 > cosA)
 			return Color.BLACK;
 		return super.getIntensity(p).scale(cosA);
+	}
+
+	@Override
+	public List<Vector> getLs(Point3D p) {
+		return getLs(direction,p);
 	}
 
 }

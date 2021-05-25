@@ -33,6 +33,15 @@ public interface LightSource {
 	 * @return List of vector from the light source to the point
 	 */
 	public List<Vector> getLs(Point3D p);
+	
+	/**
+	 * the function receives a point and calculates the vector from the light source
+	 * to the point
+	 * 
+	 * @param p the point
+	 * @return the vector from the light source to the point
+	 */
+	public Vector getL(Point3D p);
 
 	/**
 	 * 

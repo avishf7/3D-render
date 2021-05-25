@@ -121,14 +121,33 @@ public class PointLight extends Light implements LightSource {
 	}
 
 	@Override
+	public Vector getL(Point3D p) {
+		return p.subtract(position).normalize();
+	}
+
+	@Override
 	public List<Vector> getLs(Point3D p) {
-		Vector vCenter = p.subtract(position).normalize();
+		return getLs(getL(p), p);
+	}
+
+	/**
+	 * Help function for producing a target area and calculating the light beams
+	 * coming from it to the point
+	 * 
+	 * @param vCenter
+	 * @return
+	 */
+	protected List<Vector> getLs(Vector vCenter, Point3D p) {
+		
+		LinkedList<Vector> beams = new LinkedList<>(List.of(vCenter));
+		
+		if (radius == 0)
+			return beams;
+		
 		Vector vUp = vCenter.getOrthogonal();
 		Vector vRight = vCenter.crossProduct(vUp);
 
 		double interval = (2 * radius) / xAndY;
-
-		LinkedList<Vector> beams = new LinkedList<>(List.of(vCenter));
 
 		// ****If the center is on the grid — move it to the nearest upper left
 		// pixel****
@@ -164,19 +183,21 @@ public class PointLight extends Light implements LightSource {
 				double movementU = 0;
 
 				do {
-					//Reducing the INTERVAL range to reduce the chance of recreating a point outside the circle
+					// Reducing the INTERVAL range to reduce the chance of recreating a point
+					// outside the circle
 					if (movementR != 0 && movementR != 0) {
 						movementR = rand.nextDouble() * movementR - movementR / 2;
 						movementU = rand.nextDouble() * movementU - movementU / 2;
-					} 
-					//In the first case or in case there was no movement
+					}
+					// In the first case or in case there was no movement
 					else {
 						movementR = rand.nextDouble() * interval - interval / 2;
 						movementU = rand.nextDouble() * interval - interval / 2;
 					}
 
 					// ********The conditions Prevent a situation that creates a zero vector
-					//***************(When the desired pixel is on one of the axes of the plane)******
+					// ***************(When the desired pixel is on one of the axes of the
+					// plane)******
 					if (movementR != 0)
 						pIJ = pIJ.add(vRight.scale(movementR));
 					if (movementU != 0)
