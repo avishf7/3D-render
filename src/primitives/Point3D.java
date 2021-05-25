@@ -27,6 +27,12 @@ public class Point3D {
 		this.z = new Coordinate(z);
 	}
 
+	public Point3D(Point3D other) {
+		this.x = new Coordinate(other.getX());
+		this.y = new Coordinate(other.getY());
+		this.z = new Coordinate(other.getZ());
+	}
+	
 	/**
 	 * Point3D constructor receiving coordinates.
 	 * 

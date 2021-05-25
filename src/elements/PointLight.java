@@ -22,7 +22,7 @@ public class PointLight extends Light implements LightSource {
 	/**
 	 * the radius of the light source
 	 */
-	private double radius;
+	public double radius;
 
 	/**
 	 * number of columns and rows
@@ -141,21 +141,23 @@ public class PointLight extends Light implements LightSource {
 	protected List<Vector> getLs(Vector vCenter, Point3D p) {
 
 		LinkedList<Vector> beams = new LinkedList<>(List.of(getL(p)));
-
+		Point3D position1;
 		if (radius == 0)
 			return beams;
 
 		Vector vUp = vCenter.getOrthogonal();
-		Vector vRight = vCenter.crossProduct(vUp);
-
+		Vector vRight = vCenter.crossProduct(vUp).normalize();
 		double interval = (2 * radius) / xAndY;
 
 		// ****If the center is on the grid — move it to the nearest upper left
 		// pixel****
 		if (xAndY % 2 == 0) {
-			position = position.add(vRight.scale(-interval / 2));
-			position = position.add(vUp.scale(interval / 2));
+			position1=new Point3D(position);
+			position1 = position1.add(vRight.scale(-interval / 2));
+			position1 = position1.add(vUp.scale(interval / 2));
 		}
+		else
+			position1=new Point3D(position);
 		// ******************************************************************************
 
 		// ---------------------Find the center point of the first
@@ -163,22 +165,24 @@ public class PointLight extends Light implements LightSource {
 
 		double yI = -(0 - (xAndY - 1) / 2) * interval;
 		double xJ = (0 - (xAndY - 1) / 2) * interval;
-		Point3D pIJ = position;
+		Point3D pp =new Point3D(position1);
 
 		// ********The conditions Prevent a situation that creates a zero
 		// vector*********
 		// ******(When the desired pixel center is on one of the axes of the
 		// plane)******
 		if (xJ != 0)
-			pIJ = pIJ.add(vRight.scale(xJ));
+			pp = pp.add(vRight.scale(xJ));
 		if (yI != 0)
-			pIJ = pIJ.add(vUp.scale(yI));
+			pp = pp.add(vUp.scale(yI));
 		// ******************************************************************************
 
 		// -----------------------------------------------------------------------------------
 
-		for (int i = 0; i < xAndY; i++, pIJ = pIJ.add(vUp.scale(-interval)))
-			for (int j = 0; j < xAndY; j++, pIJ = pIJ.add(vRight.scale(interval))) {
+		for (int i = 0; i < xAndY; i++,pp = pp.add(vUp.scale(-interval))) {
+			Point3D pp1=pp;
+			for (int j = 0; j < xAndY; j++, pp1 = pp1.add(vRight.scale(interval))) {
+				Point3D pp2=new Point3D(pp1);
 				Random rand = new Random();
 				double movementR = 0;
 				double movementU = 0;
@@ -190,20 +194,21 @@ public class PointLight extends Light implements LightSource {
 				// ***************(When the desired pixel is on one of the axes of the
 				// plane)******
 				if (!Util.isZero(movementR))
-					pIJ = pIJ.add(vRight.scale(movementR));
+					pp2 = pp2.add(vRight.scale(movementR));
 				if (!Util.isZero(movementU))
-					pIJ = pIJ.add(vUp.scale(movementU));
+					pp2 = pp2.add(vUp.scale(movementU));
 				// ******************************************************************************
 
 				double distance;
-				if ((distance = position.distance(pIJ)) > radius) {
-					Vector revVector = position.subtract(pIJ).normalize();
-					pIJ = pIJ.add(revVector.scale(distance - radius));
+				if ((distance = position.distance(pp2)) > radius) {
+					Vector revVector = position.subtract(pp2).normalize();
+					pp2 = pp2.add(revVector.scale(distance - radius));
 				}
 				
-				beams.add(p.subtract(pIJ).normalize());
+				beams.add(p.subtract(pp2).normalize());
 
 			}
+		}
 
 		return beams;
 	}
