@@ -196,6 +196,7 @@ public class RayTracerBasic extends RayTracerBase {
 	private double transparency(LightSource ls, List<Vector> lList, Vector n, double nv, GeoPoint geoPoint) {
 		double sum = 0;
 		for (Vector l : lList) {
+
 			double nl = Util.alignZero(n.dotProduct(l));
 			if (nl * nv > 0) { // sign(nl) == sing(nv)
 				Vector lightDirection = l.scale(-1); // from point to light source
@@ -214,10 +215,8 @@ public class RayTracerBasic extends RayTracerBase {
 					}
 					sum += ktr;
 				}
-				
 
 			}
-
 		}
 		return sum / lList.size();
 	}
