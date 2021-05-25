@@ -192,7 +192,7 @@ public class ReflectionRefractionTests {
 																									 * , new Vector(-1,
 																									 * 0, -2)
 																									 */) //
-						.setKl(1E-5).setKq(1.5E-7).setRadius(50).setBeamsNum(1000));//
+						.setKl(1E-5).setKq(1.5E-7).setRadius(3).setBeamsNum(400));//
 
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter("Sphere", 600, 600)) //

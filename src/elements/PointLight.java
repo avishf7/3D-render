@@ -142,7 +142,7 @@ public class PointLight extends Light implements LightSource {
 
 		LinkedList<Vector> beams = new LinkedList<>(List.of(getL(p)));
 		Point3D position1;
-		if (radius == 0)
+		if (radius == 0||xAndY==1)
 			return beams;
 
 		Vector vUp = vCenter.getOrthogonal();
@@ -180,7 +180,7 @@ public class PointLight extends Light implements LightSource {
 		// -----------------------------------------------------------------------------------
 
 		for (int i = 0; i < xAndY; i++,pp = pp.add(vUp.scale(-interval))) {
-			Point3D pp1=pp;
+			Point3D pp1=new Point3D(pp);
 			for (int j = 0; j < xAndY; j++, pp1 = pp1.add(vRight.scale(interval))) {
 				Point3D pp2=new Point3D(pp1);
 				Random rand = new Random();
