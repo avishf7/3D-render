@@ -63,11 +63,11 @@ public class Vector {
 	public Vector getOrthogonal()
 	{
 		try {
-		return new Vector(-head.getZ(), 0 , head.getX()).normalized();
+		return new Vector(head.getZ(), 0 , -head.getX()).normalized();
 		}
 		catch(IllegalArgumentException ex)
 		{
-			return new Vector(-head.getY(), head.getX() , 0).normalized();
+			return new Vector(head.getY(), -head.getX() , 0).normalized();
 		}
 	}
 	

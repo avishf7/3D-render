@@ -9,6 +9,7 @@ import java.util.Random;
 
 import primitives.Color;
 import primitives.Point3D;
+import primitives.Util;
 import primitives.Vector;
 
 /**
@@ -138,12 +139,12 @@ public class PointLight extends Light implements LightSource {
 	 * @return
 	 */
 	protected List<Vector> getLs(Vector vCenter, Point3D p) {
-		
+
 		LinkedList<Vector> beams = new LinkedList<>(List.of(getL(p)));
-		
+
 		if (radius == 0)
 			return beams;
-		
+
 		Vector vUp = vCenter.getOrthogonal();
 		Vector vRight = vCenter.crossProduct(vUp);
 
@@ -182,30 +183,26 @@ public class PointLight extends Light implements LightSource {
 				double movementR = 0;
 				double movementU = 0;
 
-				do {
-					// Reducing the INTERVAL range to reduce the chance of recreating a point
-					// outside the circle
-					if (movementR != 0 && movementR != 0) {
-						movementR = rand.nextDouble() * movementR - movementR / 2;
-						movementU = rand.nextDouble() * movementU - movementU / 2;
-					}
-					// In the first case or in case there was no movement
-					else {
-						movementR = rand.nextDouble() * interval - interval / 2;
-						movementU = rand.nextDouble() * interval - interval / 2;
-					}
+				movementR = rand.nextDouble() * interval - interval / 2;
+				movementU = rand.nextDouble() * interval - interval / 2;
 
-					// ********The conditions Prevent a situation that creates a zero vector
-					// ***************(When the desired pixel is on one of the axes of the
-					// plane)******
-					if (movementR != 0)
-						pIJ = pIJ.add(vRight.scale(movementR));
-					if (movementU != 0)
-						pIJ = pIJ.add(vUp.scale(movementU));
-					// ******************************************************************************
-				} while (position.distance(pIJ) >= radius);
+				// ********The conditions Prevent a situation that creates a zero vector
+				// ***************(When the desired pixel is on one of the axes of the
+				// plane)******
+				if (!Util.isZero(movementR))
+					pIJ = pIJ.add(vRight.scale(movementR));
+				if (!Util.isZero(movementU))
+					pIJ = pIJ.add(vUp.scale(movementU));
+				// ******************************************************************************
 
-				beams.add(pIJ.subtract(p));
+				double distance;
+				if ((distance = position.distance(pIJ)) > radius) {
+					Vector revVector = position.subtract(pIJ).normalize();
+					pIJ = pIJ.add(revVector.scale(distance - radius));
+				}
+				
+				beams.add(p.subtract(pIJ).normalize());
+
 			}
 
 		return beams;
