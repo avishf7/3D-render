@@ -169,11 +169,11 @@ public class ReflectionRefractionTests {
 	}
 
 	/**
-	 * Produce a picture of a two triangles lighted by a spot light with a Sphere
-	 * producing a shading
+	 * Produce a picture of a sphere lighted by a spot light with a plane below
+	 * producing a soft shading
 	 */
 	@Test
-	public void Sphere() {
+	public void SphereSoftShading() {
 		Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
 				.setViewPlaneSize(200, 200).setViewPlaneDistance(1000);
 
@@ -192,10 +192,10 @@ public class ReflectionRefractionTests {
 																									 * , new Vector(-1,
 																									 * 0, -2)
 																									 */) //
-						.setKl(1E-5).setKq(1.5E-7).setRadius(3).setBeamsNum(400));//
+						.setKl(1E-5).setKq(1.5E-7).setRadius(20).setBeamsNum(400));//
 
 		Render render = new Render() //
-				.setImageWriter(new ImageWriter("Sphere", 600, 600)) //
+				.setImageWriter(new ImageWriter("SoftShading", 600, 600)) //
 				.setCam(camera) //
 				.setRayTracer(new RayTracerBasic(scene));
 		render.renderImage();

@@ -141,71 +141,66 @@ public class PointLight extends Light implements LightSource {
 	protected List<Vector> getLs(Vector vCenter, Point3D p) {
 
 		LinkedList<Vector> beams = new LinkedList<>(List.of(getL(p)));
-		Point3D position1;
-		if (radius == 0||xAndY==1)
+		
+		if (radius == 0 || xAndY == 1)
 			return beams;
 
 		Vector vUp = vCenter.getOrthogonal();
 		Vector vRight = vCenter.crossProduct(vUp).normalize();
 		double interval = (2 * radius) / xAndY;
-
-		// ****If the center is on the grid — move it to the nearest upper left
-		// pixel****
+		Point3D pI = new Point3D(position);
+		
+		// ****If the center is on the grid — move it to the nearest upper left pixel****
 		if (xAndY % 2 == 0) {
-			position1=new Point3D(position);
-			position1 = position1.add(vRight.scale(-interval / 2));
-			position1 = position1.add(vUp.scale(interval / 2));
+			pI = pI.add(vRight.scale(-interval / 2));
+			pI = pI.add(vUp.scale(interval / 2));
 		}
-		else
-			position1=new Point3D(position);
 		// ******************************************************************************
 
-		// ---------------------Find the center point of the first
-		// pixel--------------------
+		// ---------------------Find the center point of the first pixel--------------------
 
 		double yI = -(0 - (xAndY - 1) / 2) * interval;
 		double xJ = (0 - (xAndY - 1) / 2) * interval;
-		Point3D pp =new Point3D(position1);
 
 		// ********The conditions Prevent a situation that creates a zero
 		// vector*********
 		// ******(When the desired pixel center is on one of the axes of the
 		// plane)******
 		if (xJ != 0)
-			pp = pp.add(vRight.scale(xJ));
+			pI = pI.add(vRight.scale(xJ));
 		if (yI != 0)
-			pp = pp.add(vUp.scale(yI));
+			pI = pI.add(vUp.scale(yI));
 		// ******************************************************************************
 
 		// -----------------------------------------------------------------------------------
 
-		for (int i = 0; i < xAndY; i++,pp = pp.add(vUp.scale(-interval))) {
-			Point3D pp1=new Point3D(pp);
-			for (int j = 0; j < xAndY; j++, pp1 = pp1.add(vRight.scale(interval))) {
-				Point3D pp2=new Point3D(pp1);
+		for (int i = 0; i < xAndY; i++, pI = pI.add(vUp.scale(-interval))) {
+			
+			Point3D pJ = new Point3D(pI);
+			
+			for (int j = 0; j < xAndY; j++, pJ = pJ.add(vRight.scale(interval))) {
+				
+				Point3D pIJ = new Point3D(pJ);
 				Random rand = new Random();
-				double movementR = 0;
-				double movementU = 0;
 
-				movementR = rand.nextDouble() * interval - interval / 2;
-				movementU = rand.nextDouble() * interval - interval / 2;
+				double movementR = rand.nextDouble() * interval - interval / 2;
+				double movementU = rand.nextDouble() * interval - interval / 2;
 
-				// ********The conditions Prevent a situation that creates a zero vector
-				// ***************(When the desired pixel is on one of the axes of the
-				// plane)******
+				// ********The conditions Prevent a situation that creates a zero vector*****
+				// *********(When the desired pixel is on one of the axes of the plane)******
 				if (!Util.isZero(movementR))
-					pp2 = pp2.add(vRight.scale(movementR));
+					pIJ = pIJ.add(vRight.scale(movementR));
 				if (!Util.isZero(movementU))
-					pp2 = pp2.add(vUp.scale(movementU));
+					pIJ = pIJ.add(vUp.scale(movementU));
 				// ******************************************************************************
 
-				double distance;
-				if ((distance = position.distance(pp2)) > radius) {
-					Vector revVector = position.subtract(pp2).normalize();
-					pp2 = pp2.add(revVector.scale(distance - radius));
+				double distance = position.distance(pIJ);
+				if (distance > radius) {
+					Vector revVector = position.subtract(pIJ).normalize();
+					pIJ = pIJ.add(revVector.scale(distance - radius));
 				}
-				
-				beams.add(p.subtract(pp2).normalize());
+
+				beams.add(p.subtract(pIJ).normalize());
 
 			}
 		}
@@ -213,6 +208,7 @@ public class PointLight extends Light implements LightSource {
 		return beams;
 	}
 
+	
 	@Override
 	public double getDistance(Point3D point) {
 		return position.distance(point);
