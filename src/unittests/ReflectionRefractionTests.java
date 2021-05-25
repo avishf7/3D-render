@@ -169,7 +169,7 @@ public class ReflectionRefractionTests {
 	}
 
 	/**
-	 * Produce a picture of a sphere lighted by a spot light with a plane below
+	 * Produce a picture of a sphere lighted by a point light with a plane below
 	 * producing a soft shading
 	 */
 	@Test
@@ -188,10 +188,7 @@ public class ReflectionRefractionTests {
 						.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(60)) //
 		);
 		scene.lights.add( //
-				new PointLight(new Color(java.awt.Color.WHITE).reduce(4), new Point3D(100, -25, -25)/*
-																									 * , new Vector(-1,
-																									 * 0, -2)
-																									 */) //
+				new PointLight(new Color(java.awt.Color.WHITE).reduce(4), new Point3D(100, -25, -25)) 
 						.setKl(1E-5).setKq(1.5E-7).setRadius(20).setBeamsNum(400));//
 
 		Render render = new Render() //
