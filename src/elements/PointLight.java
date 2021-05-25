@@ -139,7 +139,7 @@ public class PointLight extends Light implements LightSource {
 	 */
 	protected List<Vector> getLs(Vector vCenter, Point3D p) {
 		
-		LinkedList<Vector> beams = new LinkedList<>(List.of(vCenter));
+		LinkedList<Vector> beams = new LinkedList<>(List.of(getL(p)));
 		
 		if (radius == 0)
 			return beams;
