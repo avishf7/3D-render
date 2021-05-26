@@ -27,12 +27,14 @@ public class Point3D {
 		this.z = new Coordinate(z);
 	}
 
-	public Point3D(Point3D other) {
-		this.x = new Coordinate(other.getX());
-		this.y = new Coordinate(other.getY());
-		this.z = new Coordinate(other.getZ());
+	/**
+	 * The function returns a copy of the points
+	 * @return New point with the same coordinates of this point
+	 */
+	public Point3D getCopy() {
+		return new Point3D(this.getX(), this.getY(), this.getZ());
 	}
-	
+
 	/**
 	 * Point3D constructor receiving coordinates.
 	 * 
@@ -89,7 +91,7 @@ public class Point3D {
 	 */
 	public double distanceSquared(Point3D point) {
 
-		return  (x.coord - point.x.coord) * (x.coord - point.x.coord)
+		return (x.coord - point.x.coord) * (x.coord - point.x.coord)
 				+ (y.coord - point.y.coord) * (y.coord - point.y.coord)
 				+ (z.coord - point.z.coord) * (z.coord - point.z.coord);
 	}
@@ -103,9 +105,6 @@ public class Point3D {
 	public double distance(Point3D point) {
 		return Math.sqrt(distanceSquared(point));
 	}
-	
-
-	
 
 	@Override
 	public int hashCode() {
@@ -115,7 +114,7 @@ public class Point3D {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;  
+			return true;
 		if (!(obj instanceof Point3D))
 			return false;
 		Point3D other = (Point3D) obj;

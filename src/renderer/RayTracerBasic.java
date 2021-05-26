@@ -6,6 +6,7 @@ package renderer;
 import java.util.List;
 
 import elements.LightSource;
+import elements.TargetArea;
 import geometries.Intersectable.GeoPoint;
 import primitives.Color;
 import primitives.Material;
@@ -127,9 +128,17 @@ public class RayTracerBasic extends RayTracerBase {
 		for (LightSource lightSource : scene.lights) {
 			Vector l = lightSource.getL(intersection.point);
 			double nl = Util.alignZero(n.dotProduct(l));
-
 			// The effect of the shadow
-			double ktr = transparency(lightSource, lightSource.getLs(intersection.point), n, nv, intersection);
+			List<Vector> ls;
+			
+			//Create or get a creation of shadow rays
+			if (lightSource instanceof TargetArea) {
+				ls = ((TargetArea)lightSource).getLs(intersection.point);
+			}
+			else
+				ls=List.of(lightSource.getL(intersection.point));
+			
+			double ktr = transparency(lightSource, ls, n, nv, intersection);
 
 			if (ktr * k > MIN_CALC_COLOR_K) {
 				Color lightIntensity = lightSource.getIntensity(intersection.point).scale(ktr);// Consider the shade
@@ -138,7 +147,7 @@ public class RayTracerBasic extends RayTracerBase {
 
 			}
 		}
-		
+
 		return color;
 
 	}

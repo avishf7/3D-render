@@ -26,15 +26,6 @@ public interface LightSource {
 	public Color getIntensity(Point3D p);
 
 	/**
-	 * the function receives a point and calculates the vectors from the light source
-	 * to the point
-	 * 
-	 * @param p the point
-	 * @return List of vector from the light source to the point
-	 */
-	public List<Vector> getLs(Point3D p);
-	
-	/**
 	 * the function receives a point and calculates the vector from the light source
 	 * to the point
 	 * 
@@ -45,8 +36,8 @@ public interface LightSource {
 
 	/**
 	 * 
-	 * the function receives a point and calculates the distance from the light source
-	 * to the point
+	 * the function receives a point and calculates the distance from the light
+	 * source to the point
 	 * 
 	 * @param point the point
 	 * @return the distance from the light source to the point

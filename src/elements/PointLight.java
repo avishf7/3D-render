@@ -18,7 +18,7 @@ import primitives.Vector;
  * @author Shai&Avishay
  *
  */
-public class PointLight extends Light implements LightSource {
+public class PointLight extends Light implements LightSource, TargetArea {
 	/**
 	 * the radius of the light source
 	 */
@@ -129,35 +129,38 @@ public class PointLight extends Light implements LightSource {
 	@Override
 	public List<Vector> getLs(Point3D p) {
 		return getLs(getL(p), p);
+
 	}
 
 	/**
 	 * Help function for producing a target area and calculating the light beams
 	 * coming from it to the point
 	 * 
-	 * @param vCenter
-	 * @return
+	 * @param vCenter orthoginal to the target area
+	 * @return light beams coming from the area to the point
 	 */
 	protected List<Vector> getLs(Vector vCenter, Point3D p) {
 
 		LinkedList<Vector> beams = new LinkedList<>(List.of(getL(p)));
-		
+
 		if (radius == 0 || xAndY == 1)
 			return beams;
 
 		Vector vUp = vCenter.getOrthogonal();
 		Vector vRight = vCenter.crossProduct(vUp).normalize();
 		double interval = (2 * radius) / xAndY;
-		Point3D pI = new Point3D(position);
-		
-		// ****If the center is on the grid — move it to the nearest upper left pixel****
+		Point3D pI = position.getCopy();
+
+		// ****If the center is on the grid — move it to the nearest upper left
+		// pixel****
 		if (xAndY % 2 == 0) {
 			pI = pI.add(vRight.scale(-interval / 2));
 			pI = pI.add(vUp.scale(interval / 2));
 		}
 		// ******************************************************************************
 
-		// ---------------------Find the center point of the first pixel--------------------
+		// ---------------------Find the center point of the first
+		// pixel--------------------
 
 		double yI = -(0 - (xAndY - 1) / 2) * interval;
 		double xJ = (0 - (xAndY - 1) / 2) * interval;
@@ -175,12 +178,12 @@ public class PointLight extends Light implements LightSource {
 		// -----------------------------------------------------------------------------------
 
 		for (int i = 0; i < xAndY; i++, pI = pI.add(vUp.scale(-interval))) {
-			
-			Point3D pJ = new Point3D(pI);
-			
+
+			Point3D pJ = pI.getCopy();
+
 			for (int j = 0; j < xAndY; j++, pJ = pJ.add(vRight.scale(interval))) {
-				
-				Point3D pIJ = new Point3D(pJ);
+
+				Point3D pIJ = pJ.getCopy();
 				Random rand = new Random();
 
 				double movementR = rand.nextDouble() * interval - interval / 2;
@@ -208,7 +211,6 @@ public class PointLight extends Light implements LightSource {
 		return beams;
 	}
 
-	
 	@Override
 	public double getDistance(Point3D point) {
 		return position.distance(point);
