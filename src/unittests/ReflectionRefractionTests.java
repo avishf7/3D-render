@@ -42,7 +42,9 @@ public class ReflectionRefractionTests {
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter("refractionTwoSpheres", 500, 500)) //
 				.setCam(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))//
+				.setMultithreading(3) //
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -80,7 +82,9 @@ public class ReflectionRefractionTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCam(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))//
+				.setMultithreading(3) //
+				.setDebugPrint();
 
 		render.renderImage();
 		render.writeToImage();
@@ -113,7 +117,9 @@ public class ReflectionRefractionTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCam(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))//
+				.setMultithreading(3) //
+				.setDebugPrint();
 
 		render.renderImage();
 		render.writeToImage();
@@ -158,12 +164,14 @@ public class ReflectionRefractionTests {
 		);
 		scene.lights.add( //
 				new SpotLight(new Color(300, 400, 400), new Point3D(0, 200, -300), new Vector(-1, -1, 2)) //
-						.setKl(1E-5).setKq(1.5E-7).setRadius(20).setBeamsNum(400));//
+						.setKl(1E-5).setKq(1.5E-7));//
 
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter("SpherePolygonsWithReflectionPolygonMirror", 600, 600)) //
 				.setCam(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))//
+				.setMultithreading(3) //
+				.setDebugPrint();;
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -194,7 +202,9 @@ public class ReflectionRefractionTests {
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter("SoftShading", 600, 600)) //
 				.setCam(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene)) //
+				.setMultithreading(3) //
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}

@@ -44,7 +44,8 @@ public class MiniProject {
 				new Polygon(new Point3D(-5, 120, -250), new Point3D(-5, 5, -290), new Point3D(-120, 5, -250),
 						new Point3D(-120, 120, -210))//
 								.setMaterial(new Material().setKS(0.8).setKD(0.2).setnShininess(100).setkR(1.0)), //
-				new Plane(new Point3D(0, 0, -350), new Vector(0, 2, 1)).setEmmission(new Color(java.awt.Color.GRAY))
+				new Plane(new Point3D(0, 0, -350), new Vector(0, 2, 1))//
+						.setEmmission(new Color(java.awt.Color.DARK_GRAY))//
 						.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(60)),
 				new Polygon(new Point3D(85, -15, -60), new Point3D(85, -85, -60), new Point3D(85, -85, -140),
 						new Point3D(85, -15, -140))//
@@ -86,7 +87,7 @@ public class MiniProject {
 		);
 		scene.lights.add(new DirectionalLight(new Color(java.awt.Color.YELLOW).reduce(8), new Vector(0, 0, -1)));
 		scene.lights.add(
-				new SpotLight(new Color(java.awt.Color.WHITE).reduce(4), new Point3D(100, 0, 50), new Vector(0, -1, -1))
+				new SpotLight(new Color(java.awt.Color.WHITE).reduce(4), new Point3D(100, 0, 50), new Vector(-1, 0, -1))
 						.setKl(0.00001).setKq(0.0000099).setRadius(20).setBeamsNum(400));
 		scene.lights
 				.add(new PointLight(new Color(java.awt.Color.YELLOW).reduce(4).reduce(2), new Point3D(-200, -50, -100))
@@ -95,7 +96,9 @@ public class MiniProject {
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter(scene.name, 600, 600)) //
 				.setCam(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))//
+				.setMultithreading(3) //
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}
