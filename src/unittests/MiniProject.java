@@ -93,6 +93,7 @@ public class MiniProject {
 				.add(new PointLight(new Color(java.awt.Color.YELLOW).reduce(4).reduce(2), new Point3D(-200, -50, -100))
 						.setKl(0.0000001).setKq(0.0000000001).setRadius(20).setBeamsNum(400));
 
+		
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter(scene.name, 600, 600)) //
 				.setCam(camera) //
