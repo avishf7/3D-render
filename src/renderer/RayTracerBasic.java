@@ -127,21 +127,20 @@ public class RayTracerBasic extends RayTracerBase {
 		for (LightSource lightSource : scene.lights) {
 			Vector l = lightSource.getL(intersection.point);
 			double nl = Util.alignZero(n.dotProduct(l));
-			if (nl * nv > 0) { // sign(nl) == sing(nv)
-				double ktr = transparency(lightSource, lightSource.getLs(intersection.point), n, nv, intersection);// The
-																													// effect
-																													// of
-																													// the
-																													// shadow
-				if (ktr * k > MIN_CALC_COLOR_K) {
-					Color lightIntensity = lightSource.getIntensity(intersection.point).scale(ktr);// Consider the shade
-					color = color.add(calcDiffusive(kd, l, n, lightIntensity),
-							calcSpecular(ks, l, n, v, nShininess, lightIntensity));
 
-				}
+			// The effect of the shadow
+			double ktr = transparency(lightSource, lightSource.getLs(intersection.point), n, nv, intersection);
+
+			if (ktr * k > MIN_CALC_COLOR_K) {
+				Color lightIntensity = lightSource.getIntensity(intersection.point).scale(ktr);// Consider the shade
+				color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+						calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+
 			}
 		}
+		
 		return color;
+
 	}
 
 	/**
