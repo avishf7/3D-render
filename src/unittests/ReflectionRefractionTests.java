@@ -158,7 +158,7 @@ public class ReflectionRefractionTests {
 		);
 		scene.lights.add( //
 				new SpotLight(new Color(300, 400, 400), new Point3D(0, 200, -300), new Vector(-1, -1, 2)) //
-						.setKl(1E-5).setKq(1.5E-7));//
+						.setKl(1E-5).setKq(1.5E-7).setRadius(20).setBeamsNum(400));//
 
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter("SpherePolygonsWithReflectionPolygonMirror", 600, 600)) //
