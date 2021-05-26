@@ -117,7 +117,7 @@ public class MiniProject {
 
 		scene.geometries.add( //
 				new Sphere(new Point3D(0, -10, -90), 50) //
-						.setEmmission(new Color(java.awt.Color.BLACK)) //
+				 		.setEmmission(new Color(java.awt.Color.BLACK)) //
 						.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(100).setkT(0.6)), //
 				new Sphere(new Point3D(0, -20, -110), 40) //
 						.setEmmission(new Color(java.awt.Color.PINK)) //
