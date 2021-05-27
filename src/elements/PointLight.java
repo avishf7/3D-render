@@ -134,9 +134,10 @@ public class PointLight extends Light implements LightSource, SourceArea {
 
 	/**
 	 * Help function for producing a target area and calculating the light beams
-	 * coming from it to the point
+	 * coming from it to the received point
 	 * 
-	 * @param vCenter orthoginal to the target area
+	 * @param p the point
+	 * @param vCenter orthogonal to the target area
 	 * @return light beams vectors coming from the area to the point
 	 */
 	protected List<Vector> getLs(Vector vCenter, Point3D p) {

@@ -2,7 +2,6 @@ package primitives;
 
 import java.util.Objects;
 
-
 /**
  * Class Vector is the basic class representing a vector in the
  * Three-dimensional space.
@@ -42,6 +41,7 @@ public class Vector {
 
 	/**
 	 * Vector constructor receiving point3D.
+	 * 
 	 * @param other vector head
 	 * @throws IllegalArgumentException in case of illegal point(the "zero point").
 	 */
@@ -58,21 +58,20 @@ public class Vector {
 
 	/**
 	 * The function calculates an orthogonal vector to "this"
-	 * @return a orthogonal vector to "this" vector
+	 * 
+	 * @return an orthogonal vector to "this" vector
 	 */
-	public Vector getOrthogonal()
-	{
+	public Vector getOrthogonal() {
 		try {
-		return new Vector(head.getZ(), 0 , -head.getX()).normalize();
-		}
-		catch(IllegalArgumentException ex)
-		{
-			return new Vector(head.getY(), -head.getX() , 0).normalize();
+			return new Vector(head.getZ(), 0, -head.getX()).normalize();
+		} catch (IllegalArgumentException ex) {
+			return new Vector(head.getY(), -head.getX(), 0).normalize();
 		}
 	}
-	
+
 	/**
 	 * The function performs a vector sum
+	 * 
 	 * @param vec vector to add
 	 * @return new vector that represent the sum of the two vectors
 	 */
@@ -82,6 +81,7 @@ public class Vector {
 
 	/**
 	 * The function performs a vector subtract
+	 * 
 	 * @param vec vector to subtract
 	 * @return new vector that represent the result of vector1-vector2
 	 */
@@ -91,6 +91,7 @@ public class Vector {
 
 	/**
 	 * The function performs scalar multiplication
+	 * 
 	 * @param scalar the scalar for multiply the vector
 	 * @return vector that represent the result of scalar multiplication
 	 */
@@ -100,6 +101,7 @@ public class Vector {
 
 	/**
 	 * The function performs Scleric product
+	 * 
 	 * @param vec the vector to do with him the production
 	 * @return the result of scleric product
 	 */
@@ -109,6 +111,7 @@ public class Vector {
 
 	/**
 	 * The function performs vector product
+	 * 
 	 * @param vec the vector to do with him the production
 	 * @return vector that represent the result of vector product
 	 */
@@ -120,6 +123,7 @@ public class Vector {
 
 	/**
 	 * calculates the length of the vector squared
+	 * 
 	 * @return length of the vector squared
 	 */
 	public double lengthSquared() {
@@ -128,6 +132,7 @@ public class Vector {
 
 	/**
 	 * calculates the length of the vector
+	 * 
 	 * @return length of the vector
 	 */
 	public double length() {
@@ -136,7 +141,8 @@ public class Vector {
 
 	/**
 	 * the function normalizes the vector
-	 * @return this vector after normalization 
+	 * 
+	 * @return this vector after normalization
 	 */
 	public Vector normalize() {
 		head = scale(1 / length()).head;
@@ -145,7 +151,8 @@ public class Vector {
 
 	/**
 	 * the function create normalized vector that equals to the normalized vector
-	 * @return  the new vector 
+	 * 
+	 * @return the new vector
 	 */
 	public Vector normalized() {
 		return new Vector(head).normalize();
@@ -153,13 +160,13 @@ public class Vector {
 
 	/**
 	 * Getter
+	 * 
 	 * @return head
 	 */
 	public Point3D getHead() {
 		return head;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "Vector [head=" + head + "]";
@@ -175,5 +182,4 @@ public class Vector {
 		return Objects.equals(head, other.head);
 	}
 
-	
 }
