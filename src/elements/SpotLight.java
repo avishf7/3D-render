@@ -49,8 +49,4 @@ public class SpotLight extends PointLight {
 	public List<Vector> getLs(Point3D p) {
 		return getLs(direction,p);
 	}
-	@Override
-	public List<Vector> getLs(Vector vCenter, Point3D p) {
-		return super.getLs(vCenter, p);
-	}
 }

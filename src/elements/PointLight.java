@@ -18,7 +18,7 @@ import primitives.Vector;
  * @author Shai&Avishay
  *
  */
-public class PointLight extends Light implements LightSource, TargetArea {
+public class PointLight extends Light implements LightSource, SourceArea {
 	/**
 	 * the radius of the light source
 	 */
@@ -137,7 +137,7 @@ public class PointLight extends Light implements LightSource, TargetArea {
 	 * coming from it to the point
 	 * 
 	 * @param vCenter orthoginal to the target area
-	 * @return light beams coming from the area to the point
+	 * @return light beams vectors coming from the area to the point
 	 */
 	protected List<Vector> getLs(Vector vCenter, Point3D p) {
 

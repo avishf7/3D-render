@@ -6,7 +6,7 @@ package renderer;
 import java.util.List;
 
 import elements.LightSource;
-import elements.TargetArea;
+import elements.SourceArea;
 import geometries.Intersectable.GeoPoint;
 import primitives.Color;
 import primitives.Material;
@@ -132,8 +132,8 @@ public class RayTracerBasic extends RayTracerBase {
 			List<Vector> ls;
 			
 			//Create or get a creation of shadow rays
-			if (lightSource instanceof TargetArea) {
-				ls = ((TargetArea)lightSource).getLs(intersection.point);
+			if (lightSource instanceof SourceArea) {
+				ls = ((SourceArea)lightSource).getLs(intersection.point);
 			}
 			else
 				ls=List.of(lightSource.getL(intersection.point));
