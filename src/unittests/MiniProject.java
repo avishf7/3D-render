@@ -154,6 +154,7 @@ public class MiniProject {
 		scene.lights.add(new SpotLight(new Color(150, 500, 0), new Point3D(-50, -50, 0), new Vector(1, 1, -10))
 				.setKl(0.0000001).setKq(0.0000000001).setRadius(20).setBeamsNum(400));
 
+	
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter(scene.name + "1", 500, 500)) //
 				.setCam(camera1) //
