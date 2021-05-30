@@ -20,12 +20,12 @@ import primitives.Vector;
  */
 public class PointLight extends Light implements LightSource, SourceArea {
 	/**
-	 * the radius of the light source
+	 * The radius of the light source
 	 */
 	public double radius;
 
 	/**
-	 * number of columns and rows
+	 * Number of columns and rows of the help grid that surrounds the light source circuit
 	 */
 	private int xAndY;// not sure
 
@@ -147,21 +147,23 @@ public class PointLight extends Light implements LightSource, SourceArea {
 		if (radius == 0 || xAndY == 1)
 			return beams;
 
+		//*********Find the vectors that define the slope of the help grid***************
 		Vector vUp = vCenter.getOrthogonal();
 		Vector vRight = vCenter.crossProduct(vUp).normalize();
-		double interval = (2 * radius) / xAndY;
+		
+		// ******************************************************************************
+		
+		double interval = (2 * radius) / xAndY;//The length and width of each square in the grid
 		Point3D pI = position.getCopy();
 
-		// ****If the center is on the grid — move it to the nearest upper left
-		// pixel****
+		// ****If the center is on the grid — move it to the nearest upper left pixel****
 		if (xAndY % 2 == 0) {
 			pI = pI.add(vRight.scale(-interval / 2));
 			pI = pI.add(vUp.scale(interval / 2));
 		}
 		// ******************************************************************************
 
-		// ---------------------Find the center point of the first
-		// pixel--------------------
+		// ---------------------Find the center point of the first pixel--------------------
 
 		double yI = -(0 - (xAndY - 1) / 2) * interval;
 		double xJ = (0 - (xAndY - 1) / 2) * interval;
@@ -178,6 +180,8 @@ public class PointLight extends Light implements LightSource, SourceArea {
 
 		// -----------------------------------------------------------------------------------
 
+		Random rand = new Random();
+		
 		for (int i = 0; i < xAndY; i++, pI = pI.add(vUp.scale(-interval))) {
 
 			Point3D pJ = pI.getCopy();
@@ -185,7 +189,7 @@ public class PointLight extends Light implements LightSource, SourceArea {
 			for (int j = 0; j < xAndY; j++, pJ = pJ.add(vRight.scale(interval))) {
 
 				Point3D pIJ = pJ.getCopy();
-				Random rand = new Random();
+				
 
 				double movementR = rand.nextDouble() * interval - interval / 2;
 				double movementU = rand.nextDouble() * interval - interval / 2;
