@@ -144,5 +144,7 @@ public class Ray {
 	public String toString() {
 		return "Ray [p0=" + p0 + ", dir=" + dir + "]";
 	}
+	
+	
 
 }

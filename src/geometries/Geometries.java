@@ -19,7 +19,7 @@ import primitives.Ray;
  *
  */
 
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable {
 
 	List<Intersectable> shapes;
 
@@ -40,16 +40,18 @@ public class Geometries implements Intersectable {
 
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+		if (!this.box.isIntersect(ray)) 
+			return null;		
 		List<GeoPoint> intsPoints = null, result;
-
-		for (Intersectable sh : shapes) {
-			result = sh.findGeoIntersections(ray, maxDistance);
-			if (result != null)
-				if (intsPoints == null)
-					intsPoints = result;
-				else
-					(intsPoints).addAll(result);
-		}
+		
+			for (Intersectable sh : shapes) {
+				result = sh.findGeoIntersections(ray, maxDistance);
+				if (result != null)
+					if (intsPoints == null)
+						intsPoints = result;
+					else
+						(intsPoints).addAll(result);
+			}
 
 		return intsPoints;
 	}

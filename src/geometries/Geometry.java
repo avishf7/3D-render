@@ -10,7 +10,7 @@ import primitives.Vector;
  * 
  * @author Shai&Avishay
  */
-public abstract class Geometry implements Intersectable {
+public abstract class Geometry extends Intersectable {
 	/**
 	 * the color of the shape
 	 */

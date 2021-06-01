@@ -7,12 +7,18 @@ import java.util.stream.Collectors;
 import primitives.*;
 
 /**
- * interface Intersectable is interface for working with rays and their
+ * class Intersectable is an abstract class for working with rays and their
  * intersection with geometric shapes.
  * 
  * @author Shai&Avishay
  */
-public interface Intersectable {
+public abstract class Intersectable {
+
+	/**
+	 * help box that wraps the Intersectable for finding intersections with the
+	 * Intersectable object
+	 */
+	public WrapBox box;
 
 	/**
 	 * Class GeoPoint is the basic class that represents a point of shape with her
@@ -54,7 +60,7 @@ public interface Intersectable {
 	 * @param ray A Ray in three-dimensional space
 	 * @return List of The Intersections
 	 */
-	default List<Point3D> findIntersections(Ray ray) {
+	public List<Point3D> findIntersections(Ray ray) {
 		var geoList = findGeoIntersections(ray);
 		return geoList == null ? null : geoList.stream().map(gp -> gp.point).collect(Collectors.toList());
 	}
@@ -66,17 +72,18 @@ public interface Intersectable {
 	 * @param ray A Ray in three-dimensional space
 	 * @return List(<GeoPoint>) of The Intersections points with their shapes
 	 */
-	default List<GeoPoint> findGeoIntersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
 	}
 
 	/**
-	 *  The function receives a {@link Ray} and range(number) and calculates ray's Intersections with the
-	 * shape in the range.
-	 *  
-	 * @param ray A Ray in three-dimensional space
+	 * The function receives a {@link Ray} and range(number) and calculates ray's
+	 * Intersections with the shape in the range.
+	 * 
+	 * @param ray         A Ray in three-dimensional space
 	 * @param maxDistance Intersection range
-	 * @return List(<GeoPoint>) of The Intersections points in the range with their shapes
+	 * @return List(<GeoPoint>) of The Intersections points in the range with their
+	 *         shapes
 	 */
-	List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
+	public abstract List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
 }

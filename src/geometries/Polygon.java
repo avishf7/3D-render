@@ -85,6 +85,30 @@ public class Polygon extends Geometry {
 			if (positive != (edge1.crossProduct(edge2).dotProduct(n) > 0))
 				throw new IllegalArgumentException("All vertices must be ordered and the polygon must be convex");
 		}
+		double minX = vertices[0].getX(), minY = vertices[0].getY(), minZ = vertices[0].getZ(), maxX = minX,
+				maxY = minY, maxZ = minZ;
+		for (Point3D point3d : vertices) {
+			double x = point3d.getX();
+			double y = point3d.getY();
+			double z = point3d.getZ();
+
+			if (minX < x)
+				minX = x;
+			if (minY < y)
+				minY = y;
+			if (minZ < z)
+				minZ = z;
+
+			if (maxX > x)
+				maxX = x;
+			if (maxY > y)
+				maxY = y;
+			if (maxZ > z)
+				maxZ = z;
+
+		}
+		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);
+
 	}
 
 	@Override
@@ -94,6 +118,9 @@ public class Polygon extends Geometry {
 
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+		if (!this.box.isIntersect(ray))
+			return null;
+
 		List<GeoPoint> intsPoints = plane.findGeoIntersections(ray, maxDistance);
 
 		if (intsPoints == null)

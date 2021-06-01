@@ -85,6 +85,9 @@ public class Plane extends Geometry {
 
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+		if (!this.box.isIntersect(ray)) 
+			return null;		
+		
 		try {
 			double nQ0MinusP0 = normal.dotProduct(q0.subtract(ray.getP0()));
 			double nv = normal.dotProduct(ray.getDir());
