@@ -150,12 +150,11 @@ public class MiniProject {
 		);
 		scene.lights.add(new DirectionalLight(new Color(300, 400, 0).reduce(4), new Vector(0, 1, -1)));
 		scene.lights.add(
-				new PointLight(new Color(200, 300, 0), new Point3D(-100, 100, -120)).setKl(0.00001)
-						.setKq(0.0000099)/* .setRadius(20).setBeamsNum(400) */);
+				new PointLight(new Color(200, 300, 0), new Point3D(-100, 100, -120)).setKl(0.00001).setKq(0.0000099).setRadius(20).setBeamsNum(400));
 		scene.lights.add(new SpotLight(new Color(150, 500, 0), new Point3D(-50, -50, 0), new Vector(1, 1, -10))
-				.setKl(0.0000001).setKq(0.0000000001)/* .setRadius(20).setBeamsNum(400) */);
+				.setKl(0.0000001).setKq(0.0000000001).setRadius(20).setBeamsNum(400));
 
-	
+
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter(scene.name + "1", 500, 500)) //
 				.setCam(camera1) //
