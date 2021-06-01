@@ -44,31 +44,29 @@ class WrapBox {
 				if (mins[i] > headsCords[i] || maxes[i] < headsCords[i])
 					return false;
 		}
-		double tStart = Double.NEGATIVE_INFINITY;
-		double tEnd = Double.POSITIVE_INFINITY;
+		double tStart = Double.NEGATIVE_INFINITY, tEnd = Double.POSITIVE_INFINITY;
 
 		for (int i = 0; i < 3; i++) {
-			double t1 = (mins[i] - headsCords[i]) / dirPCords[i];
-			double t2 = (maxes[i] - headsCords[i]) / dirPCords[i];
-			if(t1>t2) {
-				double temp=t1;
-				t1=t2;
-				t2=temp;
+			if (dirPCords[i] != 0) {
+				double t1 = (mins[i] - headsCords[i]) / dirPCords[i];
+				double t2 = (maxes[i] - headsCords[i]) / dirPCords[i];
+				if (t1 > t2) {
+					double temp = t1;
+					t1 = t2;
+					t2 = temp;
+				}
+				if (t1 > tStart)
+					tStart = t1;
+				if (t2 < tEnd)
+					tEnd = t2;
 			}
-			if(t1>tStart)
-				tStart=t1;
-			if(t2<tEnd)
-				tEnd=t2;
-		
 		}
-		
-		if(tStart>tEnd)
+
+		if (tStart > tEnd)
 			return false;
-		if(tEnd<0)
+		if (tEnd < 0)
 			return false;
-		
+
 		return true;
-
 	}
-
 }

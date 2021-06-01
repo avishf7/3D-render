@@ -18,7 +18,7 @@ public abstract class Intersectable {
 	 * help box that wraps the Intersectable for finding intersections with the
 	 * Intersectable object
 	 */
-	public WrapBox box;
+	protected WrapBox box;
 
 	/**
 	 * Class GeoPoint is the basic class that represents a point of shape with her

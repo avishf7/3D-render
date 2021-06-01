@@ -57,19 +57,24 @@ public class Plane extends Geometry {
 	 */
 	private Vector normal;
 
+	/**
+	 * 
+	 */
 	public void setBox() {
-		double minX = Double.NEGATIVE_INFINITY, minY = minX, minZ =  minX,// 
-		         maxX =Double.POSITIVE_INFINITY ,maxY = maxX, maxZ = maxX;
-		
-		
-		if(new Vector(new Point3D(1, 0, 0)).equals(normal))
-			minX=maxX=q0.getX();
-		if(new Vector(new Point3D(0, 1, 0)).dotProduct(normal)==0)
-			minY=maxY=q0.getY();
-		if(new Vector(new Point3D(0, 0, 1)).dotProduct(normal)==0)
-			minZ=maxZ=q0.getZ();
-		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);			
-			
+		double minX = Double.NEGATIVE_INFINITY, minY = minX, minZ = minX, //
+				maxX = Double.POSITIVE_INFINITY, maxY = maxX, maxZ = maxX;
+
+		Vector xAxis = new Vector(new Point3D(1, 0, 0));
+		Vector yAxis = new Vector(new Point3D(0, 1, 0));
+		Vector zAxis = new Vector(new Point3D(0, 0, 1));
+		if (xAxis.equals(normal) || xAxis.scale(-1).equals(normal))
+			minX = maxX = q0.getX();
+		if (yAxis.equals(normal) || yAxis.scale(-1).equals(normal))
+			minY = maxY = q0.getY();
+		if (zAxis.equals(normal) || zAxis.scale(-1).equals(normal))
+			minZ = maxZ = q0.getZ();
+		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);
+
 	}
 
 	/**

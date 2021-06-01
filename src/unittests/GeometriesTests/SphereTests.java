@@ -171,7 +171,7 @@ public class SphereTests {
 		
 		// TC01: Ray intersects the Sphere exactly at the edge of the range(2 points)
 		result = sphere.findGeoIntersections(new Ray(new Point3D(1, -2, 0), new Vector(0, 1, 0)), 3);
-		assertEquals("The Ray should Intersect with Sphere in the range", 1, result.size());
+		assertEquals("The Ray should Intersect with Sphere in the range", 2, result.size());
 		
 		// TC02: Ray intersects the Sphere exactly at the edge of the range(1 point)
 		result = sphere.findGeoIntersections(new Ray(new Point3D(1, -2, 0), new Vector(0, 1, 0)), 1);
