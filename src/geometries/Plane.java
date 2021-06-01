@@ -33,6 +33,7 @@ public class Plane extends Geometry {
 
 		this.q0 = p1;
 		this.normal = v1.crossProduct(v2).normalize();
+		setBox();
 	}
 
 	/**
@@ -44,6 +45,7 @@ public class Plane extends Geometry {
 	public Plane(Point3D q0, Vector normal) {
 		this.q0 = q0;
 		this.normal = normal;
+		setBox();
 	}
 
 	/**
@@ -54,6 +56,21 @@ public class Plane extends Geometry {
 	 * The normal to the plane
 	 */
 	private Vector normal;
+
+	public void setBox() {
+		double minX = Double.NEGATIVE_INFINITY, minY = minX, minZ =  minX,// 
+		         maxX =Double.POSITIVE_INFINITY ,maxY = maxX, maxZ = maxX;
+		
+		
+		if(new Vector(new Point3D(1, 0, 0)).equals(normal))
+			minX=maxX=q0.getX();
+		if(new Vector(new Point3D(0, 1, 0)).dotProduct(normal)==0)
+			minY=maxY=q0.getY();
+		if(new Vector(new Point3D(0, 0, 1)).dotProduct(normal)==0)
+			minZ=maxZ=q0.getZ();
+		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);			
+			
+	}
 
 	/**
 	 * Getter
@@ -85,9 +102,9 @@ public class Plane extends Geometry {
 
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-		if (!this.box.isIntersect(ray)) 
-			return null;		
-		
+		if (!this.box.isIntersect(ray))
+			return null;
+
 		try {
 			double nQ0MinusP0 = normal.dotProduct(q0.subtract(ray.getP0()));
 			double nv = normal.dotProduct(ray.getDir());

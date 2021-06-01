@@ -92,18 +92,18 @@ public class Polygon extends Geometry {
 			double y = point3d.getY();
 			double z = point3d.getZ();
 
-			if (minX < x)
+			if (minX > x)
 				minX = x;
-			if (minY < y)
+			if (minY > y)
 				minY = y;
-			if (minZ < z)
+			if (minZ > z)
 				minZ = z;
 
-			if (maxX > x)
+			if (maxX < x)
 				maxX = x;
-			if (maxY > y)
+			if (maxY < y)
 				maxY = y;
-			if (maxZ > z)
+			if (maxZ < z)
 				maxZ = z;
 
 		}
