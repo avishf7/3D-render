@@ -57,9 +57,7 @@ public class Plane extends Geometry {
 	 */
 	private Vector normal;
 
-	/**
-	 * 
-	 */
+	@Override
 	public void setBox() {
 		double minX = Double.NEGATIVE_INFINITY, minY = minX, minZ = minX, //
 				maxX = Double.POSITIVE_INFINITY, maxY = maxX, maxZ = maxX;
@@ -106,9 +104,13 @@ public class Plane extends Geometry {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-		if (!this.box.isIntersect(ray))
-			return null;
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance,boolean isAccelerated) {
+		if (isAccelerated) {
+			if(this.box == null)
+				this.setBox();
+			if (!this.box.isIntersect(ray))
+				return null;
+		}
 
 		try {
 			double nQ0MinusP0 = normal.dotProduct(q0.subtract(ray.getP0()));

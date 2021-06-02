@@ -25,6 +25,11 @@ public class Sphere extends Geometry {
 	public Sphere(Point3D center, double radius) {
 		this.center = center;
 		this.radius = radius;
+
+	}
+
+	@Override
+	public void setBox() {
 		this.box=new WrapBox(center.getX()-radius,center.getY()-radius,center.getZ()-radius,center.getX()+radius,center.getY()+radius,center.getZ()+radius);
 	}
 
@@ -66,9 +71,13 @@ public class Sphere extends Geometry {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-		if (!this.box.isIntersect(ray)) 
-			return null;		
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance,boolean isAccelerated) {
+		if (isAccelerated) {
+			if(this.box == null)
+				this.setBox();
+			if (!this.box.isIntersect(ray))
+				return null;
+		}
 		
 		try {
 			Vector u = center.subtract(ray.getP0());

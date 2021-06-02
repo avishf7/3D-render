@@ -17,6 +17,8 @@ public abstract class RayTracerBase {
 	 * The photographed scene
 	 */
 	protected Scene scene;
+	
+	protected boolean isAccelerated;
 
 	/**
 	 * RayTracerBase constructor receiving {@link scene}.
@@ -25,7 +27,20 @@ public abstract class RayTracerBase {
 	 */
 	public RayTracerBase(Scene scene) {
 		this.scene = scene;
+		this.isAccelerated = false;
 	}
+	
+	
+
+	/**
+	 * @param isAccelerated the isAccelerated to set
+	 */
+	public RayTracerBase setAccelerated(boolean isAccelerated) {
+		this.isAccelerated = isAccelerated;
+		return this;
+	}
+
+
 
 	/**
 	 * The function checks what color the ray coming out towards the scene meets

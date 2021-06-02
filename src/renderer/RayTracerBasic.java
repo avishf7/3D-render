@@ -24,6 +24,7 @@ import scene.Scene;
  */
 public class RayTracerBasic extends RayTracerBase {
 
+	
 	/**
 	 * Limit the amount of recursive calls to calcColor
 	 */
@@ -66,11 +67,12 @@ public class RayTracerBasic extends RayTracerBase {
 	 * with the shape(s)
 	 * 
 	 * @param ray Ray in three-dimensional space
+	 * @param isAccleration TODO
 	 * @return the closest Intersection point or null if there are not Intersection
 	 *         points
 	 */
 	private GeoPoint findClosestIntersection(Ray ray) {
-		return ray.getClosestGeoPoint(scene.geometries.findGeoIntersections(ray));
+		return ray.getClosestGeoPoint(scene.geometries.findGeoIntersections(ray,Double.POSITIVE_INFINITY,isAccelerated));
 	}
 
 	/**
@@ -214,7 +216,7 @@ public class RayTracerBasic extends RayTracerBase {
 			Vector lightDirection = l.scale(-1); // from point to light source
 			Ray lightRay = new Ray(geoPoint.point, lightDirection, n);
 			List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay,
-					ls.getDistance(geoPoint.point));
+					ls.getDistance(geoPoint.point),isAccelerated);
 			if (intersections != null)
 				for (GeoPoint gp : intersections) {
 					ktr *= gp.geometry.getMaterial().kT;

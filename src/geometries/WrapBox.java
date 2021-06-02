@@ -39,6 +39,7 @@ class WrapBox {
 		Point3D vecP = ray.getDir().getHead();
 		double[] headsCords = { head.getX(), head.getY(), head.getZ() };
 		double[] dirPCords = { vecP.getX(), vecP.getY(), vecP.getZ() };
+		
 		for (int i = 0; i < 3; i++) {
 			if (dirPCords[i] == 0)
 				if (mins[i] > headsCords[i] || maxes[i] < headsCords[i])

@@ -86,7 +86,11 @@ public class Polygon extends Geometry {
 			}
 		}
 
-		double minX = vertices[0].getX(), minY = vertices[0].getY(), minZ = vertices[0].getZ(), maxX = minX,
+	}
+
+	@Override
+	public void setBox() {
+		double minX = vertices.get(0).getX(), minY = vertices.get(0).getY(), minZ = vertices.get(0).getZ(), maxX = minX,
 				maxY = minY, maxZ = minZ;
 		for (Point3D point3d : vertices) {
 			double x = point3d.getX();
@@ -109,7 +113,6 @@ public class Polygon extends Geometry {
 
 		}
 		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);
-
 	}
 
 	@Override
@@ -118,9 +121,13 @@ public class Polygon extends Geometry {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-		if (!this.box.isIntersect(ray))
-			return null;
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance, boolean isAccelerated) {
+		if (isAccelerated) {
+			if(this.box == null)
+				this.setBox();
+			if (!this.box.isIntersect(ray))
+				return null;
+		}
 
 		List<GeoPoint> intsPoints = plane.findGeoIntersections(ray, maxDistance);
 

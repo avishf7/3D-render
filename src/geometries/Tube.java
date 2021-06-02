@@ -66,9 +66,16 @@ public class Tube extends Geometry {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance, boolean isAccelerated) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	void setBox() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

@@ -33,15 +33,19 @@ public class Geometries extends Intersectable {
 
 	public Geometries(Intersectable... geometries) {
 		shapes = List.of(geometries);
-		setBox();
 	}
 
 	public void add(Intersectable... geometries) {
 		shapes.addAll(List.of(geometries));
-		setBox();
 	}
 
+	@Override
 	public void setBox() {
+		for (Intersectable sh : shapes) {
+			sh.setBox();
+		}
+
+		
 		double minX = shapes.get(0).box.mins[0], minY = shapes.get(0).box.mins[1], minZ = shapes.get(0).box.mins[2],
 				maxX = shapes.get(0).box.maxes[0], maxY = shapes.get(0).box.maxes[1], maxZ = shapes.get(0).box.maxes[2];
 		for (Intersectable shape : shapes) {
@@ -70,13 +74,18 @@ public class Geometries extends Intersectable {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-		if (box == null || !this.box.isIntersect(ray))
-			return null;
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance, boolean isAccelerated) {
+		if (shapes.size() != 0 && isAccelerated) {
+			if(this.box == null) 
+				this.setBox();
+			if (!this.box.isIntersect(ray))
+				return null;
+		}
+		
 		List<GeoPoint> intsPoints = null, result;
 
 		for (Intersectable sh : shapes) {
-			result = sh.findGeoIntersections(ray, maxDistance);
+			result = sh.findGeoIntersections(ray, maxDistance, isAccelerated);
 			if (result != null)
 				if (intsPoints == null)
 					intsPoints = result;
