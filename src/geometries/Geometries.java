@@ -3,15 +3,9 @@
  */
 package geometries;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import primitives.Point3D;
 import primitives.Ray;
-import primitives.Vector;
 
 /**
  * Class Geometries is class for works with several geometric shapes.
@@ -40,18 +34,27 @@ public class Geometries extends Intersectable {
 	}
 
 	@Override
-	public void setBox() {
+	public void buildBox() {
 		for (Intersectable sh : shapes) {
-			sh.setBox();
+			sh.buildBox();
 		}
 
-		
-		double minX = shapes.get(0).box.mins[0], minY = shapes.get(0).box.mins[1], minZ = shapes.get(0).box.mins[2],
-				maxX = shapes.get(0).box.maxes[0], maxY = shapes.get(0).box.maxes[1], maxZ = shapes.get(0).box.maxes[2];
+		buildTreeBox(0);
+	}
+
+	private void buildTreeBox(int axis) {
+		if (shapes.size() <= 2)
+			return;
+		double[] boxMins = shapes.get(0).getBoxMins();
+		double[] boxMaxes = shapes.get(0).getBoxMaxes();
+		double minX = boxMins[0], minY = boxMins[1], minZ = boxMins[2], maxX = boxMaxes[0], maxY = boxMaxes[1],
+				maxZ = boxMaxes[2];
 		for (Intersectable shape : shapes) {
-			double minShapeX = shape.box.mins[0];
-			double minShapeY = shape.box.mins[1];
-			double minShapeZ = shape.box.mins[2];
+			boxMins = shape.getBoxMins();
+			boxMaxes = shape.getBoxMaxes();
+			double minShapeX = boxMins[0];
+			double minShapeY = boxMins[1];
+			double minShapeZ = boxMins[2];
 			if (minX > minShapeX)
 				minX = minShapeX;
 			if (minY > minShapeY)
@@ -59,9 +62,9 @@ public class Geometries extends Intersectable {
 			if (minZ > minShapeZ)
 				minZ = minShapeZ;
 
-			double maxShapeX = shape.box.maxes[0];
-			double maxShapeY = shape.box.maxes[1];
-			double maxShapeZ = shape.box.maxes[2];
+			double maxShapeX = boxMaxes[0];
+			double maxShapeY = boxMaxes[1];
+			double maxShapeZ = boxMaxes[2];
 			if (maxX < maxShapeX)
 				maxX = maxShapeX;
 			if (maxY < maxShapeY)
@@ -71,17 +74,34 @@ public class Geometries extends Intersectable {
 
 		}
 		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);
+
+		Geometries left = new Geometries();
+		Geometries right = new Geometries();
+
+		for (Intersectable inter : shapes) {
+			if (inter.getMid(axis) < getMid(axis))
+				left.add(inter);
+			else
+				right.add(inter);
+		}
+
+		int nextAxis = (axis + 1) % 3;
+		if (left.shapes.size() > 0)
+			left.buildTreeBox(nextAxis);
+		if (right.shapes.size() > 0)
+			right.buildTreeBox(nextAxis);
+		shapes = List.of(left, right);
 	}
 
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance, boolean isAccelerated) {
 		if (shapes.size() != 0 && isAccelerated) {
-			if(this.box == null) 
-				this.setBox();
+			if (this.box == null)
+				this.buildBox();
 			if (!this.box.isIntersect(ray))
 				return null;
 		}
-		
+
 		List<GeoPoint> intsPoints = null, result;
 
 		for (Intersectable sh : shapes) {

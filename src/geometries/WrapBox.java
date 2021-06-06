@@ -35,10 +35,9 @@ class WrapBox {
 	double[] maxes;
 
 	protected boolean isIntersect(Ray ray) {
-		Point3D head = ray.getP0();
-		Point3D vecP = ray.getDir().getHead();
-		double[] headsCords = { head.getX(), head.getY(), head.getZ() };
-		double[] dirPCords = { vecP.getX(), vecP.getY(), vecP.getZ() };
+		
+		double[] headsCords =ray.getHeadCoordinates();
+		double[] dirPCords = ray.getDirCoordinates();
 		
 		for (int i = 0; i < 3; i++) {
 			if (dirPCords[i] == 0)

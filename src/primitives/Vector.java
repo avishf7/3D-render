@@ -161,6 +161,16 @@ public class Vector {
 	/**
 	 * Getter
 	 * 
+	 * @return Head's coordinates
+	 */
+	public double[] getHeadCoordinates() {
+		double[] headsCords = { head.getX(), head.getY(), head.getZ() };
+		return headsCords;
+	}
+	
+	/**
+	 * Getter
+	 * 
 	 * @return head
 	 */
 	public Point3D getHead() {

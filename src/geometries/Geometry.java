@@ -16,7 +16,7 @@ public abstract class Geometry extends Intersectable {
 	 */
 	protected Color emmission = Color.BLACK;
 	/**
-	 * The properties of the material of the shape 
+	 * The properties of the material of the shape
 	 */
 	private Material material = new Material();
 
@@ -68,4 +68,5 @@ public abstract class Geometry extends Intersectable {
 	 */
 	public abstract Vector getNormal(Point3D point);
 
+	
 }

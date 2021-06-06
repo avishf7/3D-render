@@ -37,6 +37,8 @@ public abstract class RayTracerBase {
 	 */
 	public RayTracerBase setAccelerated(boolean isAccelerated) {
 		this.isAccelerated = isAccelerated;
+		if(isAccelerated)
+			scene.reorderGeometries();
 		return this;
 	}
 

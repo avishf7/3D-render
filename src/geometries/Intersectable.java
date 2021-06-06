@@ -23,7 +23,25 @@ public abstract class Intersectable {
 	/**
 	 * 
 	 */
-	abstract void setBox();
+	abstract void buildBox();
+	
+	/**
+	 * Getter
+	 * @return array of the minimum coordinates of the box
+	 */
+	protected double[] getBoxMins(){
+		return box.mins;
+		
+	}
+	
+	/**
+	 * Getter
+	 * @return array of the maximum coordinates of the box
+	 */
+	protected double[] getBoxMaxes(){
+		return box.maxes;
+		
+	}
 	
 	/**
 	 * Class GeoPoint is the basic class that represents a point of shape with her
@@ -106,4 +124,12 @@ public abstract class Intersectable {
 	 *         shapes
 	 */
 	public abstract List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance, boolean isAccelerated);
+	
+	public double getMid(int axis) {
+		if (box == null)
+			throw new NullPointerException("there is no box to the shape");
+		return (box.maxes[axis] + box.mins[axis]) / 2.0;
+
+	}
+
 }
