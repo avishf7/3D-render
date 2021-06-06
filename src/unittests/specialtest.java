@@ -1555,7 +1555,7 @@ public class specialtest {
 				new Triangle(pnts[529], pnts[530], pnts[470]).setEmmission(color).setMaterial(mat)) //
 		);
 		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point3D(100, 0, -100)) //
-				.setKq(0.000001).setRadius(20).setBeamsNum(400));
+				.setKq(0.000001).setBeamsNum(400).setRadius(20));
 
 		ImageWriter imageWriter = new ImageWriter("teapot", 800, 800);
 		Render render = new Render() //
