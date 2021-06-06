@@ -139,6 +139,26 @@ public class Ray {
 	public Vector getDir() {
 		return dir;
 	}
+	
+	/**
+	 * Getter
+	 * 
+	 * @return p0's coordinates
+	 */
+	public double[] getHeadCoordinates() {
+		double[] p0Cords = { p0.getX(), p0.getY(), p0.getZ() };
+		return p0Cords;
+	}
+	
+	/**
+	 * Getter
+	 * 
+	 * @return dir's coordinates
+	 */
+	public double[] getDirCoordinates() {
+		return dir.getHeadCoordinates();
+	}
+	
 
 	@Override
 	public String toString() {

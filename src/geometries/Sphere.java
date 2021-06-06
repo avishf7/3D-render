@@ -29,7 +29,7 @@ public class Sphere extends Geometry {
 	}
 
 	@Override
-	public void setBox() {
+	public void buildBox() {
 		this.box=new WrapBox(center.getX()-radius,center.getY()-radius,center.getZ()-radius,center.getX()+radius,center.getY()+radius,center.getZ()+radius);
 	}
 
@@ -74,7 +74,7 @@ public class Sphere extends Geometry {
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance,boolean isAccelerated) {
 		if (isAccelerated) {
 			if(this.box == null)
-				this.setBox();
+				this.buildBox();
 			if (!this.box.isIntersect(ray))
 				return null;
 		}

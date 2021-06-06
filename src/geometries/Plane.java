@@ -33,7 +33,7 @@ public class Plane extends Geometry {
 
 		this.q0 = p1;
 		this.normal = v1.crossProduct(v2).normalize();
-		setBox();
+		buildBox();
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class Plane extends Geometry {
 	public Plane(Point3D q0, Vector normal) {
 		this.q0 = q0;
 		this.normal = normal;
-		setBox();
+		buildBox();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class Plane extends Geometry {
 	private Vector normal;
 
 	@Override
-	public void setBox() {
+	public void buildBox() {
 		double minX = Double.NEGATIVE_INFINITY, minY = minX, minZ = minX, //
 				maxX = Double.POSITIVE_INFINITY, maxY = maxX, maxZ = maxX;
 
@@ -107,7 +107,7 @@ public class Plane extends Geometry {
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance,boolean isAccelerated) {
 		if (isAccelerated) {
 			if(this.box == null)
-				this.setBox();
+				this.buildBox();
 			if (!this.box.isIntersect(ray))
 				return null;
 		}

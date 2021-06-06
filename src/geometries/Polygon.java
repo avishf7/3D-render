@@ -89,7 +89,7 @@ public class Polygon extends Geometry {
 	}
 
 	@Override
-	public void setBox() {
+	public void buildBox() {
 		double minX = vertices.get(0).getX(), minY = vertices.get(0).getY(), minZ = vertices.get(0).getZ(), maxX = minX,
 				maxY = minY, maxZ = minZ;
 		for (Point3D point3d : vertices) {
@@ -124,7 +124,7 @@ public class Polygon extends Geometry {
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance, boolean isAccelerated) {
 		if (isAccelerated) {
 			if(this.box == null)
-				this.setBox();
+				this.buildBox();
 			if (!this.box.isIntersect(ray))
 				return null;
 		}
