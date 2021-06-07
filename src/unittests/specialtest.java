@@ -585,7 +585,11 @@ public class specialtest {
 				new Triangle(pnts[19], pnts[18], pnts[13]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[13], pnts[14], pnts[19]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[20], pnts[19], pnts[14]).setEmmission(color).setMaterial(mat), //
+<<<<<<< HEAD
 				new Triangle(pnts[14], pnts[15], pnts[20]).setEmmission(color).setMaterial(mat), //
+=======
+				new Triangle(pnts[14], pnts[15], pnts[20]).setEmmission(color).setMaterial(mat)), //
+>>>>>>> branch 'master' of https://github.com/avishf7/mini-project-SE.git
 				new Triangle(pnts[22], pnts[21], pnts[16]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[16], pnts[17], pnts[22]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[23], pnts[22], pnts[17]).setEmmission(color).setMaterial(mat), //
@@ -660,7 +664,11 @@ public class specialtest {
 				new Triangle(pnts[59], pnts[60], pnts[65]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[67], pnts[66], pnts[61]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[61], pnts[62], pnts[67]).setEmmission(color).setMaterial(mat), //
+<<<<<<< HEAD
 				new Triangle(pnts[68], pnts[67], pnts[62]).setEmmission(color).setMaterial(mat), //
+=======
+				new Triangle(pnts[68], pnts[67], pnts[62]).setEmmission(color).setMaterial(mat),//
+>>>>>>> branch 'master' of https://github.com/avishf7/mini-project-SE.git
 				new Triangle(pnts[62], pnts[63], pnts[68]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[69], pnts[68], pnts[63]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[63], pnts[64], pnts[69]).setEmmission(color).setMaterial(mat), //
@@ -791,7 +799,11 @@ public class specialtest {
 				new Triangle(pnts[134], pnts[133], pnts[129]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[129], pnts[130], pnts[134]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[135], pnts[134], pnts[130]).setEmmission(color).setMaterial(mat), //
+<<<<<<< HEAD
 				new Triangle(pnts[130], pnts[131], pnts[135]).setEmmission(color).setMaterial(mat), //
+=======
+				new Triangle(pnts[130], pnts[131], pnts[135]).setEmmission(color).setMaterial(mat),//
+>>>>>>> branch 'master' of https://github.com/avishf7/mini-project-SE.git
 				new Triangle(pnts[136], pnts[135], pnts[131]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[131], pnts[132], pnts[136]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[137], pnts[75], pnts[70]).setEmmission(color).setMaterial(mat), //
@@ -1556,13 +1568,15 @@ public class specialtest {
 				new Triangle(pnts[529], pnts[530], pnts[470]).setEmmission(color).setMaterial(mat) //
 		);
 		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point3D(100, 0, -100)) //
-				.setKq(0.000001).setBeamsNum(400).setRadius(20));
+
+				.setKq(0.000001).setRadius(20).setBeamsNum(400));
+
 
 		ImageWriter imageWriter = new ImageWriter("teapot", 800, 800);
 		Render render = new Render() //
 				.setCam(camera) //
 				.setImageWriter(imageWriter) //
-				.setRayTracer(new RayTracerBasic(scene).setAccelerated(true)) //
+				.setRayTracer(new RayTracerBasic(scene).accelerate()) //
 				.setMultithreading(3).setDebugPrint();
 		render.renderImage();
 		render.printGrid(50, new Color(java.awt.Color.YELLOW));

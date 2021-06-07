@@ -39,12 +39,12 @@ public class Geometries extends Intersectable {
 			sh.buildBox();
 		}
 
-		buildTreeBox(0);
+		if (shapes.size() != 0)
+			buildTreeBox(0);
 	}
 
 	private void buildTreeBox(int axis) {
-		if (shapes.size() <= 2)
-			return;
+
 		double[] boxMins = shapes.get(0).getBoxMins();
 		double[] boxMaxes = shapes.get(0).getBoxMaxes();
 		double minX = boxMins[0], minY = boxMins[1], minZ = boxMins[2], maxX = boxMaxes[0], maxY = boxMaxes[1],
@@ -75,37 +75,53 @@ public class Geometries extends Intersectable {
 		}
 		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);
 
+		if (shapes.size() <= 2)
+			return;
+
+		List<Intersectable> treeShapes = new LinkedList<Intersectable>();
 		Geometries left = new Geometries();
 		Geometries right = new Geometries();
 
 		for (Intersectable inter : shapes) {
 			if (inter.getMid(axis) < getMid(axis))
 				left.add(inter);
-			else
+			else if (inter.getMid(axis) > getMid(axis))
 				right.add(inter);
+			else
+				treeShapes.add(inter);
 		}
 
 		int nextAxis = (axis + 1) % 3;
-		if (left.shapes.size() > 0)
+		if (!left.isEmpty()) {
 			left.buildTreeBox(nextAxis);
-		if (right.shapes.size() > 0)
+			treeShapes.add(left);
+		}
+		if (!right.isEmpty()) {
 			right.buildTreeBox(nextAxis);
-		shapes = List.of(left, right);
+			treeShapes.add(right);
+		}
+
+		shapes = treeShapes;
+
+	}
+
+	/**
+	 * The function checks if there are no shapes
+	 * @return true if there are no shapes ,otherwise returns false.
+	 */
+	public boolean isEmpty (){
+		return this.shapes.size() == 0;
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance, boolean isAccelerated) {
-		if (shapes.size() != 0 && isAccelerated) {
-			if (this.box == null)
-				this.buildBox();
-			if (!this.box.isIntersect(ray))
-				return null;
-		}
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+		if (this.box != null && !this.box.isIntersect(ray))
+			return null;
 
 		List<GeoPoint> intsPoints = null, result;
 
 		for (Intersectable sh : shapes) {
-			result = sh.findGeoIntersections(ray, maxDistance, isAccelerated);
+			result = sh.findGeoIntersections(ray, maxDistance);
 			if (result != null)
 				if (intsPoints == null)
 					intsPoints = result;

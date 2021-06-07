@@ -99,6 +99,7 @@ public abstract class Intersectable {
 		return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
 	}
 
+	
 	/**
 	 * The function receives a {@link Ray} and range(number) and calculates ray's
 	 * Intersections with the shape in the range.
@@ -108,22 +109,7 @@ public abstract class Intersectable {
 	 * @return List(<GeoPoint>) of The Intersections points in the range with their
 	 *         shapes
 	 */
-	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance){
-		return findGeoIntersections(ray, maxDistance, false);
-	}
-	
-	/**
-	 * The function receives a {@link Ray} and range(number) and calculates ray's
-	 * Intersections with the shape in the range,
-	 * With an option to accelerate performance.
-	 * 
-	 * @param ray         A Ray in three-dimensional space
-	 * @param maxDistance Intersection range
-	 * @param isAccelerated Determines whether to accelerate performance
-	 * @return List(<GeoPoint>) of The Intersections points in the range with their
-	 *         shapes
-	 */
-	public abstract List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance, boolean isAccelerated);
+	public abstract List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
 	
 	public double getMid(int axis) {
 		if (box == null)

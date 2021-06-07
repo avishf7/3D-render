@@ -169,7 +169,7 @@ public class ReflectionRefractionTests {
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter("SpherePolygonsWithReflectionPolygonMirror", 600, 600)) //
 				.setCam(camera) //
-				.setRayTracer(new RayTracerBasic(scene))//
+				.setRayTracer(new RayTracerBasic(scene).accelerate())//
 				.setMultithreading(3) //
 				.setDebugPrint();;
 		render.renderImage();

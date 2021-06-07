@@ -72,7 +72,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 *         points
 	 */
 	private GeoPoint findClosestIntersection(Ray ray) {
-		return ray.getClosestGeoPoint(scene.geometries.findGeoIntersections(ray,Double.POSITIVE_INFINITY,isAccelerated));
+		return ray.getClosestGeoPoint(scene.geometries.findGeoIntersections(ray,Double.POSITIVE_INFINITY));
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class RayTracerBasic extends RayTracerBase {
 			Vector lightDirection = l.scale(-1); // from point to light source
 			Ray lightRay = new Ray(geoPoint.point, lightDirection, n);
 			List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay,
-					ls.getDistance(geoPoint.point),isAccelerated);
+					ls.getDistance(geoPoint.point));
 			if (intersections != null)
 				for (GeoPoint gp : intersections) {
 					ktr *= gp.geometry.getMaterial().kT;
