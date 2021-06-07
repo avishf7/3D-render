@@ -92,20 +92,31 @@ public class Geometries extends Intersectable {
 		}
 
 		int nextAxis = (axis + 1) % 3;
-		if (left.shapes.size() > 0)
+		if (!left.isEmpty()) {
 			left.buildTreeBox(nextAxis);
-		if (right.shapes.size() > 0)
+			treeShapes.add(left);
+		}
+		if (!right.isEmpty()) {
 			right.buildTreeBox(nextAxis);
-		treeShapes.addAll(List.of(left, right));
+			treeShapes.add(right);
+		}
 
 		shapes = treeShapes;
 
 	}
 
+	/**
+	 * The function checks if there are no shapes
+	 * @return true if there are no shapes ,otherwise returns false.
+	 */
+	public boolean isEmpty (){
+		return this.shapes.size() == 0;
+	}
+
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-			if (this.box != null && !this.box.isIntersect(ray))
-				return null;
+		if (this.box != null && !this.box.isIntersect(ray))
+			return null;
 
 		List<GeoPoint> intsPoints = null, result;
 
