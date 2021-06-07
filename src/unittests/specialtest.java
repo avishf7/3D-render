@@ -561,7 +561,8 @@ public class specialtest {
 	@Test
 	public void teapot1() {
 		scene.geometries.add( //
-			new Geometries(	new Triangle(pnts[7], pnts[6], pnts[1]).setEmmission(color).setMaterial(mat), //
+			
+				new Triangle(pnts[7], pnts[6], pnts[1]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[1], pnts[2], pnts[7]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[8], pnts[7], pnts[2]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[2], pnts[3], pnts[8]).setEmmission(color).setMaterial(mat), //
@@ -584,8 +585,8 @@ public class specialtest {
 				new Triangle(pnts[19], pnts[18], pnts[13]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[13], pnts[14], pnts[19]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[20], pnts[19], pnts[14]).setEmmission(color).setMaterial(mat), //
-				new Triangle(pnts[14], pnts[15], pnts[20]).setEmmission(color).setMaterial(mat)), //
-				new Geometries(new Triangle(pnts[22], pnts[21], pnts[16]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[14], pnts[15], pnts[20]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[22], pnts[21], pnts[16]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[16], pnts[17], pnts[22]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[23], pnts[22], pnts[17]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[17], pnts[18], pnts[23]).setEmmission(color).setMaterial(mat), //
@@ -608,7 +609,7 @@ public class specialtest {
 				new Triangle(pnts[34], pnts[33], pnts[28]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[28], pnts[29], pnts[34]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[35], pnts[34], pnts[29]).setEmmission(color).setMaterial(mat), //
-				new Geometries(new Triangle(pnts[29], pnts[30], pnts[35]).setEmmission(color).setMaterial(mat)), //
+				new Triangle(pnts[29], pnts[30], pnts[35]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[37], pnts[36], pnts[31]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[31], pnts[32], pnts[37]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[38], pnts[37], pnts[32]).setEmmission(color).setMaterial(mat), //
@@ -633,8 +634,8 @@ public class specialtest {
 				new Triangle(pnts[43], pnts[44], pnts[49]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[50], pnts[49], pnts[44]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[44], pnts[45], pnts[50]).setEmmission(color).setMaterial(mat), //
-				new Triangle(pnts[52], pnts[51], pnts[46]).setEmmission(color).setMaterial(mat)), //
-				new Geometries(	new Triangle(pnts[46], pnts[47], pnts[52]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[52], pnts[51], pnts[46]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[46], pnts[47], pnts[52]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[53], pnts[52], pnts[47]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[47], pnts[48], pnts[53]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[54], pnts[53], pnts[48]).setEmmission(color).setMaterial(mat), //
@@ -659,8 +660,8 @@ public class specialtest {
 				new Triangle(pnts[59], pnts[60], pnts[65]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[67], pnts[66], pnts[61]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[61], pnts[62], pnts[67]).setEmmission(color).setMaterial(mat), //
-				new Triangle(pnts[68], pnts[67], pnts[62]).setEmmission(color).setMaterial(mat)),//
-				new Geometries(	new Triangle(pnts[62], pnts[63], pnts[68]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[68], pnts[67], pnts[62]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[62], pnts[63], pnts[68]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[69], pnts[68], pnts[63]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[63], pnts[64], pnts[69]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[70], pnts[69], pnts[64]).setEmmission(color).setMaterial(mat), //
@@ -690,8 +691,8 @@ public class specialtest {
 				new Triangle(pnts[5], pnts[4], pnts[79]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[79], pnts[80], pnts[5]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[85], pnts[10], pnts[5]).setEmmission(color).setMaterial(mat), //
-				new Triangle(pnts[5], pnts[81], pnts[85]).setEmmission(color).setMaterial(mat)), //
-				new Geometries(	new Triangle(pnts[86], pnts[85], pnts[81]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[5], pnts[81], pnts[85]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[86], pnts[85], pnts[81]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[81], pnts[82], pnts[86]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[87], pnts[86], pnts[82]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[82], pnts[83], pnts[87]).setEmmission(color).setMaterial(mat), //
@@ -721,8 +722,8 @@ public class specialtest {
 				new Triangle(pnts[94], pnts[95], pnts[99]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[100], pnts[99], pnts[95]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[95], pnts[96], pnts[100]).setEmmission(color).setMaterial(mat), //
-				new Triangle(pnts[101], pnts[30], pnts[25]).setEmmission(color).setMaterial(mat)), //
-				new Geometries(	new Triangle(pnts[25], pnts[97], pnts[101]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[101], pnts[30], pnts[25]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[25], pnts[97], pnts[101]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[102], pnts[101], pnts[97]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[97], pnts[98], pnts[102]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[103], pnts[102], pnts[98]).setEmmission(color).setMaterial(mat), //
@@ -790,8 +791,8 @@ public class specialtest {
 				new Triangle(pnts[134], pnts[133], pnts[129]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[129], pnts[130], pnts[134]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[135], pnts[134], pnts[130]).setEmmission(color).setMaterial(mat), //
-				new Triangle(pnts[130], pnts[131], pnts[135]).setEmmission(color).setMaterial(mat)),//
-				new Geometries(	new Triangle(pnts[136], pnts[135], pnts[131]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[130], pnts[131], pnts[135]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[136], pnts[135], pnts[131]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[131], pnts[132], pnts[136]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[137], pnts[75], pnts[70]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[70], pnts[133], pnts[137]).setEmmission(color).setMaterial(mat), //
@@ -816,8 +817,8 @@ public class specialtest {
 				new Triangle(pnts[83], pnts[82], pnts[142]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[142], pnts[143], pnts[83]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[84], pnts[83], pnts[143]).setEmmission(color).setMaterial(mat), //
-				new Triangle(pnts[143], pnts[144], pnts[84]).setEmmission(color).setMaterial(mat)), //
-				new Geometries(	new Triangle(pnts[149], pnts[88], pnts[84]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[143], pnts[144], pnts[84]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[149], pnts[88], pnts[84]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[84], pnts[145], pnts[149]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[150], pnts[149], pnts[145]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[145], pnts[146], pnts[150]).setEmmission(color).setMaterial(mat), //
@@ -1552,10 +1553,10 @@ public class specialtest {
 				new Triangle(pnts[469], pnts[468], pnts[528]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[528], pnts[529], pnts[469]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[470], pnts[469], pnts[529]).setEmmission(color).setMaterial(mat), //
-				new Triangle(pnts[529], pnts[530], pnts[470]).setEmmission(color).setMaterial(mat)) //
+				new Triangle(pnts[529], pnts[530], pnts[470]).setEmmission(color).setMaterial(mat) //
 		);
 		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point3D(100, 0, -100)) //
-				.setKq(0.000001));
+				.setKq(0.000001).setBeamsNum(400).setRadius(20));
 
 		ImageWriter imageWriter = new ImageWriter("teapot", 800, 800);
 		Render render = new Render() //

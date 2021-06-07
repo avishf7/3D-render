@@ -104,9 +104,9 @@ public class Plane extends Geometry {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance,boolean isAccelerated) {
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance, boolean isAccelerated) {
 		if (isAccelerated) {
-			if(this.box == null)
+			if (this.box == null)
 				this.buildBox();
 			if (!this.box.isIntersect(ray))
 				return null;
