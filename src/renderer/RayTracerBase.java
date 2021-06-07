@@ -18,7 +18,6 @@ public abstract class RayTracerBase {
 	 */
 	protected Scene scene;
 	
-	protected boolean isAccelerated;
 
 	/**
 	 * RayTracerBase constructor receiving {@link scene}.
@@ -27,17 +26,14 @@ public abstract class RayTracerBase {
 	 */
 	public RayTracerBase(Scene scene) {
 		this.scene = scene;
-		this.isAccelerated = false;
 	}
 	
 	
 
 	/**
-	 * @param isAccelerated the isAccelerated to set
+	 * 
 	 */
-	public RayTracerBase setAccelerated(boolean isAccelerated) {
-		this.isAccelerated = isAccelerated;
-		if(isAccelerated)
+	public RayTracerBase accelerate() {
 			scene.reorderGeometries();
 		return this;
 	}

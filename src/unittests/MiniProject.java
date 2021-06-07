@@ -237,7 +237,7 @@ public class MiniProject {
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter(scene.name + "1", 800, 800)) //
 				.setCam(camera1) //
-				.setRayTracer(new RayTracerBasic(scene).setAccelerated(true))//
+				.setRayTracer(new RayTracerBasic(scene).accelerate())//
 				.setMultithreading(3) //
 				.setDebugPrint();
 		render.renderImage();
