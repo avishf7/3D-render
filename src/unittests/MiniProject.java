@@ -33,7 +33,7 @@ import scene.Scene;
  */
 public class MiniProject {
 
-	private Scene scene = new Scene("Mini Project");
+	private Scene scene = new Scene("Mini Project").setBackground(new Color(72,209,204));
 
 
 	/*
