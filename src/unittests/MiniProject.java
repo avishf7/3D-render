@@ -36,7 +36,6 @@ public class MiniProject {
 
 	private Scene scene = new Scene("Mini Project").setBackground(new Color(72,209,204));
 
-
 	/*
 	 * @Test public void threeDModel() { Camera camera = new Camera(new Point3D(0,
 	 * 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
