@@ -339,7 +339,7 @@ public class MiniProject {
 
 		for (int j = -18; j <= 16; j += 34) {
 
-			for (int i = -500; i < -200; i += 100) {
+			for (int i = -380; i < -200; i += 30) {
 				scene.geometries.add(new Polygon(new Point3D(j, i, -40), new Point3D(j, i, -10), // עמוד קדימה
 
 						new Point3D(j + 2, i, -10), new Point3D(j + 2, i, -40))
