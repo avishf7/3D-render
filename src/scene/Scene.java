@@ -24,10 +24,11 @@ public class Scene {
 	 * CTOR
 	 * 
 	 * @param name The name of the scene
+	 *  @param isToOrder
 	 */
-	public Scene(String name) {
+	public Scene(String name,boolean isToOrder) {
 		this.name = name;
-		geometries = new Geometries();
+		geometries = new Geometries().setToOrder(isToOrder);
 	}
 
 	/**

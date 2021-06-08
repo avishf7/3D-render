@@ -19,18 +19,44 @@ public class Geometries extends Intersectable {
 	List<Intersectable> shapes;
 
 	/**
-	 * 
+	 * A Boolean variable determines whether to reorder the shapes 
+	 * in a more efficient way for scanning the rays
 	 */
+	boolean toOrder;
+	
+	/**
+	 * CTOR
+	 */ 
 	public Geometries() {
 		shapes = new LinkedList<Intersectable>();
 	}
 
+	/**
+	 * CTOR
+	 * 
+	 * @param geometries the shapes
+	 */
 	public Geometries(Intersectable... geometries) {
 		shapes = List.of(geometries);
 	}
 
+	/**
+	 * The function add list of shapes to "this" shapes 
+	 * @param geometries the shapes to add
+	 */
 	public void add(Intersectable... geometries) {
 		shapes.addAll(List.of(geometries));
+	}
+
+	
+	
+	/**
+	 * Builder pattern Setter
+	 * @param toOrder the toOrder to set
+	 */
+	public Geometries setToOrder(boolean toOrder) {
+		this.toOrder = toOrder;
+		return this;
 	}
 
 	@Override
@@ -39,10 +65,14 @@ public class Geometries extends Intersectable {
 			sh.buildBox();
 		}
 
-		if (shapes.size() != 0)
+		if (shapes.size() != 0 && toOrder)
 			buildTreeBox(0);
 	}
 
+	/**
+	 * 
+	 * @param axis
+	 */
 	private void buildTreeBox(int axis) {
 
 		double[] boxMins = shapes.get(0).getBoxMins();
