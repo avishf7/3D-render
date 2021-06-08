@@ -17,7 +17,6 @@ public abstract class RayTracerBase {
 	 * The photographed scene
 	 */
 	protected Scene scene;
-	
 
 	/**
 	 * RayTracerBase constructor receiving {@link scene}.
@@ -27,23 +26,20 @@ public abstract class RayTracerBase {
 	public RayTracerBase(Scene scene) {
 		this.scene = scene;
 	}
-	
-	
 
 	/**
 	 * 
 	 */
-	public RayTracerBase accelerate() {
-			scene.geometries.buildBox();
+	public RayTracerBase accelerate(boolean ToOrder) {
+		scene.geometries.setToOrder(ToOrder).buildBox();
 		return this;
 	}
 
-
-
 	/**
 	 * The function checks what color the ray coming out towards the scene meets
+	 * 
 	 * @param ray
-	 * @return Color The color of the points that the ray meets 
+	 * @return Color The color of the points that the ray meets
 	 */
 	public abstract Color traceRay(Ray ray);
 

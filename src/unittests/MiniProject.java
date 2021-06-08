@@ -34,7 +34,7 @@ import scene.Scene;
 public class MiniProject {
 
 
-	private Scene scene = new Scene("Mini Project",true);
+	private Scene scene = new Scene("Mini Project");
 
 
 	/*
@@ -271,10 +271,12 @@ public class MiniProject {
 			 * -210, 10), new Vector(2, 1, -1)) .setKl(0.0000001).setKq(0.0000000001));
 			 */
 
+		boolean toOrder = true;
+		
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter(scene.name + "1", 800, 800)) //
 				.setCam(camera1) //
-				.setRayTracer(new RayTracerBasic(scene).accelerate())//
+				.setRayTracer(new RayTracerBasic(scene).accelerate(toOrder))//
 				.setMultithreading(3) //
 				.setDebugPrint();
 		render.renderImage();

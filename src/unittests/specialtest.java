@@ -17,7 +17,7 @@ import scene.Scene;
 public class specialtest {
 	private final Camera camera = new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, 1, 0)) //
 			.setViewPlaneDistance(1000).setViewPlaneSize(200, 200);
-	private final Scene scene = new Scene("Test scene",true);
+	private final Scene scene = new Scene("Test scene");
 
 	private static final Color color = new Color(200, 0, 0);
 	private static final Material mat = new Material().setKD(0.5).setKS(0.5).setnShininess(60);
@@ -1562,12 +1562,13 @@ public class specialtest {
 
 				.setKq(0.000001)/* .setRadius(20).setBeamsNum(400) */);
 
-
+		boolean toOrder = true;
+		
 		ImageWriter imageWriter = new ImageWriter("teapot", 800, 800);
 		Render render = new Render() //
 				.setCam(camera) //
 				.setImageWriter(imageWriter) //
-				.setRayTracer(new RayTracerBasic(scene).accelerate()) //
+				.setRayTracer(new RayTracerBasic(scene).accelerate(toOrder)) //
 				.setMultithreading(3).setDebugPrint();
 		render.renderImage();
 		render.printGrid(50, new Color(java.awt.Color.YELLOW));
