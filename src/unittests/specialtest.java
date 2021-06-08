@@ -561,7 +561,7 @@ public class specialtest {
 	@Test
 	public void teapot1() {
 		scene.geometries.add( //
-			new Geometries(	new Triangle(pnts[7], pnts[6], pnts[1]).setEmmission(color).setMaterial(mat), //
+				new Triangle(pnts[7], pnts[6], pnts[1]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[1], pnts[2], pnts[7]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[8], pnts[7], pnts[2]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[2], pnts[3], pnts[8]).setEmmission(color).setMaterial(mat), //
@@ -1557,12 +1557,12 @@ public class specialtest {
 				new Triangle(pnts[528], pnts[529], pnts[469]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[470], pnts[469], pnts[529]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[529], pnts[530], pnts[470]).setEmmission(color).setMaterial(mat) //
-		));
-		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point3D(100, 0, -100)) //
+		);
+		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point3D(100, 0, -100)).setBeamsNum(400).setRadius(20) //
 
 				.setKq(0.000001)/* .setRadius(20).setBeamsNum(400) */);
 
-		boolean toOrder = true;
+		boolean toOrder = false;
 		
 		ImageWriter imageWriter = new ImageWriter("teapot", 800, 800);
 		Render render = new Render() //
