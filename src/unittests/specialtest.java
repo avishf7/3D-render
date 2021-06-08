@@ -584,9 +584,7 @@ public class specialtest {
 				new Triangle(pnts[19], pnts[18], pnts[13]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[13], pnts[14], pnts[19]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[20], pnts[19], pnts[14]).setEmmission(color).setMaterial(mat), //
-
 				new Triangle(pnts[14], pnts[15], pnts[20]).setEmmission(color).setMaterial(mat), //
-
 				new Triangle(pnts[22], pnts[21], pnts[16]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[16], pnts[17], pnts[22]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[23], pnts[22], pnts[17]).setEmmission(color).setMaterial(mat), //
@@ -1558,9 +1556,11 @@ public class specialtest {
 				new Triangle(pnts[470], pnts[469], pnts[529]).setEmmission(color).setMaterial(mat), //
 				new Triangle(pnts[529], pnts[530], pnts[470]).setEmmission(color).setMaterial(mat) //
 		);
+
 		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point3D(100, 0, -100)).setBeamsNum(400).setRadius(20) //
 
-				.setKq(0.000001)/* .setRadius(20).setBeamsNum(400) */);
+
+				.setKq(0.000001).setRadius(20).setBeamsNum(400) );
 
 		boolean toOrder = false;
 		
