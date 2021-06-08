@@ -34,7 +34,7 @@ import scene.Scene;
 public class MiniProject {
 
 
-	private Scene scene = new Scene("Mini Project").setBackground(new Color(72,209,204));
+	private Scene scene = new Scene("Mini Project");
 
 
 	/*
@@ -261,7 +261,7 @@ public class MiniProject {
 		scene.lights.add(new DirectionalLight(new Color(java.awt.Color.YELLOW), new
 		 Vector(-1.5, -3, -1)));
 		
-
+		
 		
 		// scene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW), new Point3D(80,80,80)).setKl(0.0001).setKq(0.000099)); 
 			/*
