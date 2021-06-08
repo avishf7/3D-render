@@ -376,7 +376,6 @@ public class MiniProject {
 						.add(new PointLight(new Color(java.awt.Color.WHITE).reduce(8), new Point3D(j + 1, i + 1, -10))
 								.setKl(0.0001).setKq(0.000099).setBeamsNum(100).setRadius(2));
 
-		
 		// scene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW), new
 		// Point3D(80,80,80)).setKl(0.0001).setKq(0.000099));
 		/*
