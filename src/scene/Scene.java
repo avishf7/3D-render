@@ -86,9 +86,5 @@ public class Scene {
 	public Geometries geometries;
 	public List<LightSource> lights = new LinkedList<LightSource>();
 
-	public void reorderGeometries() {
-		geometries.buildBox();
-
-	}
 
 }
