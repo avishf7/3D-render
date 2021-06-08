@@ -22,7 +22,7 @@ public class Geometries extends Intersectable {
 	 * A Boolean variable determines whether to reorder the shapes 
 	 * in a more efficient way for scanning the rays
 	 */
-	boolean toOrder = false;
+	boolean toOrder;
 	
 	/**
 	 * CTOR
@@ -66,7 +66,7 @@ public class Geometries extends Intersectable {
 		}
 
 		if (shapes.size() != 0)
-			if(toOrder)
+			if(this.toOrder)
 				buildTreeBox(0);
 			else 
 				buildMyBox();
