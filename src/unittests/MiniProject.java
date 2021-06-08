@@ -33,7 +33,6 @@ import scene.Scene;
  */
 public class MiniProject {
 
-
 	private Scene scene = new Scene("Mini Project");
 
 
