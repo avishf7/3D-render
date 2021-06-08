@@ -17,7 +17,7 @@ import scene.Scene;
 public class specialtest {
 	private final Camera camera = new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, 1, 0)) //
 			.setViewPlaneDistance(1000).setViewPlaneSize(200, 200);
-	private final Scene scene = new Scene("Test scene");
+	private final Scene scene = new Scene("Test scene",true);
 
 	private static final Color color = new Color(200, 0, 0);
 	private static final Material mat = new Material().setKD(0.5).setKS(0.5).setnShininess(60);
@@ -1557,7 +1557,7 @@ public class specialtest {
 		);
 		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point3D(100, 0, -100)) //
 
-				.setKq(0.000001).setRadius(20).setBeamsNum(400));
+				.setKq(0.000001)/* .setRadius(20).setBeamsNum(400) */);
 
 
 		ImageWriter imageWriter = new ImageWriter("teapot", 800, 800);

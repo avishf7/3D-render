@@ -34,7 +34,7 @@ public abstract class RayTracerBase {
 	 * 
 	 */
 	public RayTracerBase accelerate() {
-			scene.reorderGeometries();
+			scene.geometries.buildBox();
 		return this;
 	}
 
