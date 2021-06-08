@@ -20,6 +20,7 @@ import primitives.Color;
  */
 public class Scene {
 
+	
 	/**
 	 * CTOR
 	 * 
@@ -28,6 +29,17 @@ public class Scene {
 	public Scene(String name) {
 		this.name = name;
 		geometries = new Geometries();
+	}
+	
+	/**
+	 * CTOR
+	 * 
+	 * @param name The name of the scene
+	 *  @param isToOrder
+	 */
+	public Scene(String name,boolean isToOrder) {
+		this.name = name;
+		geometries = new Geometries().setToOrder(isToOrder);
 	}
 
 	/**

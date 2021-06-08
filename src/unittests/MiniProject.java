@@ -33,7 +33,9 @@ import scene.Scene;
  */
 public class MiniProject {
 
-	private Scene scene = new Scene("Mini Project").setBackground(new Color(0,206,209));
+
+	private Scene scene = new Scene("Mini Project",true);
+
 
 	/*
 	 * @Test public void threeDModel() { Camera camera = new Camera(new Point3D(0,
