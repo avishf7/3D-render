@@ -20,6 +20,17 @@ import primitives.Color;
  */
 public class Scene {
 
+	
+	/**
+	 * CTOR
+	 * 
+	 * @param name The name of the scene
+	 */
+	public Scene(String name) {
+		this.name = name;
+		geometries = new Geometries();
+	}
+	
 	/**
 	 * CTOR
 	 * 
