@@ -166,11 +166,12 @@ public class MiniProject {
 	@Test
 	public void TempleTest() {
 
-		 Camera camera1 = new Camera(new Point3D(-370, -1100, 350), new Vector(0.4, 1,
-		 -0.4), new Vector(0, 0.4, 1)) //
-		//Camera camera1 = new Camera(new Point3D(0, -900, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)) //
+		Camera camera1 = new Camera(new Point3D(-370, -1100, 350), new Vector(0.4, 1, -0.4), new Vector(0, 0.4, 1))//
 				.setViewPlaneSize(200, 200) //
-				.setViewPlaneDistance(1000);
+				.setViewPlaneDistance(1000), //
+				camera2 = new Camera(new Point3D(0, -900, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)) //
+						.setViewPlaneSize(200, 200) //
+						.setViewPlaneDistance(1000);
 
 		for (int i = -48; i < 48; i += 32) {
 			scene.geometries.add(
@@ -337,47 +338,43 @@ public class MiniProject {
 						.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(100))
 						.setEmmission(new Color(222, 184, 135)));
 
-		for (int j = -18; j <= 16; j += 34) {
-
-			for (int i = -380; i < -200; i += 30) {
+		for (int j = -18; j <= 16; j += 34)
+			for (int i = -380; i < -200; i += 30)
 				scene.geometries.add(new Polygon(new Point3D(j, i, -40), new Point3D(j, i, -10), // עמוד קדימה
 
 						new Point3D(j + 2, i, -10), new Point3D(j + 2, i, -40))
 								.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(100))
-								.setEmmission(new Color(160, 82, 45)),
+								.setEmmission(new Color(166, 123, 91)),
 
 						new Polygon(new Point3D(j, i + 2, -40), new Point3D(j, i + 2, -10), // אחורה עמוד
 
 								new Point3D(j + 2, i + 2, -10), new Point3D(j + 2, i + 2, -40))
 										.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(100))
-										.setEmmission(new Color(160, 82, 45)),
+										.setEmmission(new Color(166, 123, 91)),
 
 						new Polygon(new Point3D(j, i + 2, -40), new Point3D(j, i + 2, -10), // שמאל עמוד
 
 								new Point3D(j, i, -10), new Point3D(j, i, -40))
 										.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(100))
-										.setEmmission(new Color(160, 82, 45)),
+										.setEmmission(new Color(166, 123, 91)),
 
 						new Polygon(new Point3D(j + 2, i + 2, -40), new Point3D(j + 2, i + 2, -10), // ימין עמוד
 
 								new Point3D(j + 2, i, -10), new Point3D(j + 2, i, -40))
 										.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(100))
-										.setEmmission(new Color(160, 82, 45)),
+										.setEmmission(new Color(166, 123, 91)),
 
-						new Sphere(new Point3D(j + 1, i + 1, -10), 3).setEmmission(new Color(java.awt.Color.WHITE))// מנורה
-																													// על
-																													// העמודים
+						new Sphere(new Point3D(j + 1, i + 1, -10), 3).setEmmission(new Color(java.awt.Color.WHITE)) // מנורה
+								.setMaterial(new Material().setkT(0.5)) // על
+																		// העמודים
 
 				);
-			}
-		}
 
-		scene.geometries.add(new Sphere(new Point3D(0, -400, 15), 5).setEmmission(new Color(java.awt.Color.WHITE))// מנורה
-																													// תקועה
-				.setMaterial(new Material().setkT(0.8)));//
-
-		scene.lights.add(new PointLight(new Color(java.awt.Color.WHITE), new Point3D(0, -400, 15)).setKl(0.0001)
-				.setKq(0.000099));
+		for (int j = -18; j <= 16; j += 34)
+			for (int i = -380; i < -200; i += 30)
+				scene.lights
+						.add(new PointLight(new Color(java.awt.Color.WHITE).reduce(8), new Point3D(j + 1, i + 1, -10))
+								.setKl(0.0001).setKq(0.000099).setBeamsNum(100).setRadius(2));
 
 		// scene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW), new
 		// Point3D(80,80,80)).setKl(0.0001).setKq(0.000099));
