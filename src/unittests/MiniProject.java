@@ -388,12 +388,13 @@ public class MiniProject {
 		 * -210, 10), new Vector(2, 1, -1)) .setKl(0.0000001).setKq(0.0000000001));
 		 */
 
-		boolean toOrder = true;
+		boolean toOrder = false;
 
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter(scene.name + "1", 800, 800)) //
 				.setCam(camera1) //
-				.setRayTracer(new RayTracerBasic(scene).accelerate(toOrder))//
+				.setRayTracer(new RayTracerBasic(
+						scene)/* .accelerate(toOrder) */)//
 				.setMultithreading(3) //
 				.setDebugPrint();
 		render.renderImage();
