@@ -17,12 +17,13 @@ import primitives.Vector;
 class WrapBox {
 
 	/**
-	 * @param minX
-	 * @param minY
-	 * @param minZ
-	 * @param maxX
-	 * @param maxY
-	 * @param maxZ
+	 * CTOR
+	 * @param minX The minimum x value of the box
+	 * @param minY The minimum y value of the box
+	 * @param minZ The minimum z value of the box
+	 * @param maxX The maximum x value of the box
+	 * @param maxY The maximum y value of the box
+	 * @param maxZ The maximum z value of the box
 	 */
 	public WrapBox(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
 		double[] tempMins = { minX, minY, minZ };
@@ -31,9 +32,23 @@ class WrapBox {
 		maxes = tempMaxes;
 	}
 
+	/**
+	 * An array that stores 
+	 * the minimum coordinate values of the box
+	 */
 	double[] mins;
+	/**
+	 * An array that stores 
+	 * the maximum coordinate values of the box
+	 */
 	double[] maxes;
 
+	/**
+	 * The function checks if there is an intersection 
+	 * between the received ray and the box
+	 * @param ray A Ray in three-dimensional space
+	 * @return True if there is an intersection, otherwise false
+	 */
 	protected boolean isIntersect(Ray ray) {
 		
 		double[] headsCords =ray.getHeadCoordinates();

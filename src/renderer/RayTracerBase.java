@@ -28,7 +28,11 @@ public abstract class RayTracerBase {
 	}
 
 	/**
+	 * The function activates the acceleration of performance by building boxes 
+	 * and optimizes the improvement by arranging boxes in case it is sent true.
 	 * 
+	 * @param ToOrder A Boolean variable that decides whether to arrange the boxes
+	 * @return The ray tracer
 	 */
 	public RayTracerBase accelerate(boolean ToOrder) {
 		scene.geometries.setToOrder(ToOrder).buildBox();
