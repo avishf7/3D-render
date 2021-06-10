@@ -1557,10 +1557,10 @@ public class specialtest {
 				new Triangle(pnts[529], pnts[530], pnts[470]).setEmmission(color).setMaterial(mat) //
 		);
 
-		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point3D(100, 0, -100)).setBeamsNum(400).setRadius(20) //
+		scene.lights.add(new PointLight(new Color(500, 500, 500), new Point3D(100, 0, -100))//.setBeamsNum(400).setRadius(20) //
 
 
-				.setKq(0.000001).setRadius(20).setBeamsNum(400) );
+      	.setKq(0.000001));//.setRadius(20).setBeamsNum(400) );
 
 		boolean toOrder = false;
 		
@@ -1568,7 +1568,7 @@ public class specialtest {
 		Render render = new Render() //
 				.setCam(camera) //
 				.setImageWriter(imageWriter) //
-				.setRayTracer(new RayTracerBasic(scene).accelerate(toOrder)) //
+				.setRayTracer(new RayTracerBasic(scene))//.accelerate(toOrder)) //
 				.setMultithreading(3).setDebugPrint();
 		render.renderImage();
 		render.printGrid(50, new Color(java.awt.Color.YELLOW));

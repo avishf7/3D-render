@@ -255,7 +255,7 @@ public class MiniProject {
 		for (int i = -48; i < 48; i += 6) {
 			scene.geometries.add(new Triangle(new Point3D(i, -200, 20), new Point3D(i + 3, -200, 24), // גג משולשים
 
-					new Point3D(i + 6, -200, 20)).setMaterial(new Material().setKD(0.3).setKS(0.7).setnShininess(200))
+					new Point3D(i + 6, -200, 20)).setMaterial(new Material().setKD(0.0).setKS(1).setnShininess(1000))
 							.setEmmission(new Color(218, 165, 32)));
 		}
 
@@ -339,7 +339,7 @@ public class MiniProject {
 						.setEmmission(new Color(222, 184, 135)));
 
 		for (int j = -18; j <= 16; j += 34)
-			for (int i = -380; i < -200; i += 30)
+			for (int i = -350; i <= -230; i += 60)
 				scene.geometries.add(new Polygon(new Point3D(j, i, -40), new Point3D(j, i, -10), // עמוד קדימה
 
 						new Point3D(j + 2, i, -10), new Point3D(j + 2, i, -40))
@@ -364,20 +364,22 @@ public class MiniProject {
 										.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(100))
 										.setEmmission(new Color(166, 123, 91)),
 
-						new Sphere(new Point3D(j + 1, i + 1, -10), 3).setEmmission(new Color(java.awt.Color.WHITE)) // מנורה
+						new Sphere(new Point3D(j + 1, i + 1, -10), 3).setEmmission(new Color(java.awt.Color.YELLOW)) // מנורה
 								.setMaterial(new Material().setkT(0.5)) // על
-																		// העמודים
+																		// עמודים
 
 				);
 
 		for (int j = -18; j <= 16; j += 34)
-			for (int i = -380; i < -200; i += 30)
+			for (int i = -350; i <= -230; i += 60)
 				scene.lights
-						.add(new PointLight(new Color(java.awt.Color.WHITE).reduce(8), new Point3D(j + 1, i + 1, -10))
-								.setKl(0.0001).setKq(0.000099).setBeamsNum(100).setRadius(2));
+						.add(new PointLight(new Color(java.awt.Color.YELLOW).reduce(16), new Point3D(j + 1, i + 1, -10))
+								.setKl(0.0001).setKq(0.000099));//.setBeamsNum(100).setRadius(2));
 
-		// scene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW), new
-		// Point3D(80,80,80)).setKl(0.0001).setKq(0.000099));
+		scene.lights.add(new DirectionalLight(new Color(300, 400, 0).reduce(8), new Vector(0, -1, -1)));
+
+// scene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW), new
+// Point3D(80,80,80)).setKl(0.0001).setKq(0.000099));
 		/*
 		 * scene.lights.add(new SpotLight(new Color(255, 255, 255), new Point3D(-30,
 		 * -210, 10), new Vector(-2, 1, -1)) .setKl(0.0000001).setKq(0.0000000001));
@@ -385,13 +387,12 @@ public class MiniProject {
 		 * -210, 10), new Vector(2, 1, -1)) .setKl(0.0000001).setKq(0.0000000001));
 		 */
 
-		boolean toOrder = false;
+		boolean toOrder = true;
 
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter(scene.name + "1", 800, 800)) //
 				.setCam(camera1) //
-				.setRayTracer(new RayTracerBasic(
-						scene)/* .accelerate(toOrder) */)//
+				.setRayTracer(new RayTracerBasic(scene).accelerate(toOrder))//
 				.setMultithreading(3) //
 				.setDebugPrint();
 		render.renderImage();
