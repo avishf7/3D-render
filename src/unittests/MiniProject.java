@@ -339,7 +339,7 @@ public class MiniProject {
 						.setEmmission(new Color(222, 184, 135)));
 
 		for (int j = -18; j <= 16; j += 34)
-			for (int i = -380; i < -200; i += 30)
+			for (int i = -350; i <= -230; i += 60)
 				scene.geometries.add(new Polygon(new Point3D(j, i, -40), new Point3D(j, i, -10), // עמוד קדימה
 
 						new Point3D(j + 2, i, -10), new Point3D(j + 2, i, -40))
@@ -364,18 +364,22 @@ public class MiniProject {
 										.setMaterial(new Material().setKD(0.5).setKS(0.5).setnShininess(100))
 										.setEmmission(new Color(166, 123, 91)),
 
-						new Sphere(new Point3D(j + 1, i + 1, -10), 3).setEmmission(new Color(java.awt.Color.WHITE)) // מנורה
+						new Sphere(new Point3D(j + 1, i + 1, -10), 3).setEmmission(new Color(java.awt.Color.YELLOW)) // מנורה
 								.setMaterial(new Material().setkT(0.5)) // על
 																		// העמודים
 
 				);
 
 		for (int j = -18; j <= 16; j += 34)
-			for (int i = -380; i < -200; i += 30)
+			for (int i = -350; i <= -230; i += 60)
 				scene.lights
-						.add(new PointLight(new Color(java.awt.Color.WHITE).reduce(8), new Point3D(j + 1, i + 1, -10))
+						.add(new PointLight(new Color(java.awt.Color.YELLOW).reduce(16), new Point3D(j + 1, i + 1, -10))
 								.setKl(0.0001).setKq(0.000099).setBeamsNum(100).setRadius(2));
 
+		
+		 scene.lights.add(new DirectionalLight(new Color(300, 400, 0).reduce(8),
+				 new Vector(0, -1, -1)));
+		
 		// scene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW), new
 		// Point3D(80,80,80)).setKl(0.0001).setKq(0.000099));
 		/*

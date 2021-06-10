@@ -105,6 +105,8 @@ public class Plane extends Geometry {
 
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+		//Checks if there is a intersect with the wrapping box 
+		//(if there is no box continues to the normal intersect test)
 		if (this.box != null && !this.box.isIntersect(ray))
 			return null;
 

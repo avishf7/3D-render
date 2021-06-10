@@ -21,7 +21,8 @@ public abstract class Intersectable {
 	protected WrapBox box;
 
 	/**
-	 * 
+	 * The function builds a box 
+	 * that will wrap the intersectable shape
 	 */
 	abstract void buildBox();
 	

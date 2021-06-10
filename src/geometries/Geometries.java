@@ -73,8 +73,10 @@ public class Geometries extends Intersectable {
 	}
 
 	/**
+	 * A recursive function for building a tree that will contains all the shapes 
+	 * in a more efficient arrangement for scanning rays.
 	 * 
-	 * @param axis
+	 * @param axis The axis that determines the division into two collections inside the box.
 	 */
 	private void buildTreeBox(int axis) {
 
@@ -111,7 +113,8 @@ public class Geometries extends Intersectable {
 	}
 
 	/**
-	 * 
+	 * Auxiliary function for building a box 
+	 * that will wrap all shapes in "geometries"
 	 */
 	private void buildMyBox() {
 		double[] boxMins = shapes.get(0).getBoxMins();
@@ -155,9 +158,12 @@ public class Geometries extends Intersectable {
 
 	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+		//Checks if there is a intersect with the wrapping box 
+		//(if there is no box continues to the normal intersect test)
 		if (this.box != null && !this.box.isIntersect(ray))
 			return null;
 
+		
 		List<GeoPoint> intsPoints = null, result;
 
 		for (Intersectable sh : shapes) {
