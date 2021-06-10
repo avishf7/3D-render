@@ -62,17 +62,21 @@ public class Plane extends Geometry {
 		double minX = Double.NEGATIVE_INFINITY, minY = minX, minZ = minX, //
 				maxX = Double.POSITIVE_INFINITY, maxY = maxX, maxZ = maxX;
 
+		//The axis that determines the division into two collections inside the box
 		Vector xAxis = new Vector(new Point3D(1, 0, 0));
 		Vector yAxis = new Vector(new Point3D(0, 1, 0));
 		Vector zAxis = new Vector(new Point3D(0, 0, 1));
+		
+		//If the plane is perpendicular to one of the axes ,the value of the box in the same axis 
+		// is the value of the plane in the same axis
 		if (xAxis.equals(normal) || xAxis.scale(-1).equals(normal))
 			minX = maxX = q0.getX();
 		if (yAxis.equals(normal) || yAxis.scale(-1).equals(normal))
 			minY = maxY = q0.getY();
 		if (zAxis.equals(normal) || zAxis.scale(-1).equals(normal))
 			minZ = maxZ = q0.getZ();
+		
 		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);
-
 	}
 
 	/**

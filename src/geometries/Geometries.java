@@ -61,6 +61,7 @@ public class Geometries extends Intersectable {
 
 	@Override
 	public void buildBox() {
+		//Build boxes for all shapes in geometries
 		for (Intersectable sh : shapes) {
 			sh.buildBox();
 		}
@@ -82,13 +83,18 @@ public class Geometries extends Intersectable {
 
 		buildMyBox();
 
+		// conditions if there are 2 shapes or less in the collection
 		if (shapes.size() <= 2)
 			return;
 
+		//List of sons of the current node
 		List<Intersectable> treeShapes = new LinkedList<Intersectable>();
+		
+		//Two nodes that branch off from the current node in the box tree
 		Geometries left = new Geometries();
 		Geometries right = new Geometries();
 
+		//division of the shapes by location
 		for (Intersectable inter : shapes) {
 			if (inter.getMid(axis) < getMid(axis))
 				left.add(inter);
@@ -98,7 +104,9 @@ public class Geometries extends Intersectable {
 				treeShapes.add(inter);
 		}
 
+		//The next axis that determines the division into two collections inside the box
 		int nextAxis = (axis + 1) % 3;
+		
 		if (!left.isEmpty()) {
 			left.buildTreeBox(nextAxis);
 			treeShapes.add(left);
@@ -117,6 +125,10 @@ public class Geometries extends Intersectable {
 	 * that will wrap all shapes in "geometries"
 	 */
 	private void buildMyBox() {
+		
+		// ----Finds the minimum and maximum coordinate values between all the boxes of shapes in geometries----
+		
+		
 		double[] boxMins = shapes.get(0).getBoxMins();
 		double[] boxMaxes = shapes.get(0).getBoxMaxes();
 		double minX = boxMins[0], minY = boxMins[1], minZ = boxMins[2], maxX = boxMaxes[0], maxY = boxMaxes[1],
@@ -145,6 +157,9 @@ public class Geometries extends Intersectable {
 				maxZ = maxShapeZ;
 
 		}
+		
+		//--------------------------------------------------------------------------------------------------------
+		
 		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 

@@ -90,6 +90,9 @@ public class Polygon extends Geometry {
 
 	@Override
 	public void buildBox() {
+		
+		// --------Finds the minimum and maximum coordinate values between all the vertices--------
+		
 		double minX = vertices.get(0).getX(), minY = vertices.get(0).getY(), minZ = vertices.get(0).getZ(), maxX = minX,
 				maxY = minY, maxZ = minZ;
 		for (Point3D point3d : vertices) {
@@ -112,6 +115,8 @@ public class Polygon extends Geometry {
 				maxZ = z;
 
 		}
+		//----------------------------------------------------------------------------------------------
+		
 		this.box = new WrapBox(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 

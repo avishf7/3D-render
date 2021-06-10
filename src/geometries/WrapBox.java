@@ -51,20 +51,29 @@ class WrapBox {
 	 */
 	protected boolean isIntersect(Ray ray) {
 		
-		double[] headsCords =ray.getHeadCoordinates();
-		double[] dirPCords = ray.getDirCoordinates();
 		
+		double[] headsCords =ray.getHeadCoordinates();//ray's head's coordinates
+		double[] dirPCords = ray.getDirCoordinates();//ray's direction vector's head's coordinates
+		
+		//The loop checks for each dimension whether the ray is parallel to the box,
+		//and if so, whether within the box range.
 		for (int i = 0; i < 3; i++) {
 			if (dirPCords[i] == 0)
 				if (mins[i] > headsCords[i] || maxes[i] < headsCords[i])
 					return false;
 		}
+		
+		//The scalars that represent the doubling range that will bring the fund to the intersection points
 		double tStart = Double.NEGATIVE_INFINITY, tEnd = Double.POSITIVE_INFINITY;
 
+		//The loop finds out of all the dimensions 
+		//maximum initial scalar and the minimum final scalar
 		for (int i = 0; i < 3; i++) {
 			if (dirPCords[i] != 0) {
-				double t1 = (mins[i] - headsCords[i]) / dirPCords[i];
-				double t2 = (maxes[i] - headsCords[i]) / dirPCords[i];
+				double t1 = (mins[i] - headsCords[i]) / dirPCords[i];//The beginning of the range
+				double t2 = (maxes[i] - headsCords[i]) / dirPCords[i];//End of range
+				
+				//In case the ray starts after the box
 				if (t1 > t2) {
 					double temp = t1;
 					t1 = t2;
@@ -77,8 +86,10 @@ class WrapBox {
 			}
 		}
 
+		//If the beginning of the range is beyond the end of the range there is no common intersection range 
 		if (tStart > tEnd)
 			return false;
+		//the ray's direction is reversed from the box
 		if (tEnd < 0)
 			return false;
 

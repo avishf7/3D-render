@@ -169,7 +169,7 @@ public class MiniProject {
 		Camera camera1 = new Camera(new Point3D(-370, -1100, 350), new Vector(0.4, 1, -0.4), new Vector(0, 0.4, 1))//
 				.setViewPlaneSize(200, 200) //
 				.setViewPlaneDistance(1000), //
-				camera2 = new Camera(new Point3D(0, -900, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)) //
+				camera2 = new Camera(new Point3D(0, -750, -10), new Vector(0, 1, 0), new Vector(0, 0, 1)) //
 						.setViewPlaneSize(200, 200) //
 						.setViewPlaneDistance(1000);
 
@@ -393,7 +393,7 @@ public class MiniProject {
 
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter(scene.name + "1", 800, 800)) //
-				.setCam(camera1) //
+				.setCam(camera2) //
 				.setRayTracer(new RayTracerBasic(scene).accelerate(toOrder))//
 				.setMultithreading(3) //
 				.setDebugPrint();

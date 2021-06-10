@@ -30,6 +30,9 @@ public class Sphere extends Geometry {
 
 	@Override
 	public void buildBox() {
+		//The coordinate values of the box are equal 
+		//to the values of the coordinates of the center of the sphere 
+		//by adding or subtracting the radius
 		this.box=new WrapBox(center.getX()-radius,center.getY()-radius,center.getZ()-radius,center.getX()+radius,center.getY()+radius,center.getZ()+radius);
 	}
 
