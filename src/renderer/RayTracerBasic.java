@@ -27,6 +27,7 @@ public class RayTracerBasic extends RayTracerBase {
 	
 	/**
 	 * Limit the amount of recursive calls to calcColor
+	 * 
 	 */
 	private static final int MAX_CALC_COLOR_LEVEL = 10;
 	/**
