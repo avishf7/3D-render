@@ -1,4 +1,4 @@
-## mini-project-SE
+## Project in Software Engineering-JAVA 
 Designing, modeling, and rendering a virtual 3-dimensional graphical scene, with most of the physics
 involved (light source, rays, reflections, refractions, color, occlusions, etc.), while implementing the
 principles of software engineering, Agile Software Development, OOP, and different design patterns.
